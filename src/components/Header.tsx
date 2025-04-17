@@ -10,7 +10,7 @@ import { Menu, Search, User, Bell, Sparkles } from "lucide-react";
 
 const Header = () => {
   return (
-    <header className="bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-200 border-b border-yellow-500/20 sticky top-0 z-50 backdrop-blur-sm bg-opacity-90">
+    <header className="bg-gradient-to-r from-yellow-300 to-yellow-200 rotate-[-90deg] border-b border-yellow-500/20 sticky top-0 z-50 backdrop-blur-sm bg-opacity-90">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Link to="/" className="flex items-center group">
