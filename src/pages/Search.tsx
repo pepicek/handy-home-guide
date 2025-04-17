@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -121,7 +120,7 @@ const Search = () => {
                 <Input
                   type="text"
                   placeholder="What service do you need?"
-                  className="pl-10"
+                  className="pl-10 border-anthracite/20"
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
                 />
@@ -131,15 +130,15 @@ const Search = () => {
                 <Input
                   type="text"
                   placeholder="Enter your location"
-                  className="pl-10"
+                  className="pl-10 border-anthracite/20"
                 />
               </div>
               <div>
                 <Select>
-                  <SelectTrigger>
+                  <SelectTrigger className="border-anthracite/20 font-sans">
                     <SelectValue placeholder="Service Category" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="font-sans">
                     {serviceCategories.map((category) => (
                       <SelectItem key={category} value={category}>
                         {category}
@@ -288,10 +287,10 @@ const Search = () => {
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-bold">24 Service Providers Found</h2>
                 <Select defaultValue="recommended">
-                  <SelectTrigger className="w-40">
+                  <SelectTrigger className="w-40 border-anthracite/20 font-sans">
                     <SelectValue placeholder="Sort by" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="font-sans">
                     <SelectItem value="recommended">Recommended</SelectItem>
                     <SelectItem value="rating-high">Highest Rated</SelectItem>
                     <SelectItem value="price-low">Lowest Price</SelectItem>

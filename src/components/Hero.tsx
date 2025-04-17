@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Search, MapPin, Clock, Star, ArrowRight } from "lucide-react";
 import {
@@ -10,7 +11,7 @@ import {
 
 const Hero = () => {
   return (
-    <div className="relative overflow-hidden bg-gradient-to-br from-yellow-200 via-yellow-100 to-yellow-50">
+    <div className="relative overflow-hidden bg-gradient-to-br from-yellow-300 via-yellow-100 to-yellow-50">
       <div className="absolute inset-0 bg-doodle opacity-10 z-0"></div>
       <div className="container mx-auto px-4 py-20 md:py-32 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
@@ -46,10 +47,10 @@ const Hero = () => {
               <div className="relative">
                 <Clock className="absolute left-3 top-1/2 -translate-y-1/2 text-yellow-600" />
                 <Select>
-                  <SelectTrigger className="w-full pl-10 rounded-xl font-sans border border-anthracite/20 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400">
+                  <SelectTrigger className="w-full h-12 pl-10 rounded-xl border-anthracite/20 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 text-base font-sans">
                     <SelectValue placeholder="When needed?" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="font-sans">
                     <SelectItem value="urgent">Urgent (24h)</SelectItem>
                     <SelectItem value="week">This week</SelectItem>
                     <SelectItem value="month">This month</SelectItem>
@@ -58,9 +59,17 @@ const Hero = () => {
                 </Select>
               </div>
 
-              <Button className="bg-anthracite hover:bg-anthracite-light text-yellow-400 font-medium h-12 rounded-xl shadow-lg transition-all duration-300 relative after:absolute after:inset-0 after:rounded-xl after:shadow-[0_0_20px_rgba(250,204,21,0.3)] after:animate-[glow_3s_ease-in-out_infinite] hover:after:animate-[glow_2s_ease-in-out_infinite]">
-                Find Pros Now
-                <ArrowRight className="ml-2 w-4 h-4" />
+              <Button 
+                className="bg-anthracite hover:bg-anthracite-light text-yellow-400 font-medium h-12 rounded-xl transition-all duration-300 relative overflow-hidden group"
+              >
+                <span className="relative z-10 flex items-center">
+                  Find Pros Now
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </span>
+                <span className="absolute inset-0 bg-anthracite z-0"></span>
+                <span className="absolute inset-0 -m-1 rounded-xl border-2 border-yellow-400/10 group-hover:scale-105 transition-transform duration-1000"></span>
+                <span className="absolute inset-0 -m-2 rounded-xl border-2 border-yellow-400/5 group-hover:scale-110 transition-transform duration-1500"></span>
+                <span className="absolute inset-0 -m-3 rounded-xl border-2 border-yellow-400/5 group-hover:scale-125 transition-transform duration-2000"></span>
               </Button>
             </div>
 
