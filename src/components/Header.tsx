@@ -28,6 +28,7 @@ const Header = () => {
           <nav className="flex items-center space-x-4">
             <Link to="/search" className="hover:text-yellow-800 font-medium transition-colors duration-200">Find Pros</Link>
             <Link to="/special-offers" className="hover:text-yellow-800 font-medium transition-colors duration-200">Deals</Link>
+            <Link to="/how-it-works" className="hover:text-yellow-800 font-medium transition-colors duration-200">How It Works</Link>
             <Link to="/providers" className="hover:text-yellow-800 font-medium transition-colors duration-200">Join as Pro</Link>
             <Link to="/about" className="hover:text-yellow-800 font-medium transition-colors duration-200">About</Link>
           </nav>
@@ -62,6 +63,9 @@ const Header = () => {
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Link to="/special-offers" className="w-full">Deals</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link to="/how-it-works" className="w-full">How It Works</Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Link to="/providers" className="w-full">Join as Pro</Link>
