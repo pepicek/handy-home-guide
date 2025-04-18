@@ -13,6 +13,7 @@ import Providers from "./pages/Providers";
 import SpecialOfferDetails from "./pages/SpecialOfferDetails";
 import BookNow from "./pages/BookNow";
 import ViewProfile from "./pages/ViewProfile";
+import CheckSchedule from "./pages/CheckSchedule";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/book-now/:id" element={<BookNow />} />
           <Route path="/profile/:id" element={<ViewProfile />} />
+          <Route path="/schedule/:id" element={<CheckSchedule />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

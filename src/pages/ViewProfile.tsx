@@ -121,6 +121,9 @@ const ViewProfile = () => {
                     <Button variant="outline">
                       Message
                     </Button>
+                    <Button variant="outline" asChild>
+                      <Link to={`/schedule/${id}`}>Check Schedule</Link>
+                    </Button>
                   </div>
                 </div>
               </div>
