@@ -4,6 +4,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
+import IndexAlt1 from "./pages/IndexAlt1";
+import IndexAlt2 from "./pages/IndexAlt2";
+import IndexAlt3 from "./pages/IndexAlt3";
 import Search from "./pages/Search";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
@@ -26,6 +29,9 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/alt1" element={<IndexAlt1 />} />
+          <Route path="/alt2" element={<IndexAlt2 />} />
+          <Route path="/alt3" element={<IndexAlt3 />} />
           <Route path="/search" element={<Search />} />
           <Route path="/special-offers" element={<SpecialOffersPage />} />
           <Route path="/special-offers/:id" element={<SpecialOfferDetails />} />
