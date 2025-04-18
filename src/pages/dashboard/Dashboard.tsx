@@ -1,10 +1,9 @@
-
 import React from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { BarChart4, Calendar, DollarSign, MessageSquare, Star, TrendingUp, UserCheck, Users } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { AlertCircle, Calendar, CheckCircle, ChevronRight, ClipboardList, DollarSign, Star, Sparkles, TrendingUp, Users } from "lucide-react";
 
 const Dashboard = () => {
   return (
