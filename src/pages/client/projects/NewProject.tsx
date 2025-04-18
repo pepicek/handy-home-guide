@@ -1,5 +1,5 @@
-
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,6 +7,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { Calendar, Users, DollarSign } from "lucide-react";
 
 const NewProject = () => {
+  const navigate = useNavigate();
+  
+  const handleCancel = () => {
+    navigate("/client/projects");
+  };
+  
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -59,7 +65,7 @@ const NewProject = () => {
             </div>
             
             <div className="flex justify-end gap-2">
-              <Button variant="outline" type="button">Cancel</Button>
+              <Button variant="outline" type="button" onClick={handleCancel}>Cancel</Button>
               <Button type="submit">Create Project</Button>
             </div>
           </form>

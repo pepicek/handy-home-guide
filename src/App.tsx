@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -38,17 +37,14 @@ import AllCategories from "./pages/AllCategories";
 
 import ProviderRating from "./pages/ProviderRating";
 
-// New signin page
 import SignIn from "./pages/SignIn";
 
-// New registration pages
 import Register from "./pages/Register";
 import RegisterVisitor from "./pages/RegisterVisitor";
 import RegisterProvider from "./pages/RegisterProvider";
 import VisitorQuestionnaire from "./pages/VisitorQuestionnaire";
 import ProviderOnboarding from "./pages/ProviderOnboarding";
 
-// Dashboard pages
 import { 
   DashboardLayout,
   Dashboard,
@@ -58,14 +54,12 @@ import {
   Settings
 } from "./pages/dashboard";
 
-// New dashboard pages
 import Clients from "./pages/dashboard/Clients";
 import Messages from "./pages/dashboard/Messages";
 import Analytics from "./pages/dashboard/Analytics";
 import Earnings from "./pages/dashboard/Earnings";
 import ProSubscription from "./pages/dashboard/ProSubscription";
 
-// Client dashboard pages
 import ClientDashboardLayout from "./components/client/ClientDashboardLayout";
 import ClientDashboard from "./pages/client/ClientDashboard";
 import SavedProviders from "./pages/client/SavedProviders";
@@ -76,15 +70,15 @@ import ClientSettings from "./pages/client/ClientSettings";
 import FinancialSummary from "./pages/client/FinancialSummary";
 import SearchHistory from "./pages/client/SearchHistory";
 
-// Project related pages
 import NewProject from "./pages/client/projects/NewProject";
 import ProjectDetails from "./pages/client/projects/ProjectDetails";
 import EditProject from "./pages/client/projects/EditProject";
 
-// Quote related pages
 import RequestNewQuote from "./pages/client/quotes/RequestNewQuote";
 import QuoteDetails from "./pages/client/quotes/QuoteDetails";
 import MessageProvider from "./pages/client/quotes/MessageProvider";
+
+import FindProviders from "./pages/client/providers/FindProviders";
 
 const queryClient = new QueryClient();
 
@@ -124,17 +118,14 @@ const App = () => (
           <Route path="/search/market" element={<MarketResearch />} />
           <Route path="/categories" element={<AllCategories />} />
           
-          {/* Signin route */}
           <Route path="/signin" element={<SignIn />} />
           
-          {/* Registration routes */}
           <Route path="/register" element={<Register />} />
           <Route path="/register/visitor" element={<RegisterVisitor />} />
           <Route path="/register/provider" element={<RegisterProvider />} />
           <Route path="/register/visitor/questionnaire" element={<VisitorQuestionnaire />} />
           <Route path="/register/provider/onboarding" element={<ProviderOnboarding />} />
           
-          {/* Dashboard routes */}
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="services" element={<Services />} />
@@ -148,7 +139,6 @@ const App = () => (
             <Route path="pro" element={<ProSubscription />} />
           </Route>
           
-          {/* Client Dashboard routes */}
           <Route path="/client" element={<ClientDashboardLayout />}>
             <Route index element={<ClientDashboard />} />
             <Route path="saved-providers" element={<SavedProviders />} />
@@ -164,6 +154,7 @@ const App = () => (
             <Route path="finance" element={<FinancialSummary />} />
             <Route path="search-history" element={<SearchHistory />} />
             <Route path="settings" element={<ClientSettings />} />
+            <Route path="providers/find" element={<FindProviders />} />
           </Route>
         </Routes>
       </BrowserRouter>

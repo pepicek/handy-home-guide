@@ -1,6 +1,5 @@
-
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,7 +8,12 @@ import { Calendar, Users, DollarSign } from "lucide-react";
 
 const EditProject = () => {
   const { id } = useParams();
-
+  const navigate = useNavigate();
+  
+  const handleCancel = () => {
+    navigate("/client/projects");
+  };
+  
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -67,7 +71,7 @@ const EditProject = () => {
             </div>
             
             <div className="flex justify-end gap-2">
-              <Button variant="outline" type="button">Cancel</Button>
+              <Button variant="outline" type="button" onClick={handleCancel}>Cancel</Button>
               <Button type="submit">Save Changes</Button>
             </div>
           </form>

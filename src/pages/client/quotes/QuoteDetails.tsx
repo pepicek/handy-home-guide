@@ -1,6 +1,6 @@
-
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import QuoteActionModal from "@/components/quotes/QuoteActionModal";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -22,8 +22,19 @@ import { Separator } from "@/components/ui/separator";
 const QuoteDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [showAcceptModal, setShowAcceptModal] = useState(false);
+  const [showDeclineModal, setShowDeclineModal] = useState(false);
   
-  // Mock data - in a real app, this would come from an API call using the id
+  const handleAcceptQuote = () => {
+    setShowAcceptModal(false);
+    navigate(`/client/quotes/${id}/accepted`);
+  };
+  
+  const handleDeclineQuote = () => {
+    setShowDeclineModal(false);
+    // Add decline logic here
+  };
+  
   const quote = {
     id: id || "1",
     project: "Home Renovation",
@@ -172,16 +183,27 @@ const QuoteDetails = () => {
               <FileText className="w-4 h-4 mr-2" />
               Download PDF
             </Button>
-            <Button variant="outline" className="flex-1 sm:flex-initial">
+            <Button 
+              variant="outline" 
+              className="flex-1 sm:flex-initial"
+              onClick={() => navigate(`/client/messages`)}
+            >
               <MessageCircle className="w-4 h-4 mr-2" />
               Message Provider
             </Button>
             <div className="flex gap-2 w-full sm:w-auto sm:ml-auto mt-2 sm:mt-0">
-              <Button variant="outline" className="flex-1 sm:flex-initial bg-red-50 hover:bg-red-100 text-red-600 hover:text-red-700 border-red-200">
+              <Button 
+                variant="outline" 
+                className="flex-1 sm:flex-initial bg-red-50 hover:bg-red-100 text-red-600 hover:text-red-700 border-red-200"
+                onClick={() => setShowDeclineModal(true)}
+              >
                 <XCircle className="w-4 h-4 mr-2" />
                 Decline
               </Button>
-              <Button className="flex-1 sm:flex-initial bg-green-600 hover:bg-green-700">
+              <Button 
+                className="flex-1 sm:flex-initial bg-green-600 hover:bg-green-700"
+                onClick={() => setShowAcceptModal(true)}
+              >
                 <CheckCircle className="w-4 h-4 mr-2" />
                 Accept Quote
               </Button>
@@ -246,6 +268,20 @@ const QuoteDetails = () => {
           </CardContent>
         </Card>
       </div>
+      
+      <QuoteActionModal
+        isOpen={showAcceptModal}
+        onClose={() => setShowAcceptModal(false)}
+        onConfirm={handleAcceptQuote}
+        type="accept"
+      />
+      
+      <QuoteActionModal
+        isOpen={showDeclineModal}
+        onClose={() => setShowDeclineModal(false)}
+        onConfirm={handleDeclineQuote}
+        type="decline"
+      />
     </div>
   );
 };

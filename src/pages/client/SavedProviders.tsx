@@ -1,5 +1,5 @@
-
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const SavedProviders = () => {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [category, setCategory] = useState("all");
   
@@ -142,7 +143,6 @@ const SavedProviders = () => {
     { value: "HVAC", label: "HVAC" }
   ];
   
-  // Filter providers based on search and category
   const filteredProviders = providers.filter(provider => 
     provider.name.toLowerCase().includes(searchTerm.toLowerCase()) && 
     (category === "all" || provider.category === category)
@@ -152,7 +152,10 @@ const SavedProviders = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold text-anthracite">Saved Service Providers</h1>
-        <Button className="bg-anthracite hover:bg-anthracite/90 text-yellow-400">
+        <Button 
+          className="bg-anthracite hover:bg-anthracite/90 text-yellow-400"
+          onClick={() => navigate("/client/providers/find")}
+        >
           Find New Providers
         </Button>
       </div>
@@ -226,6 +229,8 @@ const SavedProviders = () => {
 };
 
 const ProviderCard = ({ provider }) => {
+  const navigate = useNavigate();
+  
   return (
     <Card className="overflow-hidden">
       <CardHeader className="pb-2 flex justify-between items-start">
@@ -285,15 +290,24 @@ const ProviderCard = ({ provider }) => {
           </div>
         </div>
       </CardContent>
-      <CardFooter className="border-t bg-gray-50 flex justify-between">
+      <CardFooter className="border-t bg-gray-50 flex justify-between py-4">
         <span className="text-xs text-gray-500">
           Last contact: {provider.lastContact}
         </span>
         <div className="flex gap-2">
-          <Button size="sm" variant="ghost" className="h-8 px-2">
+          <Button 
+            size="sm" 
+            variant="ghost" 
+            className="h-8 px-2"
+            onClick={() => navigate("/client/messages")}
+          >
             <Mail className="h-4 w-4" />
           </Button>
-          <Button size="sm" className="h-8 px-2 bg-yellow-500 hover:bg-yellow-600 text-anthracite">
+          <Button 
+            size="sm" 
+            className="h-8 px-2 bg-yellow-500 hover:bg-yellow-600 text-anthracite"
+            onClick={() => navigate("/book-now/" + provider.id)}
+          >
             <Calendar className="h-4 w-4 mr-1" />
             Book
           </Button>
