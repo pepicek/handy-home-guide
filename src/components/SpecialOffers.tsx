@@ -1,8 +1,8 @@
-
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { ArrowRight, Clock, Users, DollarSign } from "lucide-react";
+import { ArrowRight, Clock, Users } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const offers = [
   {
@@ -115,9 +115,11 @@ const SpecialOffers = () => {
               </CardContent>
               
               <CardFooter className="p-6 pt-0 flex justify-between">
-                <Button size="sm" variant="outline" className="border-gray-200 text-anthracite hover:bg-gray-50">
-                  View Details
-                </Button>
+                <Link to={`/special-offers/${offer.id}`}>
+                  <Button size="sm" variant="outline" className="border-gray-200 text-anthracite hover:bg-gray-50">
+                    View Details
+                  </Button>
+                </Link>
                 <Button size="sm" className="bg-yellow-400 hover:bg-yellow-500 text-anthracite font-medium">
                   Book Now
                 </Button>
