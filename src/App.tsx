@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -19,6 +20,7 @@ import ViewProfile from "./pages/ViewProfile";
 import CheckSchedule from "./pages/CheckSchedule";
 import RequestQuote from "./pages/RequestQuote";
 import ServiceCategory from "./pages/ServiceCategory";
+import MapView from "./pages/MapView";
 
 import HomepageVariation1 from "./pages/HomepageVariation1";
 import HomepageVariation2 from "./pages/HomepageVariation2";
@@ -52,6 +54,7 @@ const App = () => (
           <Route path="/home/v3" element={<HomepageVariation3 />} />
           
           <Route path="/search" element={<Search />} />
+          <Route path="/search/map" element={<MapView />} />
           <Route path="/special-offers" element={<SpecialOffersPage />} />
           <Route path="/special-offers/:id" element={<SpecialOfferDetails />} />
           <Route path="/how-it-works" element={<HowItWorksPage />} />
