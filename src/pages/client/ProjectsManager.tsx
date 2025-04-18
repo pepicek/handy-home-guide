@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -79,15 +80,15 @@ const ProjectsManager = () => {
             </div>
             
             <TabsContent value="active" className="mt-0">
-              <ActiveProjectsList />
+              <ActiveProjectsList handleDelete={handleDelete} />
             </TabsContent>
             
             <TabsContent value="completed" className="mt-0">
-              <CompletedProjectsList />
+              <CompletedProjectsList handleDelete={handleDelete} />
             </TabsContent>
             
             <TabsContent value="planning" className="mt-0">
-              <PlanningProjectsList />
+              <PlanningProjectsList handleDelete={handleDelete} />
             </TabsContent>
           </Tabs>
         </CardContent>
@@ -107,7 +108,7 @@ const ProjectsManager = () => {
   );
 };
 
-const ActiveProjectsList = () => {
+const ActiveProjectsList = ({ handleDelete }) => {
   const activeProjects = [
     {
       id: 1,
@@ -165,13 +166,13 @@ const ActiveProjectsList = () => {
   return (
     <div className="space-y-4">
       {activeProjects.map(project => (
-        <ProjectCard key={project.id} project={project} />
+        <ProjectCard key={project.id} project={project} handleDelete={handleDelete} />
       ))}
     </div>
   );
 };
 
-const CompletedProjectsList = () => {
+const CompletedProjectsList = ({ handleDelete }) => {
   return (
     <div className="space-y-4">
       <ProjectCard 
@@ -191,6 +192,7 @@ const CompletedProjectsList = () => {
           tasks: { completed: 7, total: 7 },
           nextMilestone: "None"
         }} 
+        handleDelete={handleDelete}
       />
       <ProjectCard 
         project={{
@@ -209,12 +211,13 @@ const CompletedProjectsList = () => {
           tasks: { completed: 5, total: 5 },
           nextMilestone: "None"
         }} 
+        handleDelete={handleDelete}
       />
     </div>
   );
 };
 
-const PlanningProjectsList = () => {
+const PlanningProjectsList = ({ handleDelete }) => {
   return (
     <div className="space-y-4">
       <ProjectCard 
@@ -232,12 +235,13 @@ const PlanningProjectsList = () => {
           tasks: { completed: 1, total: 15 },
           nextMilestone: "Get 3 quotes by May 15"
         }} 
+        handleDelete={handleDelete}
       />
     </div>
   );
 };
 
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({ project, handleDelete }) => {
   const navigate = useNavigate();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   
@@ -498,3 +502,4 @@ const UpcomingMilestonesCard = () => {
 };
 
 export default ProjectsManager;
+
