@@ -1,9 +1,11 @@
+import React from 'react';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { Search } from "lucide-react";
 import { Link } from 'react-router-dom';
 
-const services = [
+const categories = [
   {
     id: 1,
     title: "Plumbing",
@@ -200,53 +202,54 @@ const services = [
   },
 ];
 
-const ServiceCategories = () => {
+const AllCategories = () => {
   return (
-    <section className="py-12 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-10">
-          <h2 className="font-poster text-3xl md:text-4xl text-anthracite font-bold mb-3">
-            Browse Service Categories
-          </h2>
-          <p className="text-lg text-anthracite-light opacity-80 max-w-2xl mx-auto">
-            Find trusted professionals for all your home service needs
-          </p>
-        </div>
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      <main className="flex-grow bg-gray-50 py-12">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-10">
+            <h1 className="font-poster text-4xl md:text-5xl text-anthracite font-bold mb-4">
+              All Service Categories
+            </h1>
+            <p className="text-lg text-anthracite-light opacity-80 max-w-2xl mx-auto mb-8">
+              Browse through our comprehensive list of professional services
+            </p>
+            
+            <div className="relative max-w-xl mx-auto mb-12">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search categories..."
+                className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none"
+              />
+            </div>
+          </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          {services.map((service) => (
-            <Link 
-              key={service.id}
-              to={`/category/${service.title.toLowerCase()}`}
-              className="block"
-            >
-              <Card className="hover-scale cursor-pointer border border-gray-100">
-                <CardContent className="flex flex-col items-center justify-center text-center p-6">
-                  <div className="bg-yellow-50 rounded-full p-4 mb-4 text-yellow-600">
-                    {service.icon}
-                  </div>
-                  <h3 className="font-bold text-lg mb-1">{service.title}</h3>
-                  <p className="text-sm text-gray-500">{service.description}</p>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {categories.map((category) => (
+              <Link 
+                key={category.id}
+                to={`/category/${category.title.toLowerCase()}`}
+                className="block"
+              >
+                <Card className="hover:shadow-lg transition-shadow duration-300 hover:border-yellow-300 cursor-pointer h-full">
+                  <CardContent className="flex flex-col items-center justify-center text-center p-6">
+                    <div className="bg-yellow-50 rounded-full p-4 mb-4 text-yellow-600">
+                      {category.icon}
+                    </div>
+                    <h3 className="font-bold text-lg mb-2">{category.title}</h3>
+                    <p className="text-sm text-gray-500">{category.description}</p>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
         </div>
-        
-        <div className="text-center mt-8">
-          <Button 
-            variant="outline"
-            className="border-yellow-300 text-anthracite hover:bg-yellow-50 font-medium"
-            asChild
-          >
-            <Link to="/categories">
-              View All Categories <ArrowRight className="ml-2 w-4 h-4" />
-            </Link>
-          </Button>
-        </div>
-      </div>
-    </section>
+      </main>
+      <Footer />
+    </div>
   );
 };
 
-export default ServiceCategories;
+export default AllCategories;

@@ -31,6 +31,7 @@ import HeroVariation3 from "@/components/variations/HeroVariation3";
 import ServiceSearch from "./pages/ServiceSearch";
 import ProjectSearch from "./pages/ProjectSearch";
 import MarketResearch from "./pages/MarketResearch";
+import AllCategories from "./pages/AllCategories";
 
 const queryClient = new QueryClient();
 
@@ -66,6 +67,7 @@ const App = () => (
           <Route path="/search/services" element={<ServiceSearch />} />
           <Route path="/search/projects" element={<ProjectSearch />} />
           <Route path="/search/market" element={<MarketResearch />} />
+          <Route path="/categories" element={<AllCategories />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
