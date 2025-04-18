@@ -1,6 +1,7 @@
+
 import React from 'react';
 import { Outlet, useLocation, Link } from 'react-router-dom';
-import { LayoutDashboard, FileText, UserCheck, Coins, Settings, MessageSquare, BarChart3, Layers, Bell, UserRound } from 'lucide-react';
+import { LayoutDashboard, FileText, UserCheck, Coins, Settings, MessageSquare, BarChart3, Layers, Bell, UserRound, CalendarDays } from 'lucide-react';
 import { Sidebar, SidebarProvider, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarHeader, SidebarFooter } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -21,6 +22,12 @@ const DashboardLayout = () => {
       icon: FileText,
       path: "/dashboard/services",
       active: location.pathname === "/dashboard/services"
+    },
+    {
+      label: "Appointments",
+      icon: CalendarDays,
+      path: "/dashboard/appointments",
+      active: location.pathname === "/dashboard/appointments"
     },
     {
       label: "Clients",
@@ -63,7 +70,7 @@ const DashboardLayout = () => {
 
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen">
+      <div className="flex min-h-screen bg-gray-50">
         <Sidebar>
           <SidebarHeader className="flex flex-row items-center justify-between">
             <Link to="/" className="flex items-center gap-2">
@@ -96,6 +103,15 @@ const DashboardLayout = () => {
                 <h2 className="px-4 text-lg font-semibold tracking-tight">
                   Provider Dashboard
                 </h2>
+              </div>
+
+              {/* Pro Upgrade Banner */}
+              <div className="mt-3 mb-4 mx-2 p-3 bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-lg border border-yellow-200">
+                <p className="text-xs font-medium text-yellow-800">Free Account</p>
+                <p className="text-xs text-yellow-600 mt-1">Upgrade to Pro for more features</p>
+                <Button size="sm" className="w-full mt-2 bg-yellow-500 hover:bg-yellow-600 text-anthracite">
+                  <Link to="/dashboard/pro" className="w-full">Upgrade Now</Link>
+                </Button>
               </div>
             </div>
             <SidebarMenu>
@@ -143,8 +159,43 @@ const DashboardLayout = () => {
             </div>
           </SidebarFooter>
         </Sidebar>
-        <main className="flex-1 p-6">
-          <Outlet />
+        
+        <main className="flex-1 flex flex-col">
+          <header className="bg-white border-b px-6 py-3 flex justify-between items-center">
+            <h1 className="text-xl font-semibold">
+              {menuItems.find(item => item.active)?.label || "Dashboard"}
+            </h1>
+            <div className="flex items-center space-x-3">
+              <Button variant="outline" size="sm">
+                <CalendarDays className="mr-2 h-4 w-4" />
+                Schedule
+              </Button>
+              <Button variant="outline" size="sm">
+                <Bell className="h-4 w-4" />
+                <span className="ml-1.5">Notifications</span>
+                <Badge className="ml-1" variant="secondary">3</Badge>
+              </Button>
+              <Avatar>
+                <AvatarImage src="/placeholder.svg" />
+                <AvatarFallback>JD</AvatarFallback>
+              </Avatar>
+            </div>
+          </header>
+          
+          <div className="flex-1 p-6 overflow-auto">
+            <Outlet />
+          </div>
+          
+          <footer className="bg-white border-t px-6 py-3 text-xs text-gray-500">
+            <div className="flex justify-between items-center">
+              <div>© 2025 YelloPago Provider Dashboard. All rights reserved.</div>
+              <div className="flex space-x-4">
+                <Link to="/terms" className="hover:text-yellow-600">Terms</Link>
+                <Link to="/privacy" className="hover:text-yellow-600">Privacy</Link>
+                <Link to="/help" className="hover:text-yellow-600">Help Center</Link>
+              </div>
+            </div>
+          </footer>
         </main>
       </div>
     </SidebarProvider>
