@@ -10,7 +10,7 @@ import {
   Camera, 
   ChevronRight, 
   Tag, 
-  Tool, 
+  Wrench, 
   Home, 
   Building, 
   Construction, 
@@ -139,7 +139,7 @@ const HeroVariation2 = () => {
                   <div>
                     <h3 className="text-lg font-medium mb-3 text-yellow-200">What's your project?</h3>
                     <div className="relative">
-                      <Tool className="absolute left-3 top-3 text-yellow-400" />
+                      <Wrench className="absolute left-3 top-3 text-yellow-400" />
                       <textarea
                         placeholder="Describe what you need help with..."
                         className="pl-10 pr-4 py-3 w-full rounded-xl border border-white/20 bg-white/5 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none h-28 text-white placeholder:text-white/50"
