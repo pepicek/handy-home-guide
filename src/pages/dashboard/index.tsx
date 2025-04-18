@@ -8,7 +8,7 @@ import Settings from "./Settings";
 import Clients from "./Clients";
 import Messages from "./Messages";
 import Analytics from "./Analytics";
-import Earnings from "./Earnings";
+import Money from "./Earnings"; // Rename the import while keeping the same file
 import Listings from "./Listings";
 import ListingsSettings from "./ListingsSettings";
 
@@ -22,7 +22,7 @@ export {
   Clients,
   Messages,
   Analytics,
-  Earnings,
+  Money, // Export as Money instead of Earnings
   Listings,
   ListingsSettings
 };

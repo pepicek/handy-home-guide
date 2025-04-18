@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -51,16 +52,14 @@ import {
   Services,
   Appointments,
   SpecialOffers,
-  Settings
+  Settings,
+  Clients,
+  Messages,
+  Analytics,
+  Money,
+  Listings,
+  ListingsSettings
 } from "./pages/dashboard";
-
-import Clients from "./pages/dashboard/Clients";
-import Messages from "./pages/dashboard/Messages";
-import Analytics from "./pages/dashboard/Analytics";
-import Earnings from "./pages/dashboard/Earnings";
-import ProSubscription from "./pages/dashboard/ProSubscription";
-import Listings from "./pages/dashboard/Listings";
-import ListingsSettings from "./pages/dashboard/ListingsSettings";
 
 import ClientDashboardLayout from "./components/client/ClientDashboardLayout";
 import ClientDashboard from "./pages/client/ClientDashboard";
@@ -142,7 +141,7 @@ const App = () => (
             <Route path="clients" element={<Clients />} />
             <Route path="messages" element={<Messages />} />
             <Route path="analytics" element={<Analytics />} />
-            <Route path="earnings" element={<Earnings />} />
+            <Route path="money" element={<Money />} /> {/* Changed from earnings to money */}
             <Route path="settings" element={<Settings />} />
             <Route path="pro" element={<ProSubscription />} />
             <Route path="clients/:id" element={<ClientProfile />} />
