@@ -14,6 +14,7 @@ import SpecialOfferDetails from "./pages/SpecialOfferDetails";
 import BookNow from "./pages/BookNow";
 import ViewProfile from "./pages/ViewProfile";
 import CheckSchedule from "./pages/CheckSchedule";
+import RequestQuote from "./pages/RequestQuote";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="/book-now/:id" element={<BookNow />} />
           <Route path="/profile/:id" element={<ViewProfile />} />
           <Route path="/schedule/:id" element={<CheckSchedule />} />
+          <Route path="/request-quote/:id" element={<RequestQuote />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

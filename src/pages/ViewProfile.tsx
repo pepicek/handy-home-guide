@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Header from "@/components/Header";
@@ -115,8 +114,8 @@ const ViewProfile = () => {
                   </div>
 
                   <div className="flex gap-3">
-                    <Button className="bg-yellow-400 hover:bg-yellow-500 text-anthracite">
-                      Request Quote
+                    <Button className="bg-yellow-400 hover:bg-yellow-500 text-anthracite" asChild>
+                      <Link to={`/request-quote/${id}`}>Request Quote</Link>
                     </Button>
                     <Button variant="outline">
                       Message
