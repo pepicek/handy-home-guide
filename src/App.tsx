@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -61,6 +62,17 @@ import Earnings from "./pages/dashboard/Earnings";
 import ProSubscription from "./pages/dashboard/ProSubscription";
 import Listings from "./pages/dashboard/Listings";
 import ListingsSettings from "./pages/dashboard/ListingsSettings";
+
+// New invoice pages
+import CreateInvoice from "./pages/dashboard/invoices/CreateInvoice";
+import IssuedInvoices from "./pages/dashboard/invoices/IssuedInvoices";
+
+// New target pages
+import AnnualTarget from "./pages/dashboard/targets/AnnualTarget";
+import TargetSettings from "./pages/dashboard/targets/TargetSettings";
+
+// New export page
+import EarningsExport from "./pages/dashboard/exports/EarningsExport";
 
 import ClientDashboardLayout from "./components/client/ClientDashboardLayout";
 import ClientDashboard from "./pages/client/ClientDashboard";
@@ -151,6 +163,17 @@ const App = () => (
             <Route path="listings" element={<Listings />} />
             <Route path="listings/service/:serviceId" element={<Listings />} />
             <Route path="listings/settings" element={<ListingsSettings />} />
+            
+            {/* New Invoice Routes */}
+            <Route path="invoices/create" element={<CreateInvoice />} />
+            <Route path="invoices" element={<IssuedInvoices />} />
+            
+            {/* New Target Routes */}
+            <Route path="targets/annual" element={<AnnualTarget />} />
+            <Route path="targets/settings" element={<TargetSettings />} />
+            
+            {/* New Export Route */}
+            <Route path="exports/earnings" element={<EarningsExport />} />
           </Route>
           
           <Route path="/client" element={<ClientDashboardLayout />}>

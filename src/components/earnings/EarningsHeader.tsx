@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
 
 interface EarningsHeaderProps {
   dateRange: [Date | undefined, Date | undefined];
@@ -19,10 +20,6 @@ interface EarningsHeaderProps {
 const EarningsHeader = ({ dateRange, setDateRange }: EarningsHeaderProps) => {
   const handleExport = () => {
     toast.success("Exporting earnings data...");
-  };
-
-  const handleCreateInvoice = () => {
-    toast.success("Opening invoice creation form...");
   };
 
   return (
@@ -59,17 +56,21 @@ const EarningsHeader = ({ dateRange, setDateRange }: EarningsHeaderProps) => {
         <Button 
           variant="outline" 
           className="flex items-center gap-1"
-          onClick={handleExport}
+          asChild
         >
-          <Download className="h-4 w-4" />
-          <span>Export</span>
+          <Link to="/dashboard/exports/earnings">
+            <Download className="h-4 w-4" />
+            <span>Export</span>
+          </Link>
         </Button>
         <Button 
           className="bg-anthracite hover:bg-anthracite/90 text-yellow-400"
-          onClick={handleCreateInvoice}
+          asChild
         >
-          <Plus className="h-4 w-4 mr-2" />
-          <span>Create Invoice</span>
+          <Link to="/dashboard/invoices/create">
+            <Plus className="h-4 w-4 mr-2" />
+            <span>Create Invoice</span>
+          </Link>
         </Button>
       </div>
     </div>

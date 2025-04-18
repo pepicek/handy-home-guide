@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/select";
 import { BarChart3, Wallet } from "lucide-react";
 import { startOfMonth } from "date-fns";
+import { Link } from "react-router-dom";
 import EarningsHeader from "@/components/earnings/EarningsHeader";
 import EarningsOverviewChart from "@/components/earnings/charts/EarningsOverviewChart";
 import ProgressCircle from "@/components/earnings/ProgressCircle";
@@ -92,9 +93,11 @@ const Earnings = () => {
             </div>
           </CardContent>
           <CardFooter>
-            <Button className="w-full bg-yellow-500 hover:bg-yellow-600 text-yellow-950">
-              <BarChart3 className="mr-2 h-4 w-4" />
-              View Detailed Report
+            <Button className="w-full bg-yellow-500 hover:bg-yellow-600 text-yellow-950" asChild>
+              <Link to="/dashboard/targets/annual">
+                <BarChart3 className="mr-2 h-4 w-4" />
+                View Detailed Report
+              </Link>
             </Button>
           </CardFooter>
         </Card>
@@ -126,7 +129,9 @@ const Earnings = () => {
                 ${pendingPayments.reduce((sum, payment) => sum + payment.amount, 0).toLocaleString()}
               </span>
             </p>
-            <Button variant="outline">View All</Button>
+            <Button variant="outline" asChild>
+              <Link to="/dashboard/invoices">View All</Link>
+            </Button>
           </CardFooter>
         </Card>
       </div>

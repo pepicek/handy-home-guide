@@ -3,29 +3,7 @@ import React from "react";
 import SmtpSettings from "./SmtpSettings";
 import EmailTemplateCard from "./EmailTemplateCard";
 import { toast } from "sonner";
-
-const DEFAULT_TEMPLATES = {
-  welcome: {
-    title: "Welcome Email",
-    description: "Sent to new users when they register",
-    template: "Welcome to {{business_name}}! We're excited to have you join us."
-  },
-  quote: {
-    title: "Quote Response",
-    description: "Sent when responding to quote requests",
-    template: "Thank you for your quote request. Here are the details: {{quote_details}}"
-  },
-  appointment: {
-    title: "Appointment Confirmation",
-    description: "Sent when an appointment is booked",
-    template: "Your appointment has been confirmed for {{date}} at {{time}}."
-  },
-  message: {
-    title: "New Message Notification",
-    description: "Sent when receiving a new message",
-    template: "You have received a new message from {{sender_name}}."
-  }
-};
+import { DEFAULT_TEMPLATES } from "./EmailTemplateData";
 
 const EmailSettings = () => {
   const handlePreview = (templateName: string) => {
