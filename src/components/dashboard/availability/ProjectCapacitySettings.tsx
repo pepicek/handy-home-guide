@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
@@ -126,11 +126,12 @@ const ProjectCapacitySettings = () => {
             </div>
           </div>
         </div>
-
-        <Button className="w-full bg-anthracite hover:bg-anthracite/90 text-yellow-400">
+      </CardContent>
+      <CardFooter>
+        <Button className="ml-auto bg-anthracite hover:bg-anthracite/90 text-yellow-400">
           Save Project Capacity Settings
         </Button>
-      </CardContent>
+      </CardFooter>
     </Card>
   );
 };

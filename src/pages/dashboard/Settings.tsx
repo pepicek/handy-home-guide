@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,6 +10,8 @@ import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Upload, Camera, MapPin, Clock, Bell, Shield, CreditCard, HelpCircle } from "lucide-react";
+import AvailabilityTypeSelector from "@/components/dashboard/availability/AvailabilityTypeSelector";
+import ProjectCapacitySettings from "@/components/dashboard/availability/ProjectCapacitySettings";
 
 const Settings = () => {
   const [availabilityType, setAvailabilityType] = useState<"business-hours" | "project-based">("business-hours");
