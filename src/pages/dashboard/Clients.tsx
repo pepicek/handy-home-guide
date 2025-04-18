@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -69,13 +70,13 @@ const Clients = () => {
             
             <TabsContent value="all" className="mt-0">
               <ClientsTable 
-                currentClients={currentClients}
+                clients={currentClients}
                 currentPage={currentPage}
                 totalPages={totalPages}
                 setCurrentPage={setCurrentPage}
-                indexOfFirstClient={indexOfFirstClient}
-                indexOfLastClient={indexOfLastClient}
-                totalClients={filteredClients.length}
+                startIndex={indexOfFirstClient}
+                endIndex={Math.min(indexOfLastClient, filteredClients.length)}
+                totalCount={filteredClients.length}
               />
             </TabsContent>
             
