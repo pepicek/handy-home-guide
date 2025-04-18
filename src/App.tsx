@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -74,6 +75,11 @@ import ClientReviews from "./pages/client/ClientReviews";
 import ClientSettings from "./pages/client/ClientSettings";
 import FinancialSummary from "./pages/client/FinancialSummary";
 import SearchHistory from "./pages/client/SearchHistory";
+
+// Project related pages
+import NewProject from "./pages/client/projects/NewProject";
+import ProjectDetails from "./pages/client/projects/ProjectDetails";
+import EditProject from "./pages/client/projects/EditProject";
 
 const queryClient = new QueryClient();
 

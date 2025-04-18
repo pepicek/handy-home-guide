@@ -8,6 +8,9 @@ import ClientReviews from "./ClientReviews";
 import FinancialSummary from "./FinancialSummary";
 import SearchHistory from "./SearchHistory";
 import ClientSettings from "./ClientSettings";
+import NewProject from "./projects/NewProject";
+import EditProject from "./projects/EditProject";
+import ProjectDetails from "./projects/ProjectDetails";
 
 export {
   ClientDashboardLayout,
@@ -18,5 +21,8 @@ export {
   ClientReviews,
   FinancialSummary,
   SearchHistory,
-  ClientSettings
+  ClientSettings,
+  NewProject,
+  EditProject,
+  ProjectDetails
 };
