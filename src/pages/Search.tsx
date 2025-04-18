@@ -27,6 +27,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Search as SearchIcon, Filter, MapPin, Star, Briefcase, Clock, Shield } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const serviceCategories = [
   "Plumbing",
@@ -362,8 +363,12 @@ const Search = () => {
                         </CardContent>
                         
                         <CardFooter className="p-0 pt-3 justify-end space-x-2">
-                          <Button variant="outline" className="text-sm border-gray-200">
-                            View Profile
+                          <Button 
+                            variant="outline" 
+                            className="text-sm border-gray-200"
+                            asChild
+                          >
+                            <Link to={`/profile/${provider.id}`}>View Profile</Link>
                           </Button>
                           <Button className="text-sm bg-yellow-400 hover:bg-yellow-500 text-anthracite">
                             Request Quote

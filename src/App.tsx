@@ -12,6 +12,7 @@ import HowItWorksPage from "./pages/HowItWorks";
 import Providers from "./pages/Providers";
 import SpecialOfferDetails from "./pages/SpecialOfferDetails";
 import BookNow from "./pages/BookNow";
+import ViewProfile from "./pages/ViewProfile";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/providers" element={<Providers />} />
           <Route path="/about" element={<About />} />
           <Route path="/book-now/:id" element={<BookNow />} />
+          <Route path="/profile/:id" element={<ViewProfile />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
