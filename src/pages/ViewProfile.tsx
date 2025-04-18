@@ -179,8 +179,8 @@ const ViewProfile = () => {
                     <Calendar className="w-4 h-4" />
                     <span>{provider.availability}</span>
                   </div>
-                  <Button className="w-full bg-yellow-400 hover:bg-yellow-500 text-anthracite">
-                    Check Schedule
+                  <Button className="w-full bg-yellow-400 hover:bg-yellow-500 text-anthracite" asChild>
+                    <Link to={`/schedule/${id}`}>Check Schedule</Link>
                   </Button>
                 </CardContent>
               </Card>
