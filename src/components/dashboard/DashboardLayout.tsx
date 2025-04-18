@@ -1,65 +1,79 @@
-
-import React from "react";
-import { useLocation, Link, Outlet } from "react-router-dom";
-import { 
-  Sidebar, 
-  SidebarContent, 
-  SidebarHeader, 
-  SidebarFooter, 
-  SidebarProvider,
-  SidebarInset,
-  SidebarMenu,
-  SidebarMenuItem,
-  SidebarMenuButton,
-  SidebarTrigger,
-  SidebarGroup,
-  SidebarGroupLabel
-} from "@/components/ui/sidebar";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
+import React, { useState } from "react";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useSidebar, SidebarProvider, Sidebar, SidebarContent, SidebarHeader, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarTrigger, SidebarInset } from "@/components/ui/sidebar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Bell, Settings, Users, Calendar, Tag, BarChart3, DollarSign, MessageSquare, Grid3x3, Home, Crown } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { toast } from "sonner";
+import { LayoutDashboard, FileText, Calendar, Users, Settings, LogOut, Bell, MessageSquare, PieChart,
+  Sparkles, DollarSign, BarChart3, ListChecks, Menu, Crown } from "lucide-react";
 
 export const DashboardLayout = () => {
+  return (
+    <SidebarProvider defaultOpen={true}>
+      <div className="flex w-full min-h-screen bg-yellow-50/50">
+        <DashboardSidebar />
+        <SidebarInset>
+          <div className="flex flex-col h-full">
+            <DashboardHeader />
+            <main className="flex-1 p-6 overflow-auto">
+              <Outlet />
+            </main>
+          </div>
+        </SidebarInset>
+      </div>
+    </SidebarProvider>
+  );
+};
+
+const DashboardSidebar = () => {
   const location = useLocation();
   
   const menuItems = [
     {
       label: "Dashboard",
-      icon: Home,
+      icon: LayoutDashboard,
       path: "/dashboard",
       active: location.pathname === "/dashboard"
+    },
+    {
+      label: "Services",
+      icon: ListChecks, 
+      path: "/dashboard/services",
+      active: location.pathname === "/dashboard/services"
+    },
+    {
+      label: "Listings",
+      icon: FileText,
+      path: "/dashboard/listings",
+      active: location.pathname.includes("/dashboard/listings")
     },
     {
       label: "Appointments",
       icon: Calendar,
       path: "/dashboard/appointments",
-      active: location.pathname.includes("/dashboard/appointments")
-    },
-    {
-      label: "Services",
-      icon: Grid3x3,
-      path: "/dashboard/services",
-      active: location.pathname.includes("/dashboard/services")
+      active: location.pathname === "/dashboard/appointments"
     },
     {
       label: "Special Offers",
-      icon: Tag,
+      icon: Sparkles,
       path: "/dashboard/special-offers",
-      active: location.pathname.includes("/dashboard/special-offers")
+      active: location.pathname === "/dashboard/special-offers"
     },
     {
       label: "Clients",
       icon: Users,
       path: "/dashboard/clients",
-      active: location.pathname.includes("/dashboard/clients")
+      active: location.pathname === "/dashboard/clients"
     },
     {
       label: "Messages",
       icon: MessageSquare,
       path: "/dashboard/messages",
-      active: location.pathname.includes("/dashboard/messages"),
-      badge: "5"
+      active: location.pathname === "/dashboard/messages",
+      badge: "3"
     },
     {
       label: "Analytics",
@@ -68,22 +82,10 @@ export const DashboardLayout = () => {
       active: location.pathname === "/dashboard/analytics"
     },
     {
-      label: "Money",
-      icon: DollarSign, 
-      path: "/dashboard/money",
-      active: location.pathname === "/dashboard/money"
-    },
-    {
-      label: "Listings",
-      icon: Grid3x3,
-      path: "/dashboard/listings",
-      active: location.pathname.includes("/dashboard/listings")
-    },
-    {
-      label: "Pro",
-      icon: Crown,
-      path: "/dashboard/pro",
-      active: location.pathname === "/dashboard/pro"
+      label: "Earnings",
+      icon: DollarSign,
+      path: "/dashboard/earnings",
+      active: location.pathname === "/dashboard/earnings"
     },
     {
       label: "Settings",
@@ -92,90 +94,136 @@ export const DashboardLayout = () => {
       active: location.pathname === "/dashboard/settings"
     }
   ];
-
+  
   return (
-    <SidebarProvider>
-      <div className="flex min-h-screen">
-        <Sidebar>
-          <SidebarHeader className="flex h-14 items-center border-b px-4">
-            <Link to="/dashboard" className="flex items-center gap-2">
-              <div className="h-6 w-6 rounded-md bg-primary" />
-              <span className="text-lg font-bold">Service Pro</span>
-            </Link>
-            <SidebarTrigger className="ml-auto md:hidden" />
-          </SidebarHeader>
-          
-          <SidebarContent>
-            <SidebarGroup>
-              <SidebarGroupLabel>Main Menu</SidebarGroupLabel>
-              <SidebarMenu>
-                {menuItems.map((item) => (
-                  <SidebarMenuItem key={item.path}>
-                    <SidebarMenuButton asChild isActive={item.active}>
-                      <Link to={item.path} className="flex items-center">
-                        <item.icon className="mr-2 h-4 w-4" />
-                        <span>{item.label}</span>
-                        {item.badge && (
-                          <Badge variant="secondary" className="ml-auto">
-                            {item.badge}
-                          </Badge>
-                        )}
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroup>
-          </SidebarContent>
-          
-          <SidebarFooter>
-            <div className="border-t p-4">
-              <div className="bg-muted/50 rounded-lg p-4 mb-4">
-                <p className="text-sm font-medium mb-2">Upgrade to Pro</p>
-                <p className="text-xs text-muted-foreground mb-3">Get more features and priority support.</p>
-                <Button size="sm" className="w-full">Upgrade</Button>
-              </div>
-              
-              <div className="flex items-center gap-3">
-                <Avatar>
-                  <AvatarImage src="/placeholder.svg" alt="User" />
-                  <AvatarFallback>JD</AvatarFallback>
-                </Avatar>
-                <div className="flex flex-col">
-                  <span className="text-sm font-medium">Jane Doe</span>
-                  <span className="text-xs text-muted-foreground">jane@example.com</span>
+    <Sidebar>
+      <SidebarHeader>
+        <div className="flex items-center px-3 py-2">
+          <Link to="/" className="flex items-center group">
+            <div className="bg-anthracite rounded-xl p-2 mr-2 rotate-3 group-hover:rotate-6 transition-transform duration-300">
+              <Sparkles className="w-4 h-4 text-yellow-400" />
+            </div>
+            <span className="font-poster text-lg font-bold text-anthracite">
+              Yello<span className="text-yellow-600">Pago</span>
+            </span>
+          </Link>
+          <SidebarTrigger className="ml-auto" />
+        </div>
+      </SidebarHeader>
+      
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel className="text-yellow-700">Main</SidebarGroupLabel>
+          <SidebarMenu>
+            {menuItems.map((item) => (
+              <SidebarMenuItem key={item.path}>
+                <SidebarMenuButton asChild isActive={item.active} tooltip={item.label}>
+                  <Link to={item.path}>
+                    <item.icon className={item.active ? "text-yellow-600" : ""} />
+                    <span>{item.label}</span>
+                    {item.badge && (
+                      <Badge className="ml-auto bg-yellow-500 text-anthracite">{item.badge}</Badge>
+                    )}
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            ))}
+          </SidebarMenu>
+        </SidebarGroup>
+        
+        <SidebarGroup>
+          <div className="px-3 py-4">
+            <Card className="bg-gradient-to-r from-yellow-100 to-amber-100 border-yellow-200">
+              <CardContent className="p-4 space-y-3">
+                <div className="flex items-center gap-2 text-anthracite">
+                  <Crown className="h-5 w-5 text-yellow-600" />
+                  <h3 className="font-semibold">Upgrade to Pro</h3>
                 </div>
-                <Button variant="ghost" size="icon" className="ml-auto">
-                  <Bell className="h-4 w-4" />
+                <p className="text-sm text-anthracite/70">
+                  Get priority listing, advanced analytics, and more premium features
+                </p>
+                <Button 
+                  className="w-full bg-yellow-500 hover:bg-yellow-600 text-anthracite"
+                  size="sm"
+                  asChild
+                >
+                  <Link to="/dashboard/pro">View Pro Plans</Link>
                 </Button>
-              </div>
+              </CardContent>
+            </Card>
+          </div>
+        </SidebarGroup>
+      </SidebarContent>
+      
+      <SidebarFooter>
+        <div className="px-3 py-2">
+          <Separator className="my-2" />
+          <div className="flex items-center gap-3 px-2 py-2">
+            <Avatar className="h-9 w-9 border-3 border-yellow-400 shadow-md shadow-yellow-300/50">
+              <AvatarImage src="/placeholder.svg" />
+              <AvatarFallback className="bg-yellow-100 text-yellow-800">JP</AvatarFallback>
+            </Avatar>
+            <div className="flex-1 overflow-hidden">
+              <p className="text-sm font-medium leading-none truncate">Joe Provider</p>
+              <p className="text-xs text-muted-foreground truncate">joe@provider.com</p>
             </div>
-          </SidebarFooter>
-        </Sidebar>
+            <Button variant="ghost" size="icon" className="ml-auto">
+              <LogOut className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      </SidebarFooter>
+    </Sidebar>
+  );
+};
 
-        <SidebarInset>
-          <div className="h-14 border-b flex items-center justify-between px-4 lg:px-6">
-            <h1 className="text-lg font-semibold">Dashboard</h1>
-            <div className="flex items-center gap-2">
-              <Button variant="ghost" size="icon">
-                <Bell className="h-4 w-4" />
-              </Button>
-              <Avatar className="h-8 w-8">
-                <AvatarImage src="/placeholder.svg" alt="User" />
-                <AvatarFallback>JD</AvatarFallback>
-              </Avatar>
-            </div>
-          </div>
-          
-          <div className="container py-6">
-            <Outlet />
-          </div>
-          
-          <div className="border-t p-4 text-center text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Service Pro. All rights reserved.
-          </div>
-        </SidebarInset>
+const DashboardHeader = () => {
+  const { toggleSidebar } = useSidebar();
+  const navigate = useNavigate();
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
+  
+  const handleNotificationClick = () => {
+    setNotificationsOpen(!notificationsOpen);
+    toast.info("You have 3 new notifications");
+  };
+  
+  return (
+    <header className="bg-gradient-to-r from-yellow-200 via-yellow-100 to-yellow-50 border-b border-yellow-300 p-4 shadow-sm">
+      <div className="flex items-center justify-between max-w-7xl mx-auto">
+        <div className="flex items-center gap-4">
+          <Button 
+            variant="ghost" 
+            size="icon"
+            onClick={toggleSidebar} 
+            className="md:hidden text-yellow-800 hover:bg-yellow-200/70"
+          >
+            <Menu className="h-5 w-5 text-yellow-700" />
+          </Button>
+          <h1 className="text-xl font-semibold text-anthracite">Provider Dashboard</h1>
+        </div>
+        <div className="flex items-center gap-4">
+          <Link to="/dashboard/credits" className="flex items-center gap-2 px-3 py-1.5 bg-yellow-100 rounded-full hover:bg-yellow-200 transition-colors">
+            <DollarSign className="h-4 w-4 text-yellow-700" />
+            <span className="font-medium text-yellow-800">$200.00</span>
+          </Link>
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="relative hover:bg-yellow-200/70"
+            onClick={handleNotificationClick}
+          >
+            <Bell className="h-5 w-5 text-yellow-700" />
+            <span className="absolute top-0 right-0 h-2.5 w-2.5 bg-yellow-500 rounded-full ring-2 ring-white"></span>
+          </Button>
+          <Button 
+            variant="outline" 
+            className="ml-2 border-yellow-400 hover:bg-yellow-100 text-yellow-800"
+            onClick={() => navigate('/profile/me')}
+          >
+            View Public Profile
+          </Button>
+        </div>
       </div>
-    </SidebarProvider>
+    </header>
   );
 };

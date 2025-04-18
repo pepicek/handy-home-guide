@@ -51,112 +51,118 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-// Sample data for charts and tables
+// Sample data for earnings charts
 const monthlyEarnings = [
-  { month: 'Jan', earnings: 8500 },
-  { month: 'Feb', earnings: 9200 },
-  { month: 'Mar', earnings: 8900 },
-  { month: 'Apr', earnings: 10400 },
-  { month: 'May', earnings: 11500 },
-  { month: 'Jun', earnings: 12000 },
-  { month: 'Jul', earnings: 11700 },
-  { month: 'Aug', earnings: 10500 },
-  { month: 'Sep', earnings: 9800 },
-  { month: 'Oct', earnings: 10200 },
-  { month: 'Nov', earnings: 10800 },
-  { month: 'Dec', earnings: 11000 },
+  { month: 'Jan', earnings: 3200 },
+  { month: 'Feb', earnings: 4100 },
+  { month: 'Mar', earnings: 3800 },
+  { month: 'Apr', earnings: 4700 },
+  { month: 'May', earnings: 5200 },
+  { month: 'Jun', earnings: 4800 },
+  { month: 'Jul', earnings: 6100 },
+  { month: 'Aug', earnings: 5900 },
+  { month: 'Sep', earnings: 6800 },
+  { month: 'Oct', earnings: 6200 },
+  { month: 'Nov', earnings: 7100 },
+  { month: 'Dec', earnings: 7800 }
 ];
 
 const weeklyEarnings = [
-  { day: 'Mon', earnings: 1200 },
-  { day: 'Tue', earnings: 1400 },
-  { day: 'Wed', earnings: 1100 },
-  { day: 'Thu', earnings: 1800 },
-  { day: 'Fri', earnings: 2100 },
-  { day: 'Sat', earnings: 1300 },
-  { day: 'Sun', earnings: 900 },
+  { day: 'Mon', earnings: 650 },
+  { day: 'Tue', earnings: 950 },
+  { day: 'Wed', earnings: 800 },
+  { day: 'Thu', earnings: 1200 },
+  { day: 'Fri', earnings: 1400 },
+  { day: 'Sat', earnings: 1700 },
+  { day: 'Sun', earnings: 500 }
 ];
 
 const serviceEarnings = [
-  { name: 'Plumbing', earnings: 35000 },
-  { name: 'Electrical', earnings: 28000 },
-  { name: 'Landscaping', earnings: 18000 },
-  { name: 'Renovation', earnings: 13500 },
+  { name: 'Interior Painting', earnings: 24500 },
+  { name: 'Kitchen Renovation', earnings: 18700 },
+  { name: 'Bathroom Remodeling', earnings: 15200 },
+  { name: 'Flooring', earnings: 9800 },
+  { name: 'Electrical Services', earnings: 7400 },
+  { name: 'Plumbing', earnings: 6500 },
+  { name: 'Other Services', earnings: 12900 }
+];
+
+const transactionHistory = [
+  { 
+    id: 1,
+    client: 'Sarah Johnson',
+    service: 'Interior Painting',
+    amount: 850,
+    date: '2025-04-15',
+    status: 'completed',
+    paymentMethod: 'credit_card'
+  },
+  { 
+    id: 2,
+    client: 'Michael Brown',
+    service: 'Kitchen Renovation (Deposit)',
+    amount: 2500,
+    date: '2025-04-12',
+    status: 'completed',
+    paymentMethod: 'bank_transfer'
+  },
+  { 
+    id: 3,
+    client: 'Emily Davis',
+    service: 'Bathroom Remodeling',
+    amount: 1850,
+    date: '2025-04-10',
+    status: 'completed',
+    paymentMethod: 'credit_card'
+  },
+  { 
+    id: 4,
+    client: 'David Wilson',
+    service: 'Electrical Repairs',
+    amount: 450,
+    date: '2025-04-08',
+    status: 'processing',
+    paymentMethod: 'credit_card'
+  },
+  { 
+    id: 5,
+    client: 'Jessica Miller',
+    service: 'Flooring Installation',
+    amount: 1200,
+    date: '2025-04-05',
+    status: 'pending',
+    paymentMethod: 'bank_transfer'
+  },
 ];
 
 const pendingPayments = [
   { 
-    id: 1, 
-    client: 'John Smith', 
-    service: 'Kitchen Renovation', 
-    amount: 2500, 
-    dueDate: '2025-04-25' 
-  },
-  { 
-    id: 2, 
-    client: 'Emma Johnson', 
-    service: 'Bathroom Remodel', 
-    amount: 1800, 
-    dueDate: '2025-04-29' 
-  },
-  { 
-    id: 3, 
-    client: 'Michael Brown', 
-    service: 'Landscaping Project', 
-    amount: 900, 
-    dueDate: '2025-05-02' 
-  },
-];
-
-const transactionHistory = [
-  {
     id: 1,
-    client: 'Sarah Wilson',
-    service: 'Electrical Rewiring',
-    amount: 1250,
-    date: '2025-04-15',
-    paymentMethod: 'credit_card',
-    status: 'completed'
+    client: 'Robert Smith',
+    service: 'Deck Construction',
+    amount: 3500,
+    dueDate: '2025-04-25',
+    status: 'pending',
   },
-  {
+  { 
     id: 2,
-    client: 'Robert Taylor',
-    service: 'Plumbing Service',
-    amount: 850,
-    date: '2025-04-12',
-    paymentMethod: 'bank_transfer',
-    status: 'processing'
+    client: 'Jennifer Garcia',
+    service: 'Kitchen Renovation (Final)',
+    amount: 4200,
+    dueDate: '2025-04-22',
+    status: 'pending',
   },
-  {
+  { 
     id: 3,
-    client: 'Jennifer Davis',
-    service: 'Kitchen Renovation',
-    amount: 3200,
-    date: '2025-04-10',
-    paymentMethod: 'credit_card',
-    status: 'completed'
-  },
-  {
-    id: 4,
-    client: 'David Clark',
-    service: 'Roof Repair',
-    amount: 1800,
-    date: '2025-04-08',
-    paymentMethod: 'bank_transfer',
-    status: 'pending'
-  },
-  {
-    id: 5,
-    client: 'Amanda Lopez',
-    service: 'Yard Cleanup',
-    amount: 550,
-    date: '2025-04-05',
-    paymentMethod: 'credit_card',
-    status: 'completed'
+    client: 'Thomas Rodriguez',
+    service: 'Bathroom Remodeling',
+    amount: 2700,
+    dueDate: '2025-04-20',
+    status: 'pending',
   }
 ];
 
-const Money = () => {
+const Earnings = () => {
   const [timeFrame, setTimeFrame] = useState("monthly");
   
   const totalEarnings = 94500;
@@ -166,10 +172,7 @@ const Money = () => {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <h1 className="text-3xl font-bold text-anthracite flex items-center gap-3">
-          <DollarSign className="h-8 w-8 text-yellow-600" />
-          Money Management
-        </h1>
+        <h1 className="text-3xl font-bold text-anthracite">Earnings Management</h1>
         <div className="flex items-center gap-2">
           <Button variant="outline" className="flex items-center gap-2">
             <Calendar className="h-4 w-4" />
@@ -551,4 +554,4 @@ const Money = () => {
   );
 };
 
-export default Money;
+export default Earnings;

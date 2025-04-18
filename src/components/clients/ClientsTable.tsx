@@ -64,7 +64,7 @@ export const ClientsTable = ({
           <Button 
             variant="outline" 
             size="sm" 
-            onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+            onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
             disabled={currentPage === 1}
           >
             <ChevronLeft className="h-4 w-4" />
@@ -72,7 +72,7 @@ export const ClientsTable = ({
           <Button 
             variant="outline" 
             size="sm" 
-            onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+            onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
             disabled={currentPage === totalPages}
           >
             <ChevronRight className="h-4 w-4" />
