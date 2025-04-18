@@ -88,7 +88,7 @@ const ClientDashboardLayout = () => {
     <div className="min-h-screen bg-background">
       <SidebarProvider defaultOpen={!isMobile}>
         <div className="flex min-h-screen w-full">
-          <Sidebar>
+          <Sidebar variant="inset">
             <SidebarHeader className="flex flex-row items-center justify-between">
               <Link to="/" className="flex items-center gap-2">
                 <div className="bg-anthracite rounded-xl p-2 rotate-3">
@@ -161,10 +161,10 @@ const ClientDashboardLayout = () => {
           </Sidebar>
 
           <SidebarInset className="flex-1 py-6 px-4 md:px-10">
-            <div className="flex justify-between items-center mb-6">
+            <div className="mb-6">
               {isMobile && (
                 <Button variant="ghost" size="icon" className="md:hidden mr-2">
-                  <Menu className="h-6 w-6" />
+                  <SidebarTrigger />
                 </Button>
               )}
               <Outlet />
