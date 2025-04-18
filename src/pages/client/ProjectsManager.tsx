@@ -23,10 +23,25 @@ import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useNavigate } from "react-router-dom";
+import DeleteProjectModal from "@/components/projects/DeleteProjectModal";
 
 const ProjectsManager = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [projectToDelete, setProjectToDelete] = useState(null);
+  
+  const handleDelete = (projectId) => {
+    setProjectToDelete(projectId);
+    setShowDeleteModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    // Handle delete logic here
+    setShowDeleteModal(false);
+    setProjectToDelete(null);
+  };
+
   
   return (
     <div className="space-y-6">
@@ -83,6 +98,12 @@ const ProjectsManager = () => {
         <ProjectSummaryCard />
         <UpcomingMilestonesCard />
       </div>
+      
+      <DeleteProjectModal 
+        isOpen={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
+        onConfirm={handleConfirmDelete}
+      />
     </div>
   );
 };
@@ -219,6 +240,7 @@ const PlanningProjectsList = () => {
 
 const ProjectCard = ({ project }) => {
   const navigate = useNavigate();
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   
   return (
     <Card className="overflow-hidden">
@@ -331,7 +353,12 @@ const ProjectCard = ({ project }) => {
           </Button>
         </div>
         <div className="flex gap-2">
-          <Button variant="ghost" size="sm" className="h-8 text-red-600 hover:text-red-700 hover:bg-red-50">
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="h-8 text-red-600 hover:text-red-700 hover:bg-red-50"
+            onClick={() => handleDelete(project.id)}
+          >
             <Trash2 className="h-4 w-4 mr-1" />
             Delete
           </Button>
@@ -383,34 +410,40 @@ const ProjectSummaryCard = () => {
 };
 
 const UpcomingMilestonesCard = () => {
+  const navigate = useNavigate();
+  
   const milestones = [
     { 
       project: "Home Renovation", 
       milestone: "Cabinet Installation", 
       date: "Apr 28", 
       status: "On Track",
-      provider: "Custom Cabinetry Co."
+      provider: "Custom Cabinetry Co.",
+      projectId: 1
     },
     { 
       project: "Garden Landscaping", 
       milestone: "Soil Preparation", 
       date: "Apr 22", 
       status: "On Track",
-      provider: "Green Gardens Pro"
+      provider: "Green Gardens Pro",
+      projectId: 2
     },
     { 
       project: "Bathroom Remodel", 
       milestone: "Material Selection", 
       date: "Apr 30", 
       status: "At Risk",
-      provider: "Elite Home Renovations"
+      provider: "Elite Home Renovations",
+      projectId: 3
     },
     { 
       project: "Basement Finishing", 
       milestone: "Get 3 Quotes", 
       date: "May 15", 
       status: "Pending",
-      provider: "N/A"
+      provider: "N/A",
+      projectId: 4
     }
   ];
   
@@ -448,7 +481,12 @@ const UpcomingMilestonesCard = () => {
                     {milestone.status}
                   </Badge>
                 </div>
-                <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="h-8 w-8 p-0"
+                  onClick={() => navigate(`/client/projects/${milestone.projectId}`)}
+                >
                   <ChevronRight className="h-4 w-4" />
                 </Button>
               </div>

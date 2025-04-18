@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -20,13 +19,19 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { useNavigate } from "react-router-dom";
 
 const ClientDashboard = () => {
+  const navigate = useNavigate();
+  
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold text-anthracite">Welcome, Jane!</h1>
-        <Button className="bg-anthracite hover:bg-anthracite/90 text-yellow-400">
+        <Button 
+          className="bg-anthracite hover:bg-anthracite/90 text-yellow-400"
+          onClick={() => navigate("/client/providers/find")}
+        >
           Find New Service Providers
         </Button>
       </div>
@@ -77,8 +82,16 @@ const ClientDashboard = () => {
               <ProjectsList />
             </CardContent>
             <CardFooter className="flex justify-between">
-              <Button variant="outline">View All Projects</Button>
-              <Button className="bg-anthracite hover:bg-anthracite/90 text-yellow-400">
+              <Button 
+                variant="outline"
+                onClick={() => navigate("/client/projects")}
+              >
+                View All Projects
+              </Button>
+              <Button 
+                className="bg-anthracite hover:bg-anthracite/90 text-yellow-400"
+                onClick={() => navigate("/client/projects/new")}
+              >
                 Create New Project
               </Button>
             </CardFooter>
@@ -167,7 +180,9 @@ const ClientDashboard = () => {
             </Table>
           </CardContent>
           <CardFooter>
-            <Button variant="outline" className="w-full">View All Quotes</Button>
+            <Button variant="outline" className="w-full" onClick={() => navigate("/client/quotes")}>
+              View All Quotes
+            </Button>
           </CardFooter>
         </Card>
         
