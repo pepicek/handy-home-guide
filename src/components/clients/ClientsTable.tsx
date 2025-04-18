@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
@@ -167,11 +166,9 @@ const ClientsTable = ({
           <PaginationContent>
             <PaginationItem>
               <PaginationPrevious 
-                onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-                disabled={currentPage === 1}
-                aria-disabled={currentPage === 1}
-                tabIndex={currentPage === 1 ? -1 : undefined}
+                onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
                 className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
+                aria-disabled={currentPage === 1}
               />
             </PaginationItem>
             {Array.from({ length: totalPages }).map((_, i) => (
@@ -186,11 +183,9 @@ const ClientsTable = ({
             ))}
             <PaginationItem>
               <PaginationNext 
-                onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
-                disabled={currentPage === totalPages}
-                aria-disabled={currentPage === totalPages}
-                tabIndex={currentPage === totalPages ? -1 : undefined}
+                onClick={() => currentPage < totalPages && setCurrentPage(currentPage + 1)}
                 className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
+                aria-disabled={currentPage === totalPages}
               />
             </PaginationItem>
           </PaginationContent>
