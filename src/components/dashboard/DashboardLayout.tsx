@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { useSidebar, SidebarProvider, Sidebar, SidebarContent, SidebarHeader, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarTrigger, SidebarInset } from "@/components/ui/sidebar";
@@ -5,6 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card"; // Added Card and CardContent import
 import { 
   LayoutDashboard, 
   FileText, 

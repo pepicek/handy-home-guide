@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
@@ -6,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Header from "@/components/Header";
 import { Badge } from "@/components/ui/badge";
-import { User, Users, LightbulbIcon, ChevronRight } from "lucide-react";
+import { User, Users, LightbulbIcon, ChevronRight, ArrowRight } from "lucide-react"; // Added ArrowRight import
 import NewsItem from "@/components/signin/NewsItem";
 import ProFeatureCard from "@/components/signin/ProFeatures";
 import SignInCard from "@/components/signin/SignInCard";
