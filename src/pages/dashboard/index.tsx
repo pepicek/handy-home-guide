@@ -5,6 +5,10 @@ import Services from "./Services";
 import Appointments from "./Appointments";
 import SpecialOffers from "./SpecialOffers";
 import Settings from "./Settings";
+import Clients from "./Clients";
+import Messages from "./Messages";
+import Analytics from "./Analytics";
+import Earnings from "./Earnings";
 
 export {
   DashboardLayout,
@@ -12,5 +16,9 @@ export {
   Services,
   Appointments,
   SpecialOffers,
-  Settings
+  Settings,
+  Clients,
+  Messages,
+  Analytics,
+  Earnings
 };

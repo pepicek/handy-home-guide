@@ -143,7 +143,7 @@ const DashboardSidebar = () => {
         <div className="px-3 py-2">
           <Separator className="my-2" />
           <div className="flex items-center gap-3 px-2 py-2">
-            <Avatar className="h-9 w-9 border-2 border-yellow-300">
+            <Avatar className="h-9 w-9 border-3 border-yellow-400 shadow-md shadow-yellow-300/50">
               <AvatarImage src="/placeholder.svg" />
               <AvatarFallback className="bg-yellow-100 text-yellow-800">JP</AvatarFallback>
             </Avatar>
@@ -165,25 +165,25 @@ const DashboardHeader = () => {
   const { toggleSidebar } = useSidebar();
   
   return (
-    <header className="border-b border-yellow-200 bg-white p-4">
+    <header className="bg-gradient-to-r from-yellow-200 via-yellow-100 to-yellow-50 border-b border-yellow-300 p-4 shadow-sm">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Button 
             variant="ghost" 
             size="icon"
             onClick={toggleSidebar} 
-            className="md:hidden"
+            className="md:hidden text-yellow-800 hover:bg-yellow-200/70"
           >
-            <Menu className="h-5 w-5 text-yellow-600" />
+            <Menu className="h-5 w-5 text-yellow-700" />
           </Button>
-          <h1 className="text-xl font-semibold text-anthracite">Provider Dashboard</h1>
+          <h1 className="text-xl font-semibold text-yellow-900">Provider Dashboard</h1>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon" className="relative">
-            <Bell className="h-5 w-5 text-yellow-600" />
-            <span className="absolute top-0 right-0 h-2 w-2 bg-yellow-500 rounded-full"></span>
+          <Button variant="ghost" size="icon" className="relative hover:bg-yellow-200/70">
+            <Bell className="h-5 w-5 text-yellow-700" />
+            <span className="absolute top-0 right-0 h-2.5 w-2.5 bg-yellow-500 rounded-full ring-2 ring-white"></span>
           </Button>
-          <Button variant="outline" className="ml-2 border-yellow-300 hover:bg-yellow-50">
+          <Button variant="outline" className="ml-2 border-yellow-400 hover:bg-yellow-100 text-yellow-800">
             View Public Profile
           </Button>
         </div>

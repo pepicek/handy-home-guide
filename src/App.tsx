@@ -38,6 +38,9 @@ import AllCategories from "./pages/AllCategories";
 
 import ProviderRating from "./pages/ProviderRating";
 
+// New signin page
+import SignIn from "./pages/SignIn";
+
 // New registration pages
 import Register from "./pages/Register";
 import RegisterVisitor from "./pages/RegisterVisitor";
@@ -54,6 +57,12 @@ import {
   SpecialOffers,
   Settings
 } from "./pages/dashboard";
+
+// New dashboard pages
+import Clients from "./pages/dashboard/Clients";
+import Messages from "./pages/dashboard/Messages";
+import Analytics from "./pages/dashboard/Analytics";
+import Earnings from "./pages/dashboard/Earnings";
 
 const queryClient = new QueryClient();
 
@@ -93,6 +102,9 @@ const App = () => (
           <Route path="/search/market" element={<MarketResearch />} />
           <Route path="/categories" element={<AllCategories />} />
           
+          {/* Signin route */}
+          <Route path="/signin" element={<SignIn />} />
+          
           {/* Registration routes */}
           <Route path="/register" element={<Register />} />
           <Route path="/register/visitor" element={<RegisterVisitor />} />
@@ -106,10 +118,10 @@ const App = () => (
             <Route path="services" element={<Services />} />
             <Route path="appointments" element={<Appointments />} />
             <Route path="special-offers" element={<SpecialOffers />} />
-            <Route path="clients" element={<NotFound />} />
-            <Route path="messages" element={<NotFound />} />
-            <Route path="analytics" element={<NotFound />} />
-            <Route path="earnings" element={<NotFound />} />
+            <Route path="clients" element={<Clients />} />
+            <Route path="messages" element={<Messages />} />
+            <Route path="analytics" element={<Analytics />} />
+            <Route path="earnings" element={<Earnings />} />
             <Route path="settings" element={<Settings />} />
           </Route>
         </Routes>
