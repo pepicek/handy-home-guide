@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
 import { LayoutDashboard, FileText, Calendar, Users, Settings, LogOut, Bell, MessageSquare, PieChart,
-  Sparkles, DollarSign, BarChart3, ListChecks, Menu, Crown } from "lucide-react";
+  Sparkles, DollarSign, BarChart3, ListChecks, Menu, Crown, Coins, Download } from "lucide-react";
 
 export const DashboardLayout = () => {
   return (
@@ -181,10 +181,21 @@ const DashboardHeader = () => {
   const { toggleSidebar } = useSidebar();
   const navigate = useNavigate();
   const [notificationsOpen, setNotificationsOpen] = useState(false);
-  
+  const [dateRange, setDateRange] = useState("thisMonth");
+
   const handleNotificationClick = () => {
     setNotificationsOpen(!notificationsOpen);
     toast.info("You have 3 new notifications");
+  };
+
+  const handleExport = () => {
+    toast.success("Exporting data...");
+    // In a real app, this would trigger the export functionality
+  };
+
+  const handleCreateInvoice = () => {
+    toast.success("Creating new invoice...");
+    // In a real app, this would open an invoice creation form
   };
   
   return (
@@ -202,9 +213,12 @@ const DashboardHeader = () => {
           <h1 className="text-xl font-semibold text-anthracite">Provider Dashboard</h1>
         </div>
         <div className="flex items-center gap-4">
-          <Link to="/dashboard/credits" className="flex items-center gap-2 px-3 py-1.5 bg-yellow-100 rounded-full hover:bg-yellow-200 transition-colors">
-            <DollarSign className="h-4 w-4 text-yellow-700" />
-            <span className="font-medium text-yellow-800">$200.00</span>
+          <Link 
+            to="/dashboard/earnings" 
+            className="flex items-center gap-2 px-3 py-1.5 bg-anthracite rounded-full hover:bg-anthracite/90 transition-colors border border-yellow-400"
+          >
+            <Coins className="h-4 w-4 text-yellow-400" />
+            <span className="font-medium text-white">$200.00</span>
           </Link>
           <Button 
             variant="ghost" 

@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -50,8 +49,15 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { format, subDays, startOfMonth, endOfMonth } from "date-fns";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { toast } from "sonner";
 
-// Sample data for earnings charts
 const monthlyEarnings = [
   { month: 'Jan', earnings: 3200 },
   { month: 'Feb', earnings: 4100 },
@@ -164,26 +170,65 @@ const pendingPayments = [
 
 const Earnings = () => {
   const [timeFrame, setTimeFrame] = useState("monthly");
+  const [dateRange, setDateRange] = useState<[Date | undefined, Date | undefined]>([
+    startOfMonth(new Date()),
+    new Date()
+  ]);
   
-  const totalEarnings = 94500;
-  const projectedEarnings = 120000;
-  const percentToTarget = (totalEarnings / projectedEarnings) * 100;
+  const handleExport = () => {
+    toast.success("Exporting earnings data...");
+    // In a real app, this would trigger the export functionality
+  };
+
+  const handleCreateInvoice = () => {
+    toast.success("Opening invoice creation form...");
+    // In a real app, this would navigate to invoice creation
+  };
   
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex items-center justify-between gap-4">
         <h1 className="text-3xl font-bold text-anthracite">Earnings Management</h1>
         <div className="flex items-center gap-2">
-          <Button variant="outline" className="flex items-center gap-2">
-            <Calendar className="h-4 w-4" />
-            <span>Apr 1 - Apr 18, 2025</span>
-            <ChevronDown className="h-4 w-4" />
-          </Button>
-          <Button variant="outline" className="flex items-center gap-1">
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="outline" className="flex items-center gap-2">
+                <Calendar className="h-4 w-4" />
+                <span>
+                  {dateRange[0] ? format(dateRange[0], "MMM d, yyyy") : "Start"} -{" "}
+                  {dateRange[1] ? format(dateRange[1], "MMM d, yyyy") : "End"}
+                </span>
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="end">
+              <Calendar
+                initialFocus
+                mode="range"
+                defaultMonth={dateRange[0]}
+                selected={{
+                  from: dateRange[0],
+                  to: dateRange[1]
+                }}
+                onSelect={(range: any) => {
+                  setDateRange([range?.from, range?.to]);
+                }}
+                numberOfMonths={1}
+                className="pointer-events-auto"
+              />
+            </PopoverContent>
+          </Popover>
+          <Button 
+            variant="outline" 
+            className="flex items-center gap-1"
+            onClick={handleExport}
+          >
             <Download className="h-4 w-4" />
             <span>Export</span>
           </Button>
-          <Button className="bg-anthracite hover:bg-anthracite/90 text-yellow-400">
+          <Button 
+            className="bg-anthracite hover:bg-anthracite/90 text-yellow-400"
+            onClick={handleCreateInvoice}
+          >
             <Plus className="h-4 w-4 mr-2" />
             <span>Create Invoice</span>
           </Button>
