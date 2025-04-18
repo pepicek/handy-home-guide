@@ -3,92 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import Header from "@/components/Header";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Check, ChevronRight, LightbulbIcon, User, Users, Mail, Lock, Star, Crown } from "lucide-react";
-
-interface ProFeature {
-  title: string;
-  description: string;
-}
-
-const proFeatures: ProFeature[] = [
-  {
-    title: "Priority Listing",
-    description: "Your services appear at the top of search results"
-  },
-  {
-    title: "Advanced Analytics",
-    description: "Detailed insights about your business performance"
-  },
-  {
-    title: "Custom Branding",
-    description: "Add your logo and brand colors to your profile"
-  },
-  {
-    title: "Unlimited Offers",
-    description: "Create unlimited special offers and promotions"
-  }
-];
-
-const SignIn = () => {
-  const { toast } = useToast();
-  const navigate = useNavigate();
-  const [userType, setUserType] = useState<string | null>(null);
-  
-  const handleContinue = () => {
-    if (!userType) {
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Please select a user type to continue",
-      });
-      return;
-    }
-    
-    // For demo purposes, we'll navigate to corresponding dashboards
-    if (userType === "provider") {
-      navigate("/dashboard");
-    } else {
-      navigate("/"); // Regular user would go to homepage or user dashboard
-    }
-  };
-  
-  const handleTypeSelection = (type: string) => {
-    setUserType(type);
-  };
-  
-  return (
-    <div className="flex min-h-screen flex-col">
-      <Header />
-      <main className="flex-1 bg-yellow-50/50">
-        <div className="container max-w-screen-xl mx-auto px-4 py-12">
-          <div className="grid gap-8 md:grid-cols-5 lg:gap-12">
-            {/* Signin Section */}
-            <div className="md:col-span-3 lg:col-span-2">
-              <div className="space-y-4">
-                {!userType ? (
-                  <InterstialCard onSelectType={handleTypeSelection} />
-                ) : (
-                  <SignInCard userType={userType} onBackClick={() => setUserType(null)} onContinue={handleContinue} />
-                )}
-              </div>
-            </div>
-            
-            {/* News & Updates Section */}
-            <div className="md:col-span-2 lg:col-span-3">
-              <NewsAndUpdates />
-            </div>
-          </div>
-        </div>
-      </main>
-    </div>
-  );
-};
+import { User, Users, LightbulbIcon, ChevronRight } from "lucide-react";
+import NewsItem from "@/components/signin/NewsItem";
+import ProFeatureCard from "@/components/signin/ProFeatures";
+import SignInCard from "@/components/signin/SignInCard";
 
 interface InterstialCardProps {
   onSelectType: (type: string) => void;
@@ -137,85 +58,6 @@ const InterstialCard = ({ onSelectType }: InterstialCardProps) => {
       </CardContent>
       <CardFooter className="bg-gray-50 px-6 py-4 border-t">
         <p className="text-sm text-gray-500">Don't have an account? <Link to="/register" className="text-yellow-700 font-medium hover:underline">Sign up now</Link></p>
-      </CardFooter>
-    </Card>
-  );
-};
-
-interface SignInCardProps {
-  userType: string;
-  onBackClick: () => void;
-  onContinue: () => void;
-}
-
-const SignInCard = ({ userType, onBackClick, onContinue }: SignInCardProps) => {
-  return (
-    <Card className="overflow-hidden border-none shadow-lg">
-      <CardHeader className={`${
-        userType === "provider" 
-          ? "bg-gradient-to-r from-yellow-500 to-amber-400" 
-          : "bg-gradient-to-r from-blue-100 to-yellow-100"
-        } pb-8`}>
-        <Button 
-          variant="ghost"
-          size="sm"
-          className="text-anthracite hover:bg-white/20 p-0 h-8 mb-2"
-          onClick={onBackClick}
-        >
-          ← Back
-        </Button>
-        <CardTitle className="text-2xl md:text-3xl font-bold text-anthracite">
-          {userType === "provider" ? "Provider Sign In" : "Client Sign In"}
-        </CardTitle>
-        <CardDescription className="text-anthracite/70 text-lg">
-          {userType === "provider" 
-            ? "Access your provider dashboard" 
-            : "Access your client account"}
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="p-6 space-y-6">
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="email">Email address</Label>
-            <div className="relative">
-              <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-              <Input id="email" type="email" placeholder="Your email" className="pl-10" />
-            </div>
-          </div>
-          
-          <div className="space-y-2">
-            <div className="flex justify-between">
-              <Label htmlFor="password">Password</Label>
-              <Link to="/forgot-password" className="text-sm text-yellow-600 hover:underline">
-                Forgot password?
-              </Link>
-            </div>
-            <div className="relative">
-              <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-              <Input id="password" type="password" placeholder="••••••••" className="pl-10" />
-            </div>
-          </div>
-          
-          <Button 
-            className={`w-full ${userType === "provider" ? "bg-yellow-600 hover:bg-yellow-700" : "bg-blue-600 hover:bg-blue-700"}`}
-            onClick={onContinue}
-          >
-            Sign In
-          </Button>
-        </div>
-        
-        <div className="relative flex items-center justify-center">
-          <Separator className="absolute w-full" />
-          <span className="relative px-2 bg-white text-xs text-gray-500">OR CONTINUE WITH</span>
-        </div>
-        
-        <div className="grid grid-cols-2 gap-4">
-          <Button variant="outline" className="font-medium">Google</Button>
-          <Button variant="outline" className="font-medium">Facebook</Button>
-        </div>
-      </CardContent>
-      <CardFooter className="bg-gray-50 px-6 py-4 border-t">
-        <p className="text-sm text-gray-500">New to YelloPago? <Link to="/register" className="text-yellow-700 font-medium hover:underline">Create an account</Link></p>
       </CardFooter>
     </Card>
   );
@@ -324,7 +166,7 @@ const NewsAndUpdates = () => {
         </TabsContent>
       </Tabs>
       
-      <ProPlanCard />
+      <ProFeatureCard />
       
       <Card className="overflow-hidden bg-gradient-to-r from-yellow-500 to-amber-400 border-none">
         <CardContent className="p-6 flex flex-col sm:flex-row items-center gap-6">
@@ -344,68 +186,59 @@ const NewsAndUpdates = () => {
   );
 };
 
-interface NewsItemProps {
-  date: string;
-  title: string;
-  description: string;
-  link: string;
-  tag: string;
-  tagColor: string;
-}
-
-const NewsItem = ({ date, title, description, link, tag, tagColor }: NewsItemProps) => {
+const SignIn = () => {
+  const { toast } = useToast();
+  const navigate = useNavigate();
+  const [userType, setUserType] = useState<string | null>(null);
+  
+  const handleContinue = () => {
+    if (!userType) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Please select a user type to continue",
+      });
+      return;
+    }
+    
+    if (userType === "provider") {
+      navigate("/dashboard");
+    } else {
+      navigate("/");
+    }
+  };
+  
+  const handleTypeSelection = (type: string) => {
+    setUserType(type);
+  };
+  
   return (
-    <div className="border-b border-gray-200 pb-6 last:border-0 last:pb-0">
-      <div className="flex items-center gap-2 mb-2">
-        <p className="text-sm text-gray-500">{date}</p>
-        <Badge className={`${tagColor}`}>{tag}</Badge>
-      </div>
-      <h3 className="text-lg font-semibold text-anthracite mb-1">{title}</h3>
-      <p className="text-gray-600 mb-3">{description}</p>
-      <Link to={link} className="text-sm font-medium text-yellow-700 hover:text-yellow-800 hover:underline flex items-center">
-        Read more <ChevronRight className="ml-1 h-4 w-4" />
-      </Link>
-    </div>
-  );
-};
-
-const ProPlanCard = () => {
-  return (
-    <Card className="bg-gradient-to-br from-yellow-500 via-yellow-400 to-amber-400 border-none shadow-xl my-8">
-      <CardHeader>
-        <div className="flex items-center gap-2">
-          <Crown className="h-6 w-6 text-anthracite" />
-          <CardTitle className="text-2xl text-anthracite">YelloPago Pro</CardTitle>
-        </div>
-        <CardDescription className="text-anthracite/80 text-lg">
-          Unlock premium features to grow your business
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="bg-white/90 backdrop-blur rounded-lg p-6">
-          <div className="flex items-baseline gap-2 mb-4">
-            <span className="text-3xl font-bold text-anthracite">$29</span>
-            <span className="text-anthracite/70">/month</span>
-          </div>
-          <div className="space-y-3">
-            {proFeatures.map((feature, index) => (
-              <div key={index} className="flex items-start gap-3">
-                <div className="mt-1">
-                  <Check className="h-4 w-4 text-yellow-600" />
-                </div>
-                <div>
-                  <h4 className="font-medium text-anthracite">{feature.title}</h4>
-                  <p className="text-sm text-anthracite/70">{feature.description}</p>
-                </div>
+    <div className="flex min-h-screen flex-col">
+      <Header />
+      <main className="flex-1 bg-yellow-50/50">
+        <div className="container max-w-screen-xl mx-auto px-4 py-12">
+          <div className="grid gap-8 md:grid-cols-5 lg:gap-12">
+            <div className="md:col-span-3 lg:col-span-2">
+              <div className="space-y-4">
+                {!userType ? (
+                  <InterstialCard onSelectType={handleTypeSelection} />
+                ) : (
+                  <SignInCard 
+                    userType={userType} 
+                    onBackClick={() => setUserType(null)} 
+                    onContinue={handleContinue} 
+                  />
+                )}
               </div>
-            ))}
+            </div>
+            
+            <div className="md:col-span-2 lg:col-span-3">
+              <NewsAndUpdates />
+            </div>
           </div>
         </div>
-        <Button className="w-full bg-anthracite hover:bg-anthracite/90 text-yellow-400">
-          Upgrade to Pro <ArrowRight className="ml-2 h-4 w-4" />
-        </Button>
-      </CardContent>
-    </Card>
+      </main>
+    </div>
   );
 };
 
