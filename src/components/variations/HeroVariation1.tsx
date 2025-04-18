@@ -301,7 +301,7 @@ const HeroVariation1 = () => {
                         </SelectTrigger>
                         <SelectContent className="bg-white">
                           <SelectItem value="any">Any time period</SelectItem>
-                          <SelectItem value="new">New (< 2 years)</SelectItem>
+                          <SelectItem value="new">New (&lt; 2 years)</SelectItem>
                           <SelectItem value="established">Established (2-5 years)</SelectItem>
                           <SelectItem value="experienced">Experienced (5-10 years)</SelectItem>
                           <SelectItem value="veteran">Veteran (10+ years)</SelectItem>
