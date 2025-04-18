@@ -30,7 +30,7 @@ import { Search as SearchIcon, Filter, MapPin, Star, Briefcase, Clock, Shield } 
 
 const serviceCategories = [
   "Plumbing",
-  "Electrical",
+  "Electrical", 
   "Landscaping",
   "Cleaning",
   "Painting",
@@ -303,11 +303,11 @@ const Search = () => {
                 {serviceProviders.map((provider) => (
                   <Card key={provider.id} className="overflow-hidden hover-scale transition-all">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                      <div className="md:col-span-1 flex justify-center items-center p-4">
+                      <div className="md:col-span-1 relative h-full min-h-[12rem] md:min-h-full">
                         <img
                           src={provider.image}
                           alt={provider.name}
-                          className="w-24 h-24 md:w-32 md:h-32 rounded object-cover filter grayscale hover:grayscale-0 transition-all duration-300"
+                          className="absolute inset-0 w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-300"
                         />
                       </div>
                       <div className="md:col-span-3 p-6 pt-2 md:pt-6">
