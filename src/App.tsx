@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -86,6 +85,8 @@ import FindProviders from "./pages/client/providers/FindProviders";
 import ClientProfile from "./pages/dashboard/client/ClientProfile";
 import ServiceHistory from "./pages/dashboard/client/ServiceHistory";
 
+import Credits from "./pages/Credits";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -117,6 +118,7 @@ const App = () => (
           <Route path="/request-quote/:id" element={<RequestQuote />} />
           <Route path="/category/:category" element={<ServiceCategory />} />
           <Route path="/provider/:id/ratings" element={<ProviderRating />} />
+          <Route path="/credits" element={<Credits />} />
           <Route path="*" element={<NotFound />} />
           
           <Route path="/search/services" element={<ServiceSearch />} />

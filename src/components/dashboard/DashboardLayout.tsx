@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useSidebar, SidebarProvider, Sidebar, SidebarContent, SidebarHeader, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarTrigger, SidebarInset } from "@/components/ui/sidebar";
@@ -202,7 +201,11 @@ const DashboardHeader = () => {
           </Button>
           <h1 className="text-xl font-semibold text-anthracite">Provider Dashboard</h1>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
+          <Link to="/dashboard/credits" className="flex items-center gap-2 px-3 py-1.5 bg-yellow-100 rounded-full hover:bg-yellow-200 transition-colors">
+            <DollarSign className="h-4 w-4 text-yellow-700" />
+            <span className="font-medium text-yellow-800">$200.00</span>
+          </Link>
           <Button 
             variant="ghost" 
             size="icon" 
@@ -224,4 +227,3 @@ const DashboardHeader = () => {
     </header>
   );
 };
-
