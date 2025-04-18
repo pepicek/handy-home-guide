@@ -1,5 +1,4 @@
-
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -12,6 +11,8 @@ import { Badge } from "@/components/ui/badge";
 import { Upload, Camera, MapPin, Clock, Bell, Shield, CreditCard, HelpCircle } from "lucide-react";
 
 const Settings = () => {
+  const [availabilityType, setAvailabilityType] = useState<"business-hours" | "project-based">("business-hours");
+  
   return (
     <div className="space-y-6">
       <div>
@@ -183,133 +184,69 @@ const Settings = () => {
         <TabsContent value="availability" className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Business Hours</CardTitle>
+              <CardTitle className="text-lg">How Do You Want to Manage Your Availability?</CardTitle>
               <CardDescription>
-                Set your regular working hours
+                Choose the type of availability management that best suits your business
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                <div className="flex items-center p-3 border rounded-md bg-gray-50">
-                  <Clock className="h-5 w-5 text-gray-500 mr-2" />
-                  <p className="text-sm">Set your availability to let clients know when they can book your services</p>
-                </div>
-                
-                {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map((day) => (
-                  <div key={day} className="flex items-center justify-between py-2 border-b last:border-0">
-                    <div className="flex items-center gap-4">
-                      <div className="w-24">
-                        <p className="font-medium">{day}</p>
+              <AvailabilityTypeSelector 
+                value={availabilityType} 
+                onChange={setAvailabilityType}
+              />
+            </CardContent>
+          </Card>
+
+          {availabilityType === "business-hours" ? (
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Business Hours</CardTitle>
+                <CardDescription>
+                  Set your regular working hours
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="flex items-center p-3 border rounded-md bg-gray-50">
+                    <Clock className="h-5 w-5 text-gray-500 mr-2" />
+                    <p className="text-sm">Set your availability to let clients know when they can book your services</p>
+                  </div>
+                  
+                  {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map((day) => (
+                    <div key={day} className="flex items-center justify-between py-2 border-b last:border-0">
+                      <div className="flex items-center gap-4">
+                        <div className="w-24">
+                          <p className="font-medium">{day}</p>
+                        </div>
+                        <Switch id={`${day.toLowerCase()}-switch`} defaultChecked={day !== "Sunday"} />
+                        <Label htmlFor={`${day.toLowerCase()}-switch`} className="text-sm text-gray-600">
+                          Available
+                        </Label>
                       </div>
-                      <Switch id={`${day.toLowerCase()}-switch`} defaultChecked={day !== "Sunday"} />
-                      <Label htmlFor={`${day.toLowerCase()}-switch`} className="text-sm text-gray-600">
-                        Available
-                      </Label>
+                      <div className="flex items-center gap-2">
+                        <select className="h-8 rounded-md border bg-background px-2 py-1 text-sm">
+                          <option>9:00 AM</option>
+                          <option>10:00 AM</option>
+                          <option>11:00 AM</option>
+                        </select>
+                        <span className="text-sm">to</span>
+                        <select className="h-8 rounded-md border bg-background px-2 py-1 text-sm">
+                          <option>5:00 PM</option>
+                          <option>6:00 PM</option>
+                          <option>7:00 PM</option>
+                        </select>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <select className="h-8 rounded-md border bg-background px-2 py-1 text-sm">
-                        <option>9:00 AM</option>
-                        <option>10:00 AM</option>
-                        <option>11:00 AM</option>
-                      </select>
-                      <span className="text-sm">to</span>
-                      <select className="h-8 rounded-md border bg-background px-2 py-1 text-sm">
-                        <option>5:00 PM</option>
-                        <option>6:00 PM</option>
-                        <option>7:00 PM</option>
-                      </select>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-            <CardFooter>
-              <Button className="ml-auto bg-anthracite hover:bg-anthracite/90 text-yellow-400">Save Hours</Button>
-            </CardFooter>
-          </Card>
-          
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Booking Settings</CardTitle>
-              <CardDescription>
-                Customize how clients can book your services
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <div>
-                    <p className="font-medium">Minimum notice period</p>
-                    <p className="text-sm text-gray-500">How far in advance clients must book</p>
-                  </div>
-                  <select className="h-9 rounded-md border bg-background px-3 py-1">
-                    <option>24 hours</option>
-                    <option>48 hours</option>
-                    <option>3 days</option>
-                    <option>1 week</option>
-                  </select>
+                  ))}
                 </div>
-                
-                <div className="flex justify-between items-center">
-                  <div>
-                    <p className="font-medium">Booking window</p>
-                    <p className="text-sm text-gray-500">How far in advance clients can book</p>
-                  </div>
-                  <select className="h-9 rounded-md border bg-background px-3 py-1">
-                    <option>2 weeks</option>
-                    <option>1 month</option>
-                    <option>2 months</option>
-                    <option>3 months</option>
-                  </select>
-                </div>
-                
-                <div className="flex justify-between items-center">
-                  <div>
-                    <p className="font-medium">Buffer time between appointments</p>
-                    <p className="text-sm text-gray-500">Time between consecutive appointments</p>
-                  </div>
-                  <select className="h-9 rounded-md border bg-background px-3 py-1">
-                    <option>None</option>
-                    <option>15 minutes</option>
-                    <option>30 minutes</option>
-                    <option>1 hour</option>
-                  </select>
-                </div>
-              </div>
-              
-              <Separator />
-              
-              <div className="space-y-4">
-                <h4 className="font-medium">Booking Options</h4>
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <Switch id="instant-booking" defaultChecked />
-                      <Label htmlFor="instant-booking">Allow instant booking</Label>
-                    </div>
-                    <HelpCircle className="h-4 w-4 text-gray-400" />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <Switch id="quote-requests" defaultChecked />
-                      <Label htmlFor="quote-requests">Accept quote requests</Label>
-                    </div>
-                    <HelpCircle className="h-4 w-4 text-gray-400" />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <Switch id="booking-deposit" />
-                      <Label htmlFor="booking-deposit">Require deposit for booking</Label>
-                    </div>
-                    <HelpCircle className="h-4 w-4 text-gray-400" />
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-            <CardFooter>
-              <Button className="ml-auto bg-anthracite hover:bg-anthracite/90 text-yellow-400">Save Settings</Button>
-            </CardFooter>
-          </Card>
+              </CardContent>
+              <CardFooter>
+                <Button className="ml-auto bg-anthracite hover:bg-anthracite/90 text-yellow-400">Save Hours</Button>
+              </CardFooter>
+            </Card>
+          ) : (
+            <ProjectCapacitySettings />
+          )}
         </TabsContent>
         
         <TabsContent value="notifications">
