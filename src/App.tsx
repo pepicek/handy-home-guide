@@ -18,13 +18,12 @@ import BookNow from "./pages/BookNow";
 import ViewProfile from "./pages/ViewProfile";
 import CheckSchedule from "./pages/CheckSchedule";
 import RequestQuote from "./pages/RequestQuote";
+import ServiceCategory from "./pages/ServiceCategory";
 
-// New homepage variations
 import HomepageVariation1 from "./pages/HomepageVariation1";
 import HomepageVariation2 from "./pages/HomepageVariation2";
 import HomepageVariation3 from "./pages/HomepageVariation3";
 
-// New component imports
 import HeroVariation1 from "@/components/variations/HeroVariation1";
 import HeroVariation2 from "@/components/variations/HeroVariation2";
 import HeroVariation3 from "@/components/variations/HeroVariation3";
@@ -47,7 +46,6 @@ const App = () => (
           <Route path="/alt2" element={<IndexAlt2 />} />
           <Route path="/alt3" element={<IndexAlt3 />} />
           
-          {/* New homepage variations */}
           <Route path="/home/v1" element={<HomepageVariation1 />} />
           <Route path="/home/v2" element={<HomepageVariation2 />} />
           <Route path="/home/v3" element={<HomepageVariation3 />} />
@@ -62,9 +60,9 @@ const App = () => (
           <Route path="/profile/:id" element={<ViewProfile />} />
           <Route path="/schedule/:id" element={<CheckSchedule />} />
           <Route path="/request-quote/:id" element={<RequestQuote />} />
+          <Route path="/category/:category" element={<ServiceCategory />} />
           <Route path="*" element={<NotFound />} />
           
-          {/* New search results pages */}
           <Route path="/search/services" element={<ServiceSearch />} />
           <Route path="/search/projects" element={<ProjectSearch />} />
           <Route path="/search/market" element={<MarketResearch />} />
