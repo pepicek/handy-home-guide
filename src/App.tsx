@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -64,6 +65,17 @@ import Analytics from "./pages/dashboard/Analytics";
 import Earnings from "./pages/dashboard/Earnings";
 import ProSubscription from "./pages/dashboard/ProSubscription";
 
+// Client dashboard pages
+import { ClientDashboardLayout } from "./components/client/ClientDashboardLayout";
+import ClientDashboard from "./pages/client/ClientDashboard";
+import SavedProviders from "./pages/client/SavedProviders";
+import ProjectsManager from "./pages/client/ProjectsManager";
+import QuoteRequests from "./pages/client/QuoteRequests";
+import ClientReviews from "./pages/client/ClientReviews";
+import ClientSettings from "./pages/client/ClientSettings";
+import FinancialSummary from "./pages/client/FinancialSummary";
+import SearchHistory from "./pages/client/SearchHistory";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -124,6 +136,18 @@ const App = () => (
             <Route path="earnings" element={<Earnings />} />
             <Route path="settings" element={<Settings />} />
             <Route path="pro" element={<ProSubscription />} />
+          </Route>
+          
+          {/* Client Dashboard routes */}
+          <Route path="/client" element={<ClientDashboardLayout />}>
+            <Route index element={<ClientDashboard />} />
+            <Route path="saved-providers" element={<SavedProviders />} />
+            <Route path="projects" element={<ProjectsManager />} />
+            <Route path="quote-requests" element={<QuoteRequests />} />
+            <Route path="reviews" element={<ClientReviews />} />
+            <Route path="financial" element={<FinancialSummary />} />
+            <Route path="search-history" element={<SearchHistory />} />
+            <Route path="settings" element={<ClientSettings />} />
           </Route>
         </Routes>
       </BrowserRouter>

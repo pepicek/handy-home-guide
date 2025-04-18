@@ -1,0 +1,213 @@
+
+import React from "react";
+import { Link, Outlet, useLocation } from "react-router-dom";
+import { useSidebar, SidebarProvider, Sidebar, SidebarContent, SidebarHeader, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarTrigger, SidebarInset } from "@/components/ui/sidebar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { 
+  LayoutDashboard, 
+  FileText, 
+  Calendar, 
+  Users, 
+  Settings, 
+  LogOut, 
+  Bell, 
+  MessageSquare, 
+  BookmarkIcon,
+  ClipboardListIcon,
+  FileQuestionIcon,
+  Star,
+  DollarSign,
+  Search,
+  Menu,
+  HeartIcon,
+  ClipboardCheckIcon
+} from "lucide-react";
+
+export const ClientDashboardLayout = () => {
+  return (
+    <SidebarProvider defaultOpen={true}>
+      <div className="flex w-full min-h-screen bg-yellow-50/50">
+        <ClientSidebar />
+        <SidebarInset>
+          <div className="flex flex-col h-full">
+            <ClientDashboardHeader />
+            <main className="flex-1 p-6 overflow-auto">
+              <Outlet />
+            </main>
+          </div>
+        </SidebarInset>
+      </div>
+    </SidebarProvider>
+  );
+};
+
+const ClientSidebar = () => {
+  const location = useLocation();
+  
+  const menuItems = [
+    {
+      label: "Dashboard",
+      icon: LayoutDashboard,
+      path: "/client",
+      active: location.pathname === "/client"
+    },
+    {
+      label: "Saved Providers",
+      icon: HeartIcon,
+      path: "/client/saved-providers",
+      active: location.pathname === "/client/saved-providers"
+    },
+    {
+      label: "My Projects",
+      icon: ClipboardCheckIcon,
+      path: "/client/projects",
+      active: location.pathname === "/client/projects"
+    },
+    {
+      label: "Quote Requests",
+      icon: FileQuestionIcon,
+      path: "/client/quote-requests",
+      active: location.pathname === "/client/quote-requests"
+    },
+    {
+      label: "My Reviews",
+      icon: Star,
+      path: "/client/reviews",
+      active: location.pathname === "/client/reviews"
+    },
+    {
+      label: "Financial Summary",
+      icon: DollarSign,
+      path: "/client/financial",
+      active: location.pathname === "/client/financial"
+    },
+    {
+      label: "Search History",
+      icon: Search,
+      path: "/client/search-history",
+      active: location.pathname === "/client/search-history"
+    },
+    {
+      label: "Settings",
+      icon: Settings,
+      path: "/client/settings",
+      active: location.pathname === "/client/settings"
+    }
+  ];
+  
+  return (
+    <Sidebar>
+      <SidebarHeader>
+        <div className="flex items-center px-3 py-2">
+          <Link to="/" className="flex items-center group">
+            <div className="bg-anthracite rounded-xl p-2 mr-2 rotate-3 group-hover:rotate-6 transition-transform duration-300">
+              <Users className="w-4 h-4 text-yellow-400" />
+            </div>
+            <span className="font-poster text-lg font-bold text-anthracite">
+              Client<span className="text-yellow-600">Portal</span>
+            </span>
+          </Link>
+          <SidebarTrigger className="ml-auto" />
+        </div>
+      </SidebarHeader>
+      
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel className="text-yellow-700">Main</SidebarGroupLabel>
+          <SidebarMenu>
+            {menuItems.map((item) => (
+              <SidebarMenuItem key={item.path}>
+                <SidebarMenuButton asChild isActive={item.active} tooltip={item.label}>
+                  <Link to={item.path}>
+                    <item.icon className={item.active ? "text-yellow-600" : ""} />
+                    <span>{item.label}</span>
+                    {item.badge && (
+                      <Badge className="ml-auto bg-yellow-500 text-anthracite">{item.badge}</Badge>
+                    )}
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            ))}
+          </SidebarMenu>
+        </SidebarGroup>
+        
+        <SidebarGroup>
+          <div className="px-3 py-4">
+            <Card className="bg-gradient-to-r from-yellow-50 to-amber-50 border-yellow-200">
+              <CardContent className="p-4 space-y-3">
+                <div className="flex items-center gap-2 text-anthracite">
+                  <FileText className="h-5 w-5 text-yellow-600" />
+                  <h3 className="font-semibold">Need Help?</h3>
+                </div>
+                <p className="text-sm text-anthracite/70">
+                  Get answers to frequent questions or contact our support team
+                </p>
+                <Button 
+                  className="w-full bg-yellow-500 hover:bg-yellow-600 text-anthracite"
+                  size="sm"
+                  asChild
+                >
+                  <Link to="/how-it-works">View Help Center</Link>
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </SidebarGroup>
+      </SidebarContent>
+      
+      <SidebarFooter>
+        <div className="px-3 py-2">
+          <Separator className="my-2" />
+          <div className="flex items-center gap-3 px-2 py-2">
+            <Avatar className="h-9 w-9 border-3 border-yellow-400 shadow-md shadow-yellow-300/50">
+              <AvatarImage src="/placeholder.svg" />
+              <AvatarFallback className="bg-yellow-100 text-yellow-800">JC</AvatarFallback>
+            </Avatar>
+            <div className="flex-1 overflow-hidden">
+              <p className="text-sm font-medium leading-none truncate">Jane Client</p>
+              <p className="text-xs text-muted-foreground truncate">jane@example.com</p>
+            </div>
+            <Button variant="ghost" size="icon" className="ml-auto">
+              <LogOut className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      </SidebarFooter>
+    </Sidebar>
+  );
+};
+
+const ClientDashboardHeader = () => {
+  const { toggleSidebar } = useSidebar();
+  
+  return (
+    <header className="bg-gradient-to-r from-amber-100 via-yellow-50 to-amber-50 border-b border-yellow-200 p-4 shadow-sm">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <Button 
+            variant="ghost" 
+            size="icon"
+            onClick={toggleSidebar} 
+            className="md:hidden text-yellow-800 hover:bg-yellow-200/70"
+          >
+            <Menu className="h-5 w-5 text-yellow-700" />
+          </Button>
+          <h1 className="text-xl font-semibold text-yellow-900">Client Dashboard</h1>
+        </div>
+        <div className="flex items-center gap-2">
+          <Button variant="ghost" size="icon" className="relative hover:bg-yellow-200/70">
+            <Bell className="h-5 w-5 text-yellow-700" />
+            <span className="absolute top-0 right-0 h-2.5 w-2.5 bg-yellow-500 rounded-full ring-2 ring-white"></span>
+          </Button>
+          <Button variant="outline" className="ml-2 border-yellow-400 hover:bg-yellow-100 text-yellow-800">
+            Find Services
+          </Button>
+        </div>
+      </div>
+    </header>
+  );
+};
