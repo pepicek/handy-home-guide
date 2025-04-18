@@ -1,9 +1,9 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Index from "./pages/Index";
 import IndexAlt1 from "./pages/IndexAlt1";
 import IndexAlt2 from "./pages/IndexAlt2";
@@ -35,6 +35,8 @@ import ProjectSearch from "./pages/ProjectSearch";
 import MarketResearch from "./pages/MarketResearch";
 import AllCategories from "./pages/AllCategories";
 
+import ProviderRating from "./pages/ProviderRating";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -65,6 +67,7 @@ const App = () => (
           <Route path="/schedule/:id" element={<CheckSchedule />} />
           <Route path="/request-quote/:id" element={<RequestQuote />} />
           <Route path="/category/:category" element={<ServiceCategory />} />
+          <Route path="/provider/:id/ratings" element={<ProviderRating />} />
           <Route path="*" element={<NotFound />} />
           
           <Route path="/search/services" element={<ServiceSearch />} />

@@ -123,6 +123,9 @@ const ViewProfile = () => {
                     <Button variant="outline" asChild>
                       <Link to={`/schedule/${id}`}>Check Schedule</Link>
                     </Button>
+                    <Button variant="outline" asChild>
+                      <Link to={`/provider/${id}/ratings`}>View All Reviews</Link>
+                    </Button>
                   </div>
                 </div>
               </div>

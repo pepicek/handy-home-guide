@@ -140,7 +140,10 @@ const SpecialOfferDetails = () => {
                     ))}
                   </div>
                 </div>
-                <p className="text-gray-600">{offer.reviews} verified reviews</p>
+                <p className="text-gray-600 mb-4">{offer.reviews} verified reviews</p>
+                <Button variant="outline" className="w-full" asChild>
+                  <Link to={`/provider/${id}/ratings`}>View All Reviews</Link>
+                </Button>
               </Card>
             </div>
           </div>
