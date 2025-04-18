@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -24,6 +23,15 @@ import RequestQuote from "./pages/RequestQuote";
 import HomepageVariation1 from "./pages/HomepageVariation1";
 import HomepageVariation2 from "./pages/HomepageVariation2";
 import HomepageVariation3 from "./pages/HomepageVariation3";
+
+// New component imports
+import HeroVariation1 from "@/components/variations/HeroVariation1";
+import HeroVariation2 from "@/components/variations/HeroVariation2";
+import HeroVariation3 from "@/components/variations/HeroVariation3";
+
+import ServiceSearch from "./pages/ServiceSearch";
+import ProjectSearch from "./pages/ProjectSearch";
+import MarketResearch from "./pages/MarketResearch";
 
 const queryClient = new QueryClient();
 
@@ -55,6 +63,11 @@ const App = () => (
           <Route path="/schedule/:id" element={<CheckSchedule />} />
           <Route path="/request-quote/:id" element={<RequestQuote />} />
           <Route path="*" element={<NotFound />} />
+          
+          {/* New search results pages */}
+          <Route path="/search/services" element={<ServiceSearch />} />
+          <Route path="/search/projects" element={<ProjectSearch />} />
+          <Route path="/search/market" element={<MarketResearch />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
