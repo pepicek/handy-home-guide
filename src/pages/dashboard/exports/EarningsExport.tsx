@@ -8,7 +8,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
-import { CalendarIcon, Download, FileSpreadsheet, FileText, FileCsv, FileJson, ArrowLeft } from "lucide-react";
+import { CalendarIcon, Download, FileSpreadsheet, FileText, FileIcon, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
@@ -86,7 +86,12 @@ const EarningsExport = () => {
                       mode="range"
                       defaultMonth={dateRange.from}
                       selected={dateRange}
-                      onSelect={setDateRange}
+                      onSelect={(range) => {
+                        setDateRange({
+                          from: range?.from,
+                          to: range?.to || range?.from
+                        });
+                      }}
                       numberOfMonths={2}
                     />
                   </PopoverContent>
@@ -140,7 +145,7 @@ const EarningsExport = () => {
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="csv" id="csv" />
                   <Label htmlFor="csv" className="flex items-center">
-                    <FileCsv className="h-4 w-4 mr-2 text-blue-600" />
+                    <FileIcon className="h-4 w-4 mr-2 text-blue-600" />
                     CSV
                   </Label>
                 </div>
@@ -154,7 +159,7 @@ const EarningsExport = () => {
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="json" id="json" />
                   <Label htmlFor="json" className="flex items-center">
-                    <FileJson className="h-4 w-4 mr-2 text-amber-600" />
+                    <FileIcon className="h-4 w-4 mr-2 text-amber-600" />
                     JSON
                   </Label>
                 </div>
