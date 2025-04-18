@@ -177,7 +177,7 @@ const Money = () => {
               <CardTitle>Pending Payments</CardTitle>
               <CardDescription>Payments awaiting processing</CardDescription>
             </div>
-            <Button variant="yellow" className="bg-yellow-500 text-anthracite hover:bg-yellow-600">
+            <Button className="bg-yellow-500 text-anthracite hover:bg-yellow-600">
               <Plus className="mr-2 h-4 w-4" />
               Add Payment
             </Button>
@@ -240,7 +240,7 @@ const Money = () => {
                     <td className="py-2 text-sm">{transaction.service}</td>
                     <td className="py-2 text-sm text-right">${transaction.amount.toFixed(2)}</td>
                     <td className="py-2 text-sm text-right">
-                      <Badge variant="success" className="bg-green-500 text-white">
+                      <Badge className="bg-green-500 text-white">
                         {transaction.status}
                       </Badge>
                     </td>

@@ -1,9 +1,8 @@
 
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { LayoutDashboard, FileText, UserCheck, Bell, DollarSign, Coins, Settings } from 'lucide-react';
+import { LayoutDashboard, FileText, UserCheck, Coins, Settings } from 'lucide-react';
 import { Sidebar, SidebarProvider, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton } from '@/components/ui/sidebar';
-import { cn } from '@/lib/utils';
 
 const DashboardLayout = () => {
   const location = window.location;

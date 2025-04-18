@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -52,12 +53,7 @@ import {
   Appointments,
   SpecialOffers,
   Settings,
-  Clients,
-  Messages,
-  Analytics,
-  Money,
-  Listings,
-  ListingsSettings
+  Money
 } from "./pages/dashboard";
 
 import Clients from "./pages/dashboard/Clients";
