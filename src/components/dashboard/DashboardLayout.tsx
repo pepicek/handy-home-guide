@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Outlet, useLocation, Link } from 'react-router-dom';
 import { LayoutDashboard, FileText, UserCheck, Coins, Settings, MessageSquare, BarChart3, Layers, Bell, UserRound } from 'lucide-react';
@@ -109,7 +108,7 @@ const DashboardLayout = () => {
                     <item.icon className="mr-2 h-4 w-4" />
                     {item.label}
                     {item.badge && (
-                      <Badge variant="yellow" className="ml-auto">
+                      <Badge variant="secondary" className="ml-auto">
                         {item.badge}
                       </Badge>
                     )}
