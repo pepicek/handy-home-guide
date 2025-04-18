@@ -58,7 +58,8 @@ import {
   Analytics,
   Money,
   Listings,
-  ListingsSettings
+  ListingsSettings,
+  ProSubscription
 } from "./pages/dashboard";
 
 import ClientDashboardLayout from "./components/client/ClientDashboardLayout";

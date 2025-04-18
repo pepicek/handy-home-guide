@@ -18,7 +18,7 @@ import {
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Bell, Settings, Users, Calendar, Tag, BarChart3, DollarSign, MessageSquare, Grid3x3, Home } from "lucide-react";
+import { Bell, Settings, Users, Calendar, Tag, BarChart3, DollarSign, MessageSquare, Grid3x3, Home, Crown } from "lucide-react";
 
 export const DashboardLayout = () => {
   const location = useLocation();
@@ -78,6 +78,12 @@ export const DashboardLayout = () => {
       icon: Grid3x3,
       path: "/dashboard/listings",
       active: location.pathname.includes("/dashboard/listings")
+    },
+    {
+      label: "Pro",
+      icon: Crown,
+      path: "/dashboard/pro",
+      active: location.pathname === "/dashboard/pro"
     },
     {
       label: "Settings",
