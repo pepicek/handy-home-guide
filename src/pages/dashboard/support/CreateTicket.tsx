@@ -1,5 +1,4 @@
-
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -7,32 +6,40 @@ import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { MessageInput } from "@/components/support/MessageInput";
 
 const ticketFormSchema = z.object({
   subject: z.string().min(1, "Subject is required"),
   category: z.string().min(1, "Category is required"),
-  description: z.string().min(10, "Description must be at least 10 characters"),
 });
 
 const CreateTicket = () => {
   const navigate = useNavigate();
+  const [description, setDescription] = useState("");
+  const [attachments, setAttachments] = useState<File[]>([]);
+  
   const form = useForm<z.infer<typeof ticketFormSchema>>({
     resolver: zodResolver(ticketFormSchema),
     defaultValues: {
       subject: "",
       category: "",
-      description: "",
     },
   });
 
   const onSubmit = (values: z.infer<typeof ticketFormSchema>) => {
-    console.log(values);
-    // Here you would typically send the data to your backend
-    // For now, we'll just redirect to the tickets list
+    console.log({
+      ...values,
+      description,
+      attachments
+    });
     navigate("/dashboard/support/tickets");
+  };
+
+  const handleMessageInput = (message: string, files: File[]) => {
+    setDescription(message);
+    setAttachments(files);
   };
 
   return (
@@ -83,23 +90,16 @@ const CreateTicket = () => {
                 )}
               />
 
-              <FormField
-                control={form.control}
-                name="description"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Description</FormLabel>
-                    <FormControl>
-                      <Textarea 
-                        placeholder="Please provide detailed information about your issue"
-                        className="min-h-[150px]"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              <FormItem>
+                <FormLabel>Description</FormLabel>
+                <FormControl>
+                  <MessageInput
+                    onSend={handleMessageInput}
+                    placeholder="Please provide detailed information about your issue"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
 
               <div className="flex justify-end gap-4">
                 <Button

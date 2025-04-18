@@ -1,12 +1,9 @@
-
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Send } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { MessageInput } from "@/components/support/MessageInput";
 
 const mockTicket = {
   id: "1",
@@ -32,12 +29,10 @@ const mockTicket = {
 
 const TicketDetails = () => {
   const { ticketId } = useParams();
-  const [newMessage, setNewMessage] = React.useState("");
 
-  const handleSendMessage = () => {
-    if (!newMessage.trim()) return;
-    console.log("Sending message:", newMessage);
-    setNewMessage("");
+  const handleSendMessage = (message: string, attachments: File[]) => {
+    console.log("Sending message:", message);
+    console.log("With attachments:", attachments);
   };
 
   return (
@@ -79,7 +74,7 @@ const TicketDetails = () => {
                     : "bg-primary text-primary-foreground"
                 }`}
               >
-                <p className="text-sm">{message.message}</p>
+                <p className="text-sm whitespace-pre-wrap">{message.message}</p>
                 <p className="text-xs mt-2 opacity-70">
                   {new Date(message.timestamp).toLocaleString()}
                 </p>
@@ -89,18 +84,7 @@ const TicketDetails = () => {
           
           <Separator className="my-4" />
           
-          <div className="flex gap-4">
-            <Textarea
-              value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
-              placeholder="Type your message here..."
-              className="flex-1"
-            />
-            <Button onClick={handleSendMessage}>
-              <Send className="h-4 w-4 mr-2" />
-              Send
-            </Button>
-          </div>
+          <MessageInput onSend={handleSendMessage} />
         </CardContent>
       </Card>
     </div>
