@@ -19,9 +19,9 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				sans: ['Inter', 'sans-serif'],
-				poster: ['Inter Display', 'sans-serif'], // More condensed variation
-				condensed: ['Inter Tight', 'sans-serif'], // Even more condensed
+				sans: ['Catamaran', 'sans-serif'],
+				poster: ['Catamaran', 'sans-serif'],
+				condensed: ['Catamaran', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
