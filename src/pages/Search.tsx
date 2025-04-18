@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -307,7 +307,7 @@ const Search = () => {
                         <img
                           src={provider.image}
                           alt={provider.name}
-                          className="absolute inset-0 w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-300"
+                          className="absolute inset-0 w-full h-full object-cover filter grayscale-[50%] hover:grayscale-0 transition-all duration-300"
                         />
                       </div>
                       <div className="md:col-span-3 p-6 pt-2 md:pt-6">
