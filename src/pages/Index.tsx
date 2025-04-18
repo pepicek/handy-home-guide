@@ -13,7 +13,6 @@ import HeroVariation1 from "@/components/variations/HeroVariation1";
 import HeroVariation2 from "@/components/variations/HeroVariation2";
 import HeroVariation3 from "@/components/variations/HeroVariation3";
 
-// Uncomment one of these variations to test them
 const Index = () => {
   return (
     <div className="flex flex-col min-h-screen">
@@ -22,10 +21,7 @@ const Index = () => {
         {/* Original Hero */}
         <Hero />
         
-        {/* Uncomment to test different variations */}
-        {/* <HeroVariation1 /> */}
-        {/* <HeroVariation2 /> */}
-        {/* <HeroVariation3 /> */}
+        {/* Variations are now accessible at /home/v1, /home/v2, and /home/v3 routes */}
         
         <ServiceCategories />
         <SpecialOffers />
