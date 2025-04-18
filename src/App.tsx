@@ -45,6 +45,16 @@ import RegisterProvider from "./pages/RegisterProvider";
 import VisitorQuestionnaire from "./pages/VisitorQuestionnaire";
 import ProviderOnboarding from "./pages/ProviderOnboarding";
 
+// Dashboard pages
+import { 
+  DashboardLayout,
+  Dashboard,
+  Services,
+  Appointments,
+  SpecialOffers,
+  Settings
+} from "./pages/dashboard";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -89,6 +99,19 @@ const App = () => (
           <Route path="/register/provider" element={<RegisterProvider />} />
           <Route path="/register/visitor/questionnaire" element={<VisitorQuestionnaire />} />
           <Route path="/register/provider/onboarding" element={<ProviderOnboarding />} />
+          
+          {/* Dashboard routes */}
+          <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="services" element={<Services />} />
+            <Route path="appointments" element={<Appointments />} />
+            <Route path="special-offers" element={<SpecialOffers />} />
+            <Route path="clients" element={<NotFound />} />
+            <Route path="messages" element={<NotFound />} />
+            <Route path="analytics" element={<NotFound />} />
+            <Route path="earnings" element={<NotFound />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

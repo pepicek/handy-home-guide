@@ -1,36 +1,48 @@
 
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { ArrowRight, Building, Mail, Phone, Lock, User, Eye, EyeOff } from "lucide-react";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { ArrowRight, Play, Users, Building, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent } from "@/components/ui/card";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { toast } from "sonner";
 
 const formSchema = z.object({
   businessName: z.string().min(2, "Business name must be at least 2 characters"),
   contactName: z.string().min(2, "Contact name must be at least 2 characters"),
-  email: z.string().email("Please enter a valid email"),
-  phone: z.string().min(10, "Please enter a valid phone number"),
-  password: z.string().min(8, "Password must be at least 8 characters"),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().min(10, "Phone number must be at least 10 digits"),
+  password: z.string()
+    .min(8, "Password must be at least 8 characters")
+    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .regex(/[0-9]/, "Password must contain at least one number"),
   confirmPassword: z.string()
-}).refine((data) => data.password === data.confirmPassword, {
+}).refine(data => data.password === data.confirmPassword, {
   message: "Passwords do not match",
   path: ["confirmPassword"],
 });
 
-const RegisterProvider = () => {
-  const navigate = useNavigate();
-  const [videoOpen, setVideoOpen] = useState(false);
+type FormValues = z.infer<typeof formSchema>;
 
-  const form = useForm<z.infer<typeof formSchema>>({
+const RegisterProvider = () => {
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+  const { toast } = useToast();
+  const navigate = useNavigate();
+
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       businessName: "",
@@ -38,16 +50,19 @@ const RegisterProvider = () => {
       email: "",
       phone: "",
       password: "",
-      confirmPassword: "",
-    },
+      confirmPassword: ""
+    }
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // In a real app, you would send this to your backend
-    console.log(values);
-    toast.success("Registration successful!");
-    navigate("/register/provider/onboarding");
-  }
+  const onSubmit = (data: FormValues) => {
+    console.log(data);
+    toast({
+      title: "Registration Successful!",
+      description: "Your account has been created successfully.",
+    });
+    // Navigate to onboarding after successful registration
+    navigate("/dashboard");
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -55,56 +70,18 @@ const RegisterProvider = () => {
       <main className="flex-grow bg-gray-50">
         <div className="container mx-auto px-4 py-12">
           <div className="max-w-4xl mx-auto">
-            <Button
-              variant="ghost"
-              className="mb-8 flex items-center text-gray-600 hover:text-gray-900"
-              onClick={() => navigate("/register")}
-            >
-              <ArrowRight className="h-4 w-4 mr-2 rotate-180" />
-              Back to registration options
-            </Button>
-
-            <div className="grid md:grid-cols-2 gap-8 mb-8">
-              <div>
-                <h1 className="text-3xl font-bold text-anthracite mb-4">
-                  Register as a Service Provider
-                </h1>
-                <p className="text-gray-600 mb-6">
-                  Join our network of professionals and connect with customers looking for your services.
-                </p>
-
-                <div className="relative rounded-lg overflow-hidden bg-gray-900 mb-6 cursor-pointer group" onClick={() => setVideoOpen(true)}>
-                  <div className="aspect-video bg-gradient-to-r from-anthracite/20 to-anthracite/40 flex items-center justify-center">
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-300"></div>
-                    <div className="relative z-10 flex flex-col items-center justify-center text-white">
-                      <div className="bg-anthracite rounded-full w-16 h-16 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                        <Play className="h-8 w-8 text-yellow-400 ml-1" />
-                      </div>
-                      <p className="font-medium">Watch how YelloPago works for providers</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-gray-100 border-l-4 border-anthracite p-4 rounded-r-lg">
-                  <h3 className="font-semibold text-anthracite mb-1">Benefits for Service Providers</h3>
-                  <ul className="space-y-2 text-sm text-gray-700">
-                    <li>• Get connected with qualified customers</li>
-                    <li>• Manage your schedule efficiently</li>
-                    <li>• Create special offers and promotions</li>
-                    <li>• Build your online reputation with reviews</li>
-                    <li>• Access to business growth resources</li>
-                  </ul>
-                </div>
-              </div>
-
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="flex items-center justify-center mb-6">
-                    <div className="rounded-full bg-anthracite/10 w-12 h-12 flex items-center justify-center">
-                      <Users className="h-6 w-6 text-anthracite" />
-                    </div>
-                  </div>
-
+            <div className="text-center mb-8">
+              <h1 className="text-3xl md:text-4xl font-bold text-anthracite mb-4">
+                Register as a Service Provider
+              </h1>
+              <p className="text-lg text-gray-600">
+                Create your professional account and start growing your business
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-5 gap-8">
+              <div className="md:col-span-3">
+                <div className="bg-white p-6 rounded-lg shadow-sm border">
                   <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                       <FormField
@@ -114,41 +91,50 @@ const RegisterProvider = () => {
                           <FormItem>
                             <FormLabel>Business Name</FormLabel>
                             <FormControl>
-                              <Input placeholder="Your Business Name" {...field} icon={<Building className="h-4 w-4" />} />
+                              <div className="relative">
+                                <Building className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
+                                <Input className="pl-10" placeholder="Your business name" {...field} />
+                              </div>
                             </FormControl>
                             <FormMessage />
                           </FormItem>
                         )}
                       />
-
+                      
                       <FormField
                         control={form.control}
                         name="contactName"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Contact Name</FormLabel>
+                            <FormLabel>Contact Person</FormLabel>
                             <FormControl>
-                              <Input placeholder="John Doe" {...field} />
+                              <div className="relative">
+                                <User className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
+                                <Input className="pl-10" placeholder="Your name" {...field} />
+                              </div>
                             </FormControl>
                             <FormMessage />
                           </FormItem>
                         )}
                       />
-
+                      
                       <FormField
                         control={form.control}
                         name="email"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Business Email</FormLabel>
+                            <FormLabel>Email Address</FormLabel>
                             <FormControl>
-                              <Input type="email" placeholder="business@example.com" {...field} />
+                              <div className="relative">
+                                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
+                                <Input className="pl-10" type="email" placeholder="you@example.com" {...field} />
+                              </div>
                             </FormControl>
                             <FormMessage />
                           </FormItem>
                         )}
                       />
-
+                      
                       <FormField
                         control={form.control}
                         name="phone"
@@ -156,27 +142,51 @@ const RegisterProvider = () => {
                           <FormItem>
                             <FormLabel>Phone Number</FormLabel>
                             <FormControl>
-                              <Input placeholder="(123) 456-7890" {...field} icon={<Phone className="h-4 w-4" />} />
+                              <div className="relative">
+                                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
+                                <Input className="pl-10" placeholder="Your phone number" {...field} />
+                              </div>
                             </FormControl>
                             <FormMessage />
                           </FormItem>
                         )}
                       />
-
+                      
                       <FormField
                         control={form.control}
                         name="password"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Password</FormLabel>
+                            <FormLabel>Create Password</FormLabel>
                             <FormControl>
-                              <Input type="password" {...field} />
+                              <div className="relative">
+                                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
+                                <Input 
+                                  className="pl-10" 
+                                  type={showPassword ? "text" : "password"} 
+                                  placeholder="Create a secure password" 
+                                  {...field} 
+                                />
+                                <Button 
+                                  type="button" 
+                                  variant="ghost" 
+                                  size="icon" 
+                                  className="absolute right-2 top-1/2 -translate-y-1/2"
+                                  onClick={() => setShowPassword(!showPassword)}
+                                >
+                                  {showPassword ? (
+                                    <EyeOff className="h-4 w-4 text-gray-500" />
+                                  ) : (
+                                    <Eye className="h-4 w-4 text-gray-500" />
+                                  )}
+                                </Button>
+                              </div>
                             </FormControl>
                             <FormMessage />
                           </FormItem>
                         )}
                       />
-
+                      
                       <FormField
                         control={form.control}
                         name="confirmPassword"
@@ -184,41 +194,100 @@ const RegisterProvider = () => {
                           <FormItem>
                             <FormLabel>Confirm Password</FormLabel>
                             <FormControl>
-                              <Input type="password" {...field} />
+                              <div className="relative">
+                                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
+                                <Input 
+                                  className="pl-10" 
+                                  type={showConfirmPassword ? "text" : "password"} 
+                                  placeholder="Confirm your password" 
+                                  {...field} 
+                                />
+                                <Button 
+                                  type="button" 
+                                  variant="ghost" 
+                                  size="icon" 
+                                  className="absolute right-2 top-1/2 -translate-y-1/2"
+                                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                >
+                                  {showConfirmPassword ? (
+                                    <EyeOff className="h-4 w-4 text-gray-500" />
+                                  ) : (
+                                    <Eye className="h-4 w-4 text-gray-500" />
+                                  )}
+                                </Button>
+                              </div>
                             </FormControl>
                             <FormMessage />
                           </FormItem>
                         )}
                       />
-
-                      <Button type="submit" className="w-full bg-anthracite hover:bg-anthracite/90 text-yellow-400">
-                        Create Provider Account
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
+                      
+                      <div className="pt-4">
+                        <Button type="submit" className="w-full bg-anthracite hover:bg-anthracite/90 text-yellow-400" size="lg">
+                          Create Account
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                      </div>
+                      
+                      <p className="text-center text-sm text-gray-600 mt-4">
+                        Already have an account?{" "}
+                        <Link to="/signin" className="text-yellow-600 hover:text-yellow-800 font-medium">
+                          Sign in
+                        </Link>
+                      </p>
                     </form>
                   </Form>
-
-                  <p className="mt-6 text-xs text-center text-gray-500">
-                    By creating an account, you agree to our Terms of Service and Privacy Policy.
-                  </p>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
+              
+              <div className="md:col-span-2">
+                <div className="bg-white p-6 rounded-lg shadow-sm border h-full">
+                  <h2 className="text-xl font-semibold mb-4 text-anthracite">Why Join YelloPago as a Pro?</h2>
+                  
+                  <div className="relative aspect-video mb-4 rounded-md overflow-hidden bg-gray-100">
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <p className="text-sm text-gray-500">Promotional video will be displayed here</p>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center flex-shrink-0">
+                        <span className="text-yellow-600 font-semibold">1</span>
+                      </div>
+                      <div>
+                        <h3 className="font-medium text-anthracite">Grow Your Business</h3>
+                        <p className="text-sm text-gray-600">Connect with clients looking for your specific services and expertise.</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center flex-shrink-0">
+                        <span className="text-yellow-600 font-semibold">2</span>
+                      </div>
+                      <div>
+                        <h3 className="font-medium text-anthracite">Manage Everything in One Place</h3>
+                        <p className="text-sm text-gray-600">Simplify scheduling, invoicing, and client communication with our tools.</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center flex-shrink-0">
+                        <span className="text-yellow-600 font-semibold">3</span>
+                      </div>
+                      <div>
+                        <h3 className="font-medium text-anthracite">Build Your Reputation</h3>
+                        <p className="text-sm text-gray-600">Collect reviews and showcase your best work to stand out from competitors.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </main>
       <Footer />
-
-      <Dialog open={videoOpen} onOpenChange={setVideoOpen}>
-        <DialogContent className="max-w-3xl p-0 bg-black">
-          <div className="aspect-video w-full">
-            {/* In a real app, you would use a real video here */}
-            <div className="flex items-center justify-center h-full text-white">
-              <p className="text-center">Provider onboarding video would play here</p>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 };
