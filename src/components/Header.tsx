@@ -44,8 +44,8 @@ const Header = () => {
               <User className="h-4 w-4" />
               <span>Sign In</span>
             </Button>
-            <Button className="bg-anthracite hover:bg-anthracite/90 text-yellow-400 font-medium">
-              Register
+            <Button className="bg-anthracite hover:bg-anthracite/90 text-yellow-400 font-medium" asChild>
+              <Link to="/register">Register</Link>
             </Button>
           </div>
         </div>

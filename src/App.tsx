@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -37,6 +38,13 @@ import AllCategories from "./pages/AllCategories";
 
 import ProviderRating from "./pages/ProviderRating";
 
+// New registration pages
+import Register from "./pages/Register";
+import RegisterVisitor from "./pages/RegisterVisitor";
+import RegisterProvider from "./pages/RegisterProvider";
+import VisitorQuestionnaire from "./pages/VisitorQuestionnaire";
+import ProviderOnboarding from "./pages/ProviderOnboarding";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -74,6 +82,13 @@ const App = () => (
           <Route path="/search/projects" element={<ProjectSearch />} />
           <Route path="/search/market" element={<MarketResearch />} />
           <Route path="/categories" element={<AllCategories />} />
+          
+          {/* Registration routes */}
+          <Route path="/register" element={<Register />} />
+          <Route path="/register/visitor" element={<RegisterVisitor />} />
+          <Route path="/register/provider" element={<RegisterProvider />} />
+          <Route path="/register/visitor/questionnaire" element={<VisitorQuestionnaire />} />
+          <Route path="/register/provider/onboarding" element={<ProviderOnboarding />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
