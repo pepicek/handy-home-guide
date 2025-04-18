@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   Dialog,
@@ -75,44 +74,17 @@ export const MessageClientDialog = () => {
   );
 };
 
-export const ScheduleAppointmentDialog = () => {
-  const [open, setOpen] = React.useState(false);
-  const [date, setDate] = React.useState<Date>();
-
-  const handleSchedule = () => {
-    if (!date) return;
-    // In a real app, this would be an API call
-    console.log("Scheduling appointment for:", date);
-    toast.success("Appointment scheduled successfully");
-    setOpen(false);
-  };
-
+export const ScheduleAppointmentDialog = ({ clientId }: { clientId: string }) => {
+  const navigate = useNavigate();
+  
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant="ghost" className="text-sm w-full text-left justify-start">Schedule Appointment</Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Schedule Appointment</DialogTitle>
-          <DialogDescription>
-            Pick a date for the appointment.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="py-4">
-          <Calendar
-            mode="single"
-            selected={date}
-            onSelect={setDate}
-          />
-        </div>
-        <DialogFooter>
-          <Button onClick={handleSchedule} disabled={!date}>
-            Schedule
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+    <Button 
+      variant="ghost" 
+      className="text-sm w-full text-left justify-start"
+      onClick={() => navigate(`/dashboard/appointments/schedule/${clientId}`)}
+    >
+      Schedule Appointment
+    </Button>
   );
 };
 

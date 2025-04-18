@@ -81,6 +81,7 @@ import MessageProvider from "./pages/client/quotes/MessageProvider";
 import FindProviders from "./pages/client/providers/FindProviders";
 
 import ClientProfile from "./pages/dashboard/client/ClientProfile";
+import ServiceHistory from "./pages/dashboard/client/ServiceHistory";
 
 const queryClient = new QueryClient();
 
@@ -140,6 +141,8 @@ const App = () => (
             <Route path="settings" element={<Settings />} />
             <Route path="pro" element={<ProSubscription />} />
             <Route path="clients/:id" element={<ClientProfile />} />
+            <Route path="clients/:id/history" element={<ServiceHistory />} />
+            <Route path="appointments/schedule/:id" element={<CheckSchedule />} />
           </Route>
           
           <Route path="/client" element={<ClientDashboardLayout />}>
