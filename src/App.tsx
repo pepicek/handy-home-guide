@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -63,6 +62,7 @@ import Clients from "./pages/dashboard/Clients";
 import Messages from "./pages/dashboard/Messages";
 import Analytics from "./pages/dashboard/Analytics";
 import Earnings from "./pages/dashboard/Earnings";
+import ProSubscription from "./pages/dashboard/ProSubscription";
 
 const queryClient = new QueryClient();
 
@@ -123,6 +123,7 @@ const App = () => (
             <Route path="analytics" element={<Analytics />} />
             <Route path="earnings" element={<Earnings />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="pro" element={<ProSubscription />} />
           </Route>
         </Routes>
       </BrowserRouter>

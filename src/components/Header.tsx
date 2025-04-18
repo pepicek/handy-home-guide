@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
@@ -40,9 +39,11 @@ const Header = () => {
             <Button variant="ghost" size="icon" className="rounded-full hover:bg-yellow-500/20">
               <Bell className="h-5 w-5" />
             </Button>
-            <Button variant="outline" className="flex items-center gap-2 border-anthracite/30 hover:bg-yellow-500/20">
-              <User className="h-4 w-4" />
-              <span>Sign In</span>
+            <Button variant="outline" className="flex items-center gap-2 border-anthracite/30 hover:bg-yellow-500/20" asChild>
+              <Link to="/signin">
+                <User className="h-4 w-4" />
+                <span>Sign In</span>
+              </Link>
             </Button>
             <Button className="bg-anthracite hover:bg-anthracite/90 text-yellow-400 font-medium" asChild>
               <Link to="/register">Register</Link>
