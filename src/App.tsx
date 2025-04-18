@@ -100,6 +100,9 @@ import ClientProfile from "./pages/dashboard/client/ClientProfile";
 import ServiceHistory from "./pages/dashboard/client/ServiceHistory";
 
 import Credits from "./pages/Credits";
+import TicketsList from "./pages/dashboard/support/TicketsList";
+import CreateTicket from "./pages/dashboard/support/CreateTicket";
+import TicketDetails from "./pages/dashboard/support/TicketDetails";
 
 const queryClient = new QueryClient();
 
@@ -181,6 +184,9 @@ const App = () => (
 
             {/* Support Route */}
             <Route path="support" element={<Support />} />
+            <Route path="support/tickets" element={<TicketsList />} />
+            <Route path="support/tickets/new" element={<CreateTicket />} />
+            <Route path="support/tickets/:ticketId" element={<TicketDetails />} />
           </Route>
           
           <Route path="/client" element={<ClientDashboardLayout />}>

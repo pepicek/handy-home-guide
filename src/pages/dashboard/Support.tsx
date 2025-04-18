@@ -1,10 +1,13 @@
 
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FileText, Youtube, MessageSquare, Book, ExternalLink } from "lucide-react";
 
 const Support = () => {
+  const navigate = useNavigate();
+  
   return (
     <div className="space-y-6">
       <div>
@@ -79,11 +82,17 @@ const Support = () => {
               Need help? Create a support ticket and we'll assist you
             </CardDescription>
           </CardHeader>
-          <CardContent>
-            <Button className="w-full sm:w-auto">
-              <MessageSquare className="h-4 w-4 mr-2" />
-              Create Support Ticket
-            </Button>
+          <CardContent className="space-y-4">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button onClick={() => navigate("/dashboard/support/tickets/new")}>
+                <MessageSquare className="h-4 w-4 mr-2" />
+                Create Support Ticket
+              </Button>
+              <Button variant="outline" onClick={() => navigate("/dashboard/support/tickets")}>
+                View My Tickets
+                <ExternalLink className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </div>
