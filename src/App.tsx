@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -59,6 +60,8 @@ import Messages from "./pages/dashboard/Messages";
 import Analytics from "./pages/dashboard/Analytics";
 import Earnings from "./pages/dashboard/Earnings";
 import ProSubscription from "./pages/dashboard/ProSubscription";
+import Listings from "./pages/dashboard/Listings";
+import ListingsSettings from "./pages/dashboard/ListingsSettings";
 
 import ClientDashboardLayout from "./components/client/ClientDashboardLayout";
 import ClientDashboard from "./pages/client/ClientDashboard";
@@ -143,6 +146,9 @@ const App = () => (
             <Route path="clients/:id" element={<ClientProfile />} />
             <Route path="clients/:id/history" element={<ServiceHistory />} />
             <Route path="appointments/schedule/:id" element={<CheckSchedule />} />
+            <Route path="listings" element={<Listings />} />
+            <Route path="listings/service/:serviceId" element={<Listings />} />
+            <Route path="listings/settings" element={<ListingsSettings />} />
           </Route>
           
           <Route path="/client" element={<ClientDashboardLayout />}>

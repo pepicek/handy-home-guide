@@ -46,6 +46,12 @@ const DashboardSidebar = () => {
       active: location.pathname === "/dashboard/services"
     },
     {
+      label: "Listings",
+      icon: FileText,
+      path: "/dashboard/listings",
+      active: location.pathname.includes("/dashboard/listings")
+    },
+    {
       label: "Appointments",
       icon: Calendar,
       path: "/dashboard/appointments",

@@ -9,6 +9,8 @@ import Clients from "./Clients";
 import Messages from "./Messages";
 import Analytics from "./Analytics";
 import Earnings from "./Earnings";
+import Listings from "./Listings";
+import ListingsSettings from "./ListingsSettings";
 
 export {
   DashboardLayout,
@@ -20,5 +22,7 @@ export {
   Clients,
   Messages,
   Analytics,
-  Earnings
+  Earnings,
+  Listings,
+  ListingsSettings
 };

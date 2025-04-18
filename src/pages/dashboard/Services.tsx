@@ -7,9 +7,26 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Edit, EyeIcon, Plus, Search, Trash2 } from "lucide-react";
+import { Edit, EyeIcon, Plus, Search, Trash2, FileText } from "lucide-react";
+import { Link } from "react-router-dom";
+import { toast } from "sonner";
 
 const Services = () => {
+  const handleViewService = (serviceId: number) => {
+    // In a real app, this would navigate to the service details
+    toast.info(`Viewing service #${serviceId}`);
+  };
+  
+  const handleEditService = (serviceId: number) => {
+    // In a real app, this would open an edit dialog
+    toast.info(`Editing service #${serviceId}`);
+  };
+  
+  const handleDeleteService = (serviceId: number) => {
+    // In a real app, this would open a confirmation dialog
+    toast.info(`Deleting service #${serviceId}`);
+  };
+  
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -130,14 +147,35 @@ const Services = () => {
                       </TableCell>
                       <TableCell className="text-right">
                         <div className="flex justify-end gap-2">
-                          <Button variant="ghost" size="icon">
+                          <Button 
+                            variant="ghost" 
+                            size="icon"
+                            onClick={() => handleViewService(service.id)}
+                          >
                             <EyeIcon className="h-4 w-4" />
                           </Button>
-                          <Button variant="ghost" size="icon">
+                          <Button 
+                            variant="ghost" 
+                            size="icon"
+                            onClick={() => handleEditService(service.id)}
+                          >
                             <Edit className="h-4 w-4" />
                           </Button>
-                          <Button variant="ghost" size="icon">
+                          <Button 
+                            variant="ghost" 
+                            size="icon"
+                            onClick={() => handleDeleteService(service.id)}
+                          >
                             <Trash2 className="h-4 w-4" />
+                          </Button>
+                          <Button 
+                            variant="ghost" 
+                            size="icon"
+                            asChild
+                          >
+                            <Link to={`/dashboard/listings/service/${service.id}`}>
+                              <FileText className="h-4 w-4 text-yellow-600" />
+                            </Link>
                           </Button>
                         </div>
                       </TableCell>
