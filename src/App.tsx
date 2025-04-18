@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -19,6 +20,11 @@ import ViewProfile from "./pages/ViewProfile";
 import CheckSchedule from "./pages/CheckSchedule";
 import RequestQuote from "./pages/RequestQuote";
 
+// New homepage variations
+import HomepageVariation1 from "./pages/HomepageVariation1";
+import HomepageVariation2 from "./pages/HomepageVariation2";
+import HomepageVariation3 from "./pages/HomepageVariation3";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -32,6 +38,12 @@ const App = () => (
           <Route path="/alt1" element={<IndexAlt1 />} />
           <Route path="/alt2" element={<IndexAlt2 />} />
           <Route path="/alt3" element={<IndexAlt3 />} />
+          
+          {/* New homepage variations */}
+          <Route path="/home/v1" element={<HomepageVariation1 />} />
+          <Route path="/home/v2" element={<HomepageVariation2 />} />
+          <Route path="/home/v3" element={<HomepageVariation3 />} />
+          
           <Route path="/search" element={<Search />} />
           <Route path="/special-offers" element={<SpecialOffersPage />} />
           <Route path="/special-offers/:id" element={<SpecialOfferDetails />} />

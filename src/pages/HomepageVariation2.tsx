@@ -1,6 +1,6 @@
 
 import Header from "@/components/Header";
-import Hero from "@/components/Hero";
+import HeroVariation2 from "@/components/variations/HeroVariation2";
 import ServiceCategories from "@/components/ServiceCategories";
 import SpecialOffers from "@/components/SpecialOffers";
 import HowItWorks from "@/components/HowItWorks";
@@ -8,25 +8,12 @@ import Testimonials from "@/components/Testimonials";
 import CtaSection from "@/components/CtaSection";
 import Footer from "@/components/Footer";
 
-// New component imports
-import HeroVariation1 from "@/components/variations/HeroVariation1";
-import HeroVariation2 from "@/components/variations/HeroVariation2";
-import HeroVariation3 from "@/components/variations/HeroVariation3";
-
-// Uncomment one of these variations to test them
-const Index = () => {
+const HomepageVariation2 = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-grow">
-        {/* Original Hero */}
-        <Hero />
-        
-        {/* Uncomment to test different variations */}
-        {/* <HeroVariation1 /> */}
-        {/* <HeroVariation2 /> */}
-        {/* <HeroVariation3 /> */}
-        
+        <HeroVariation2 />
         <ServiceCategories />
         <SpecialOffers />
         <HowItWorks />
@@ -38,4 +25,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default HomepageVariation2;
