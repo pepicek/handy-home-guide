@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useSidebar, SidebarProvider, Sidebar, SidebarContent, SidebarHeader, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarTrigger, SidebarInset } from "@/components/ui/sidebar";
@@ -6,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import { LayoutDashboard, FileText, Calendar, Users, Settings, LogOut, Bell, MessageSquare, PieChart,
   Sparkles, DollarSign, BarChart3, ListChecks, Menu, Crown } from "lucide-react";
 
@@ -193,7 +194,7 @@ const DashboardHeader = () => {
           >
             <Menu className="h-5 w-5 text-yellow-700" />
           </Button>
-          <h1 className="text-2xl font-semibold text-anthracite">Provider Dashboard</h1>
+          <h1 className="text-xl font-semibold text-anthracite">Provider Dashboard</h1>
         </div>
         <div className="flex items-center gap-2">
           <Button 
@@ -217,3 +218,4 @@ const DashboardHeader = () => {
     </header>
   );
 };
+
