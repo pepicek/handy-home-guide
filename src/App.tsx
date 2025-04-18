@@ -80,6 +80,8 @@ import MessageProvider from "./pages/client/quotes/MessageProvider";
 
 import FindProviders from "./pages/client/providers/FindProviders";
 
+import ClientProfile from "./pages/dashboard/client/ClientProfile";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -137,6 +139,7 @@ const App = () => (
             <Route path="earnings" element={<Earnings />} />
             <Route path="settings" element={<Settings />} />
             <Route path="pro" element={<ProSubscription />} />
+            <Route path="clients/:id" element={<ClientProfile />} />
           </Route>
           
           <Route path="/client" element={<ClientDashboardLayout />}>

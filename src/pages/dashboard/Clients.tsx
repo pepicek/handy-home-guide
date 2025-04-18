@@ -1,32 +1,15 @@
-
 import React, { useState } from "react";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { 
-  Search, 
-  Filter, 
-  Plus, 
-  Mail, 
-  Phone, 
-  Calendar, 
-  Star, 
-  MoreHorizontal,
-  ChevronLeft,
-  ChevronRight,
-  Star as StarIcon
-} from "lucide-react";
-import { 
-  DropdownMenu, 
-  DropdownMenuContent, 
-  DropdownMenuItem, 
-  DropdownMenuLabel, 
-  DropdownMenuSeparator, 
-  DropdownMenuTrigger 
-} from "@/components/ui/dropdown-menu";
+import { Search, Filter, Star as StarIcon } from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { AddClientButton } from "@/components/clients/AddClientDialog";
+import { MessageClientDialog, ScheduleAppointmentDialog, RemoveClientDialog, ViewServiceHistoryButton } from "@/components/clients/ClientActionDialogs";
+import { Link } from "react-router-dom";
 
 const generateRandomClients = (count: number) => {
   const firstNames = ["John", "Sarah", "Michael", "Emily", "David", "Jessica", "Robert", "Jennifer", "William", "Linda", "James", "Susan", "Maria", "Thomas", "Carlos"];
@@ -59,13 +42,11 @@ const Clients = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const clientsPerPage = 10;
   
-  // Filter clients based on search term
   const filteredClients = clients.filter(client => 
     client.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
     client.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
   
-  // Pagination
   const indexOfLastClient = currentPage * clientsPerPage;
   const indexOfFirstClient = indexOfLastClient - clientsPerPage;
   const currentClients = filteredClients.slice(indexOfFirstClient, indexOfLastClient);
@@ -75,9 +56,7 @@ const Clients = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold text-anthracite">Client Management</h1>
-        <Button className="bg-anthracite hover:bg-anthracite/90 text-yellow-400">
-          <Plus className="mr-2 h-4 w-4" /> Add New Client
-        </Button>
+        <AddClientButton />
       </div>
       
       <Card>
@@ -140,13 +119,20 @@ const Clients = () => {
                       <tr key={client.id} className="border-b hover:bg-yellow-50/30">
                         <td className="py-3 px-4">
                           <div className="flex items-center gap-3">
-                            <Avatar className="h-9 w-9 border-2 border-yellow-200">
-                              <AvatarFallback className="bg-yellow-100 text-yellow-800">
-                                {client.name.split(' ').map(n => n[0]).join('')}
-                              </AvatarFallback>
-                            </Avatar>
+                            <Link to={`/dashboard/clients/${client.id}`}>
+                              <Avatar className="h-9 w-9 border-2 border-yellow-200">
+                                <AvatarFallback className="bg-yellow-100 text-yellow-800">
+                                  {client.name.split(' ').map(n => n[0]).join('')}
+                                </AvatarFallback>
+                              </Avatar>
+                            </Link>
                             <div>
-                              <p className="font-medium">{client.name}</p>
+                              <Link 
+                                to={`/dashboard/clients/${client.id}`}
+                                className="font-medium hover:text-yellow-600"
+                              >
+                                {client.name}
+                              </Link>
                               <div className="flex items-center text-xs text-gray-500 mt-1">
                                 <StarIcon className="h-3 w-3 fill-yellow-400 text-yellow-400 mr-1" />
                                 <span>{client.rating}</span>
@@ -189,9 +175,7 @@ const Clients = () => {
                         <td className="py-3 px-4 hidden sm:table-cell font-medium">{client.totalSpent}</td>
                         <td className="py-3 px-4 text-center">
                           <div className="flex items-center justify-center gap-2">
-                            <Button variant="outline" size="sm" className="h-8 w-8 p-0">
-                              <Mail className="h-4 w-4" />
-                            </Button>
+                            <MessageClientDialog />
                             <DropdownMenu>
                               <DropdownMenuTrigger asChild>
                                 <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
@@ -199,11 +183,21 @@ const Clients = () => {
                                 </Button>
                               </DropdownMenuTrigger>
                               <DropdownMenuContent align="end">
-                                <DropdownMenuItem>View Profile</DropdownMenuItem>
-                                <DropdownMenuItem>Schedule Appointment</DropdownMenuItem>
-                                <DropdownMenuItem>View Service History</DropdownMenuItem>
+                                <DropdownMenuItem asChild>
+                                  <Link to={`/dashboard/clients/${client.id}`}>
+                                    View Profile
+                                  </Link>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem>
+                                  <ScheduleAppointmentDialog />
+                                </DropdownMenuItem>
+                                <DropdownMenuItem>
+                                  <ViewServiceHistoryButton clientId={client.id.toString()} />
+                                </DropdownMenuItem>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem className="text-red-600">Remove Client</DropdownMenuItem>
+                                <DropdownMenuItem className="text-red-600">
+                                  <RemoveClientDialog />
+                                </DropdownMenuItem>
                               </DropdownMenuContent>
                             </DropdownMenu>
                           </div>
@@ -214,7 +208,6 @@ const Clients = () => {
                 </table>
               </div>
               
-              {/* Pagination */}
               <div className="flex items-center justify-between mt-4">
                 <p className="text-sm text-gray-500">
                   Showing {indexOfFirstClient + 1}-{Math.min(indexOfLastClient, filteredClients.length)} of {filteredClients.length} clients
