@@ -7,6 +7,7 @@ import NotificationSettings from "@/components/dashboard/settings/NotificationSe
 import PaymentSettings from "@/components/dashboard/settings/PaymentSettings";
 import SecuritySettings from "@/components/dashboard/settings/SecuritySettings";
 import BacklinkSettings from "@/components/dashboard/settings/BacklinkSettings";
+import EmailSettings from "@/components/dashboard/settings/email/EmailSettings";
 
 const Settings = () => {
   return (
@@ -21,6 +22,7 @@ const Settings = () => {
           <TabsTrigger value="profile">Business Profile</TabsTrigger>
           <TabsTrigger value="availability">Availability</TabsTrigger>
           <TabsTrigger value="notifications">Notifications</TabsTrigger>
+          <TabsTrigger value="emails">Emails</TabsTrigger>
           <TabsTrigger value="payment">Payment & Billing</TabsTrigger>
           <TabsTrigger value="security">Security</TabsTrigger>
           <TabsTrigger value="backlinks">Backlinks</TabsTrigger>
@@ -36,6 +38,10 @@ const Settings = () => {
         
         <TabsContent value="notifications">
           <NotificationSettings />
+        </TabsContent>
+        
+        <TabsContent value="emails">
+          <EmailSettings />
         </TabsContent>
         
         <TabsContent value="payment">
