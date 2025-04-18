@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ClientsHeader } from "@/components/clients/ClientsHeader";
 import { ClientsSearch } from "@/components/clients/ClientsSearch";
-import { ClientsTable } from "@/components/clients/ClientsTable";
+import ClientsTable from "@/components/clients/ClientsTable";
 
 const generateRandomClients = (count: number) => {
   const firstNames = ["John", "Sarah", "Michael", "Emily", "David", "Jessica", "Robert", "Jennifer", "William", "Linda", "James", "Susan", "Maria", "Thomas", "Carlos"];
