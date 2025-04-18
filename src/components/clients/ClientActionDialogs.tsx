@@ -18,6 +18,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
+  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -89,7 +90,7 @@ export const ScheduleAppointmentDialog = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="ghost" className="text-sm">Schedule Appointment</Button>
+        <Button variant="ghost" className="text-sm w-full text-left justify-start">Schedule Appointment</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -127,9 +128,9 @@ export const RemoveClientDialog = () => {
 
   return (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <Button variant="ghost" className="text-red-600 text-sm">Remove Client</Button>
-      </DialogTrigger>
+      <AlertDialogTrigger asChild>
+        <Button variant="ghost" className="text-red-600 text-sm w-full text-left justify-start">Remove Client</Button>
+      </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you sure?</AlertDialogTitle>
@@ -155,7 +156,7 @@ export const ViewServiceHistoryButton = ({ clientId }: { clientId: string }) => 
   return (
     <Button 
       variant="ghost" 
-      className="text-sm"
+      className="text-sm w-full text-left justify-start"
       onClick={() => navigate(`/dashboard/clients/${clientId}/history`)}
     >
       View Service History
