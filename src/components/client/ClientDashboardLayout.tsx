@@ -1,213 +1,179 @@
 
-import React from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
-import { useSidebar, SidebarProvider, Sidebar, SidebarContent, SidebarHeader, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarTrigger, SidebarInset } from "@/components/ui/sidebar";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { Badge } from "@/components/ui/badge";
+import * as React from "react";
+import { useLocation, Link, Outlet } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
-import { 
-  LayoutDashboard, 
-  FileText, 
-  Calendar, 
-  Users, 
-  Settings, 
-  LogOut, 
-  Bell, 
-  MessageSquare, 
-  BookmarkIcon,
-  ClipboardListIcon,
-  FileQuestionIcon,
+import { cn } from "@/lib/utils";
+import {
+  Home,
+  Heart,
+  ClipboardList,
   Star,
   DollarSign,
   Search,
+  Settings,
   Menu,
-  HeartIcon,
-  ClipboardCheckIcon
+  User
 } from "lucide-react";
+import {
+  SidebarProvider,
+  Sidebar,
+  SidebarTrigger,
+  SidebarHeader,
+  SidebarContent,
+  SidebarFooter,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+  SidebarInset,
+} from "@/components/ui/sidebar";
+import { Button } from "@/components/ui/button";
+import { useIsMobile } from "@/hooks/use-mobile";
 
-export const ClientDashboardLayout = () => {
-  return (
-    <SidebarProvider defaultOpen={true}>
-      <div className="flex w-full min-h-screen bg-yellow-50/50">
-        <ClientSidebar />
-        <SidebarInset>
-          <div className="flex flex-col h-full">
-            <ClientDashboardHeader />
-            <main className="flex-1 p-6 overflow-auto">
-              <Outlet />
-            </main>
-          </div>
-        </SidebarInset>
-      </div>
-    </SidebarProvider>
-  );
-};
-
-const ClientSidebar = () => {
+const ClientDashboardLayout = () => {
   const location = useLocation();
-  
-  const menuItems = [
+  const isMobile = useIsMobile();
+
+  const navigation = [
     {
       label: "Dashboard",
-      icon: LayoutDashboard,
+      icon: Home,
       path: "/client",
-      active: location.pathname === "/client"
+      active: location.pathname === "/client",
     },
     {
       label: "Saved Providers",
-      icon: HeartIcon,
+      icon: Heart,
       path: "/client/saved-providers",
-      active: location.pathname === "/client/saved-providers"
+      active: location.pathname === "/client/saved-providers",
     },
     {
-      label: "My Projects",
-      icon: ClipboardCheckIcon,
+      label: "Projects",
+      icon: ClipboardList,
       path: "/client/projects",
-      active: location.pathname === "/client/projects"
+      active: location.pathname === "/client/projects",
     },
     {
       label: "Quote Requests",
-      icon: FileQuestionIcon,
-      path: "/client/quote-requests",
-      active: location.pathname === "/client/quote-requests"
+      icon: ClipboardList,
+      path: "/client/quotes",
+      active: location.pathname === "/client/quotes",
     },
     {
-      label: "My Reviews",
+      label: "Reviews",
       icon: Star,
       path: "/client/reviews",
-      active: location.pathname === "/client/reviews"
+      active: location.pathname === "/client/reviews",
     },
     {
       label: "Financial Summary",
       icon: DollarSign,
-      path: "/client/financial",
-      active: location.pathname === "/client/financial"
+      path: "/client/finance",
+      active: location.pathname === "/client/finance",
     },
     {
       label: "Search History",
       icon: Search,
       path: "/client/search-history",
-      active: location.pathname === "/client/search-history"
+      active: location.pathname === "/client/search-history",
     },
     {
-      label: "Settings",
+      label: "Account Settings",
       icon: Settings,
       path: "/client/settings",
-      active: location.pathname === "/client/settings"
-    }
+      active: location.pathname === "/client/settings",
+    },
   ];
-  
+
   return (
-    <Sidebar>
-      <SidebarHeader>
-        <div className="flex items-center px-3 py-2">
-          <Link to="/" className="flex items-center group">
-            <div className="bg-anthracite rounded-xl p-2 mr-2 rotate-3 group-hover:rotate-6 transition-transform duration-300">
-              <Users className="w-4 h-4 text-yellow-400" />
-            </div>
-            <span className="font-poster text-lg font-bold text-anthracite">
-              Client<span className="text-yellow-600">Portal</span>
-            </span>
-          </Link>
-          <SidebarTrigger className="ml-auto" />
-        </div>
-      </SidebarHeader>
-      
-      <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-yellow-700">Main</SidebarGroupLabel>
-          <SidebarMenu>
-            {menuItems.map((item) => (
-              <SidebarMenuItem key={item.path}>
-                <SidebarMenuButton asChild isActive={item.active} tooltip={item.label}>
-                  <Link to={item.path}>
-                    <item.icon className={item.active ? "text-yellow-600" : ""} />
-                    <span>{item.label}</span>
-                    {item.badge && (
-                      <Badge className="ml-auto bg-yellow-500 text-anthracite">{item.badge}</Badge>
-                    )}
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            ))}
-          </SidebarMenu>
-        </SidebarGroup>
-        
-        <SidebarGroup>
-          <div className="px-3 py-4">
-            <Card className="bg-gradient-to-r from-yellow-50 to-amber-50 border-yellow-200">
-              <CardContent className="p-4 space-y-3">
-                <div className="flex items-center gap-2 text-anthracite">
-                  <FileText className="h-5 w-5 text-yellow-600" />
-                  <h3 className="font-semibold">Need Help?</h3>
+    <div className="min-h-screen bg-background">
+      <SidebarProvider defaultOpen={!isMobile}>
+        <div className="flex min-h-screen w-full">
+          <Sidebar>
+            <SidebarHeader className="flex flex-row items-center justify-between">
+              <Link to="/" className="flex items-center gap-2">
+                <div className="bg-anthracite rounded-xl p-2 rotate-3">
+                  <svg
+                    className="w-4 h-4 text-yellow-400"
+                    fill="none"
+                    height="24"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="m12 3-1.9 5.8a2 2 0 0 1-1.287 1.288L3 12l5.8 1.9a2 2 0 0 1 1.288 1.287L12 21l1.9-5.8a2 2 0 0 1 1.287-1.288L21 12l-5.8-1.9a2 2 0 0 1-1.288-1.287Z" />
+                  </svg>
                 </div>
-                <p className="text-sm text-anthracite/70">
-                  Get answers to frequent questions or contact our support team
-                </p>
-                <Button 
-                  className="w-full bg-yellow-500 hover:bg-yellow-600 text-anthracite"
-                  size="sm"
-                  asChild
-                >
-                  <Link to="/how-it-works">View Help Center</Link>
+                <div className="hidden font-poster text-lg font-bold text-anthracite md:inline-block">
+                  <span>Yello</span>
+                  <span className="text-yellow-600">Pago</span>
+                </div>
+              </Link>
+              <SidebarTrigger />
+            </SidebarHeader>
+
+            <SidebarContent>
+              <div className="px-2 py-2">
+                <div className="space-y-1">
+                  <h2 className="px-4 text-lg font-semibold tracking-tight">
+                    Client Portal
+                  </h2>
+                </div>
+              </div>
+              <SidebarMenu>
+                {navigation.map((item) => (
+                  <SidebarMenuItem key={item.path}>
+                    <Link to={item.path} className="w-full">
+                      <SidebarMenuButton isActive={item.active} tooltip={item.label}>
+                        <item.icon className="size-4" />
+                        <span>{item.label}</span>
+                      </SidebarMenuButton>
+                    </Link>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarContent>
+
+            <SidebarFooter>
+              <div className="space-y-2">
+                <Card className="mx-2">
+                  <CardContent className="p-2 flex items-center space-x-2">
+                    <div className="p-1.5 rounded-md bg-yellow-100">
+                      <User className="w-5 h-5 text-yellow-700" />
+                    </div>
+                    <div className="text-sm">
+                      <p className="font-medium">Alex Johnson</p>
+                      <p className="text-xs text-muted-foreground">Client since 2024</p>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <div className="mx-2">
+                  <Button variant="outline" className="w-full">
+                    <Link to="/" className="w-full">Home Page</Link>
+                  </Button>
+                </div>
+              </div>
+            </SidebarFooter>
+          </Sidebar>
+
+          <SidebarInset className="flex-1 py-6 px-4 md:px-10">
+            <div className="flex justify-between items-center mb-6">
+              {isMobile && (
+                <Button variant="ghost" size="icon" className="md:hidden mr-2">
+                  <Menu className="h-6 w-6" />
                 </Button>
-              </CardContent>
-            </Card>
-          </div>
-        </SidebarGroup>
-      </SidebarContent>
-      
-      <SidebarFooter>
-        <div className="px-3 py-2">
-          <Separator className="my-2" />
-          <div className="flex items-center gap-3 px-2 py-2">
-            <Avatar className="h-9 w-9 border-3 border-yellow-400 shadow-md shadow-yellow-300/50">
-              <AvatarImage src="/placeholder.svg" />
-              <AvatarFallback className="bg-yellow-100 text-yellow-800">JC</AvatarFallback>
-            </Avatar>
-            <div className="flex-1 overflow-hidden">
-              <p className="text-sm font-medium leading-none truncate">Jane Client</p>
-              <p className="text-xs text-muted-foreground truncate">jane@example.com</p>
+              )}
+              <Outlet />
             </div>
-            <Button variant="ghost" size="icon" className="ml-auto">
-              <LogOut className="h-4 w-4" />
-            </Button>
-          </div>
+          </SidebarInset>
         </div>
-      </SidebarFooter>
-    </Sidebar>
+      </SidebarProvider>
+    </div>
   );
 };
 
-const ClientDashboardHeader = () => {
-  const { toggleSidebar } = useSidebar();
-  
-  return (
-    <header className="bg-gradient-to-r from-amber-100 via-yellow-50 to-amber-50 border-b border-yellow-200 p-4 shadow-sm">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Button 
-            variant="ghost" 
-            size="icon"
-            onClick={toggleSidebar} 
-            className="md:hidden text-yellow-800 hover:bg-yellow-200/70"
-          >
-            <Menu className="h-5 w-5 text-yellow-700" />
-          </Button>
-          <h1 className="text-xl font-semibold text-yellow-900">Client Dashboard</h1>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon" className="relative hover:bg-yellow-200/70">
-            <Bell className="h-5 w-5 text-yellow-700" />
-            <span className="absolute top-0 right-0 h-2.5 w-2.5 bg-yellow-500 rounded-full ring-2 ring-white"></span>
-          </Button>
-          <Button variant="outline" className="ml-2 border-yellow-400 hover:bg-yellow-100 text-yellow-800">
-            Find Services
-          </Button>
-        </div>
-      </div>
-    </header>
-  );
-};
+export default ClientDashboardLayout;
