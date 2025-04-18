@@ -176,4 +176,6 @@ const ClientDashboardLayout = () => {
   );
 };
 
+// Export as both default and named export to maintain compatibility
+export { ClientDashboardLayout };
 export default ClientDashboardLayout;

@@ -1,5 +1,5 @@
 
-import { ClientDashboardLayout } from "@/components/client/ClientDashboardLayout";
+import ClientDashboardLayout from "@/components/client/ClientDashboardLayout";
 import ClientDashboard from "./ClientDashboard";
 import SavedProviders from "./SavedProviders";
 import ProjectsManager from "./ProjectsManager";

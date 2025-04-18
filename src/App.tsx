@@ -66,7 +66,7 @@ import Earnings from "./pages/dashboard/Earnings";
 import ProSubscription from "./pages/dashboard/ProSubscription";
 
 // Client dashboard pages
-import { ClientDashboardLayout } from "./components/client/ClientDashboardLayout";
+import ClientDashboardLayout from "./components/client/ClientDashboardLayout";
 import ClientDashboard from "./pages/client/ClientDashboard";
 import SavedProviders from "./pages/client/SavedProviders";
 import ProjectsManager from "./pages/client/ProjectsManager";
@@ -143,9 +143,9 @@ const App = () => (
             <Route index element={<ClientDashboard />} />
             <Route path="saved-providers" element={<SavedProviders />} />
             <Route path="projects" element={<ProjectsManager />} />
-            <Route path="quote-requests" element={<QuoteRequests />} />
+            <Route path="quotes" element={<QuoteRequests />} />
             <Route path="reviews" element={<ClientReviews />} />
-            <Route path="financial" element={<FinancialSummary />} />
+            <Route path="finance" element={<FinancialSummary />} />
             <Route path="search-history" element={<SearchHistory />} />
             <Route path="settings" element={<ClientSettings />} />
           </Route>
