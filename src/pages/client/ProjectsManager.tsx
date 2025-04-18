@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -29,20 +30,18 @@ const ProjectsManager = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [projectToDelete, setProjectToDelete] = useState(null);
+  const [projectToDelete, setProjectToDelete] = useState<string | null>(null);
   
-  const handleDelete = (projectId) => {
+  const handleDelete = (projectId: string) => {
     setProjectToDelete(projectId);
     setShowDeleteModal(true);
   };
 
-  const handleConfirmDelete = () => {
-    // Handle delete logic here
+  const confirmDelete = () => {
     setShowDeleteModal(false);
     setProjectToDelete(null);
   };
 
-  
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-2 sm:space-y-0">
@@ -102,7 +101,7 @@ const ProjectsManager = () => {
       <DeleteProjectModal 
         isOpen={showDeleteModal}
         onClose={() => setShowDeleteModal(false)}
-        onConfirm={handleConfirmDelete}
+        onConfirm={confirmDelete}
       />
     </div>
   );

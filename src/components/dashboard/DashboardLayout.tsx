@@ -1,12 +1,11 @@
-
-import React from "react";
+import React, { useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { useSidebar, SidebarProvider, Sidebar, SidebarContent, SidebarHeader, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarTrigger, SidebarInset } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card"; // Added Card and CardContent import
+import { Card, CardContent } from "@/components/ui/card";
 import { 
   LayoutDashboard, 
   FileText, 
@@ -188,6 +187,7 @@ const DashboardSidebar = () => {
 
 const DashboardHeader = () => {
   const { toggleSidebar } = useSidebar();
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
   
   return (
     <header className="bg-gradient-to-r from-yellow-200 via-yellow-100 to-yellow-50 border-b border-yellow-300 p-4 shadow-sm">
@@ -201,10 +201,15 @@ const DashboardHeader = () => {
           >
             <Menu className="h-5 w-5 text-yellow-700" />
           </Button>
-          <h1 className="text-xl font-semibold text-yellow-900">Provider Dashboard</h1>
+          <h1 className="text-3xl font-semibold text-anthracite">Provider Dashboard</h1>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon" className="relative hover:bg-yellow-200/70">
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="relative hover:bg-yellow-200/70"
+            onClick={() => setNotificationsOpen(!notificationsOpen)}
+          >
             <Bell className="h-5 w-5 text-yellow-700" />
             <span className="absolute top-0 right-0 h-2.5 w-2.5 bg-yellow-500 rounded-full ring-2 ring-white"></span>
           </Button>
