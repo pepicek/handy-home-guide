@@ -1,28 +1,14 @@
 import React, { useState } from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useSidebar, SidebarProvider, Sidebar, SidebarContent, SidebarHeader, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarTrigger, SidebarInset } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { 
-  LayoutDashboard, 
-  FileText, 
-  Calendar, 
-  Users, 
-  Settings, 
-  LogOut, 
-  Bell, 
-  MessageSquare, 
-  PieChart,
-  Sparkles,
-  DollarSign,
-  BarChart3,
-  ListChecks,
-  Menu,
-  Crown
-} from "lucide-react";
+import { toast } from "react-toastify";
+import { LayoutDashboard, FileText, Calendar, Users, Settings, LogOut, Bell, MessageSquare, PieChart,
+  Sparkles, DollarSign, BarChart3, ListChecks, Menu, Crown } from "lucide-react";
 
 export const DashboardLayout = () => {
   return (
@@ -187,11 +173,17 @@ const DashboardSidebar = () => {
 
 const DashboardHeader = () => {
   const { toggleSidebar } = useSidebar();
+  const navigate = useNavigate();
   const [notificationsOpen, setNotificationsOpen] = useState(false);
+  
+  const handleNotificationClick = () => {
+    setNotificationsOpen(!notificationsOpen);
+    toast.info("You have 3 new notifications");
+  };
   
   return (
     <header className="bg-gradient-to-r from-yellow-200 via-yellow-100 to-yellow-50 border-b border-yellow-300 p-4 shadow-sm">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between max-w-7xl mx-auto">
         <div className="flex items-center gap-4">
           <Button 
             variant="ghost" 
@@ -201,19 +193,23 @@ const DashboardHeader = () => {
           >
             <Menu className="h-5 w-5 text-yellow-700" />
           </Button>
-          <h1 className="text-3xl font-semibold text-anthracite">Provider Dashboard</h1>
+          <h1 className="text-2xl font-semibold text-anthracite">Provider Dashboard</h1>
         </div>
         <div className="flex items-center gap-2">
           <Button 
             variant="ghost" 
             size="icon" 
             className="relative hover:bg-yellow-200/70"
-            onClick={() => setNotificationsOpen(!notificationsOpen)}
+            onClick={handleNotificationClick}
           >
             <Bell className="h-5 w-5 text-yellow-700" />
             <span className="absolute top-0 right-0 h-2.5 w-2.5 bg-yellow-500 rounded-full ring-2 ring-white"></span>
           </Button>
-          <Button variant="outline" className="ml-2 border-yellow-400 hover:bg-yellow-100 text-yellow-800">
+          <Button 
+            variant="outline" 
+            className="ml-2 border-yellow-400 hover:bg-yellow-100 text-yellow-800"
+            onClick={() => navigate('/profile/me')}
+          >
             View Public Profile
           </Button>
         </div>

@@ -1,10 +1,10 @@
-
 import React from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
+import { useNavigate } from "react-router-dom";
 import { 
   AlertCircle, 
   Calendar, 
@@ -21,11 +21,18 @@ import {
 } from "lucide-react";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+  
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold text-anthracite">Dashboard</h1>
-        <Button className="bg-anthracite hover:bg-anthracite/90 text-yellow-400">+ Add New Service</Button>
+        <Button 
+          className="bg-anthracite hover:bg-anthracite/90 text-yellow-400"
+          onClick={() => navigate("/dashboard/services")}
+        >
+          + Add New Service
+        </Button>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -78,8 +85,18 @@ const Dashboard = () => {
               <AppointmentsList />
             </CardContent>
             <CardFooter className="flex justify-between">
-              <Button variant="outline">View Calendar</Button>
-              <Button className="bg-anthracite hover:bg-anthracite/90 text-yellow-400">Manage Appointments</Button>
+              <Button 
+                variant="outline"
+                onClick={() => navigate("/dashboard/appointments")}
+              >
+                View Calendar
+              </Button>
+              <Button 
+                className="bg-anthracite hover:bg-anthracite/90 text-yellow-400"
+                onClick={() => navigate("/dashboard/appointments")}
+              >
+                Manage Appointments
+              </Button>
             </CardFooter>
           </Card>
         </TabsContent>
@@ -130,7 +147,13 @@ const Dashboard = () => {
             </div>
           </CardContent>
           <CardFooter>
-            <Button variant="outline" className="w-full">View Detailed Analytics</Button>
+            <Button 
+              variant="outline" 
+              className="w-full"
+              onClick={() => navigate("/dashboard/analytics")}
+            >
+              View Detailed Analytics
+            </Button>
           </CardFooter>
         </Card>
         
@@ -159,7 +182,12 @@ const Dashboard = () => {
             </div>
           </CardContent>
           <CardFooter>
-            <Button className="w-full">Complete Your Profile</Button>
+            <Button 
+              className="w-full"
+              onClick={() => navigate("/dashboard/settings")}
+            >
+              Complete Your Profile
+            </Button>
           </CardFooter>
         </Card>
       </div>

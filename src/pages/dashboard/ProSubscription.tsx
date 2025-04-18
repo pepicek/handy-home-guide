@@ -1,6 +1,8 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import {
   Card,
   CardContent,
@@ -59,6 +61,18 @@ const plans = [
 ];
 
 const ProSubscription = () => {
+  const navigate = useNavigate();
+
+  const handleUpgrade = (planName: string) => {
+    toast.success(`Starting upgrade process to ${planName} plan`);
+    // In a real app, this would navigate to a payment page
+    navigate("/dashboard/settings");
+  };
+
+  const handleScheduleConsultation = () => {
+    toast.success("Consultation request submitted! Our team will contact you soon.");
+  };
+
   return (
     <div className="space-y-6 p-6">
       <div className="text-center max-w-3xl mx-auto mb-12">
@@ -122,6 +136,8 @@ const ProSubscription = () => {
                     ? "bg-yellow-500 hover:bg-yellow-600 text-anthracite"
                     : "bg-anthracite hover:bg-anthracite/90 text-white"
                 }`}
+                onClick={() => plan.name !== "Basic" && handleUpgrade(plan.name)}
+                disabled={plan.name === "Basic"}
               >
                 {plan.name === "Basic" ? "Current Plan" : `Upgrade to ${plan.name}`}
               </Button>
@@ -137,7 +153,11 @@ const ProSubscription = () => {
         <p className="text-gray-600 mb-6">
           Schedule a call with our team to discuss your needs and find the perfect solution for your business.
         </p>
-        <Button variant="outline" className="border-yellow-400 text-anthracite hover:bg-yellow-50">
+        <Button 
+          variant="outline" 
+          className="border-yellow-400 text-anthracite hover:bg-yellow-50"
+          onClick={handleScheduleConsultation}
+        >
           Schedule Consultation
         </Button>
       </div>
