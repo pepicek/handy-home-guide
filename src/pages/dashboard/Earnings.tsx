@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -49,6 +50,111 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+// Sample data for charts and tables
+const monthlyEarnings = [
+  { month: 'Jan', earnings: 8500 },
+  { month: 'Feb', earnings: 9200 },
+  { month: 'Mar', earnings: 8900 },
+  { month: 'Apr', earnings: 10400 },
+  { month: 'May', earnings: 11500 },
+  { month: 'Jun', earnings: 12000 },
+  { month: 'Jul', earnings: 11700 },
+  { month: 'Aug', earnings: 10500 },
+  { month: 'Sep', earnings: 9800 },
+  { month: 'Oct', earnings: 10200 },
+  { month: 'Nov', earnings: 10800 },
+  { month: 'Dec', earnings: 11000 },
+];
+
+const weeklyEarnings = [
+  { day: 'Mon', earnings: 1200 },
+  { day: 'Tue', earnings: 1400 },
+  { day: 'Wed', earnings: 1100 },
+  { day: 'Thu', earnings: 1800 },
+  { day: 'Fri', earnings: 2100 },
+  { day: 'Sat', earnings: 1300 },
+  { day: 'Sun', earnings: 900 },
+];
+
+const serviceEarnings = [
+  { name: 'Plumbing', earnings: 35000 },
+  { name: 'Electrical', earnings: 28000 },
+  { name: 'Landscaping', earnings: 18000 },
+  { name: 'Renovation', earnings: 13500 },
+];
+
+const pendingPayments = [
+  { 
+    id: 1, 
+    client: 'John Smith', 
+    service: 'Kitchen Renovation', 
+    amount: 2500, 
+    dueDate: '2025-04-25' 
+  },
+  { 
+    id: 2, 
+    client: 'Emma Johnson', 
+    service: 'Bathroom Remodel', 
+    amount: 1800, 
+    dueDate: '2025-04-29' 
+  },
+  { 
+    id: 3, 
+    client: 'Michael Brown', 
+    service: 'Landscaping Project', 
+    amount: 900, 
+    dueDate: '2025-05-02' 
+  },
+];
+
+const transactionHistory = [
+  {
+    id: 1,
+    client: 'Sarah Wilson',
+    service: 'Electrical Rewiring',
+    amount: 1250,
+    date: '2025-04-15',
+    paymentMethod: 'credit_card',
+    status: 'completed'
+  },
+  {
+    id: 2,
+    client: 'Robert Taylor',
+    service: 'Plumbing Service',
+    amount: 850,
+    date: '2025-04-12',
+    paymentMethod: 'bank_transfer',
+    status: 'processing'
+  },
+  {
+    id: 3,
+    client: 'Jennifer Davis',
+    service: 'Kitchen Renovation',
+    amount: 3200,
+    date: '2025-04-10',
+    paymentMethod: 'credit_card',
+    status: 'completed'
+  },
+  {
+    id: 4,
+    client: 'David Clark',
+    service: 'Roof Repair',
+    amount: 1800,
+    date: '2025-04-08',
+    paymentMethod: 'bank_transfer',
+    status: 'pending'
+  },
+  {
+    id: 5,
+    client: 'Amanda Lopez',
+    service: 'Yard Cleanup',
+    amount: 550,
+    date: '2025-04-05',
+    paymentMethod: 'credit_card',
+    status: 'completed'
+  }
+];
 
 const Money = () => {
   const [timeFrame, setTimeFrame] = useState("monthly");
