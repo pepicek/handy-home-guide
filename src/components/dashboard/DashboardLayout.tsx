@@ -18,7 +18,7 @@ import {
   PieChart,
   Sparkles,
   DollarSign,
-  BarChart4,
+  BarChart3,
   ListChecks,
   Menu
 } from "lucide-react";
@@ -84,7 +84,7 @@ const DashboardSidebar = () => {
     },
     {
       label: "Analytics",
-      icon: BarChart4,
+      icon: BarChart3,
       path: "/dashboard/analytics",
       active: location.pathname === "/dashboard/analytics"
     },

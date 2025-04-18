@@ -1,9 +1,24 @@
+
 import React from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { AlertCircle, Calendar, CheckCircle, ChevronRight, ClipboardList, DollarSign, Star, Sparkles, TrendingUp, Users } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
+import { 
+  AlertCircle, 
+  Calendar, 
+  CheckCircle, 
+  ChevronRight, 
+  ClipboardList, 
+  DollarSign, 
+  Star, 
+  Sparkles, 
+  TrendingUp, 
+  Users, 
+  BarChart3, 
+  UserCheck 
+} from "lucide-react";
 
 const Dashboard = () => {
   return (
@@ -111,7 +126,7 @@ const Dashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="h-[240px] flex items-center justify-center border rounded-md bg-gray-50">
-              <BarChart4 className="h-24 w-24 text-gray-300" />
+              <BarChart3 className="h-24 w-24 text-gray-300" />
             </div>
           </CardContent>
           <CardFooter>
