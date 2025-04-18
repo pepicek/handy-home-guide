@@ -1,4 +1,3 @@
-
 import { useParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -6,11 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Clock, DollarSign, Award, ShieldCheck, Users, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const SpecialOfferDetails = () => {
   const { id } = useParams();
   
-  // This would typically come from an API call using the id
   const offer = {
     id: 1,
     title: "Spring A/C Tune-Up Special",
@@ -84,9 +83,11 @@ const SpecialOfferDetails = () => {
                     </div>
                   </div>
 
-                  <Button className="w-full bg-anthracite hover:bg-anthracite/90 text-yellow-400">
-                    Book Now
-                  </Button>
+                  <Link to={`/book-now/${id}`}>
+                    <Button className="w-full bg-anthracite hover:bg-anthracite/90 text-yellow-400">
+                      Book Now
+                    </Button>
+                  </Link>
                   
                   <p className="text-sm text-center text-gray-500">
                     No payment required until service is complete
