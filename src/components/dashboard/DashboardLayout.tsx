@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
 import { LayoutDashboard, FileText, Calendar, Users, Settings, LogOut, Bell, MessageSquare, PieChart,
-  Sparkles, DollarSign, BarChart3, ListChecks, Menu, Crown, Coins, Download } from "lucide-react";
+  Sparkles, DollarSign, BarChart3, ListChecks, Menu, Crown, Coins, Download, LifeBuoy } from "lucide-react";
 
 export const DashboardLayout = () => {
   return (
@@ -92,6 +92,12 @@ const DashboardSidebar = () => {
       icon: Settings,
       path: "/dashboard/settings",
       active: location.pathname === "/dashboard/settings"
+    },
+    {
+      label: "Support",
+      icon: LifeBuoy,
+      path: "/dashboard/support",
+      active: location.pathname === "/dashboard/support"
     }
   ];
   

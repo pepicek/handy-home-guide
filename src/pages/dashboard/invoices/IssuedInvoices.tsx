@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,10 +17,9 @@ import {
   TableRow 
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Download, Eye, FileText, Filter, Plus, Search } from "lucide-react";
+import { Download, Eye, FileText, Filter, Plus, Search, FileEdit } from "lucide-react";
 import { Link } from "react-router-dom";
 
-// Sample data for demonstration
 const invoices = [
   {
     id: "INV-2025-042",
@@ -98,7 +96,6 @@ const IssuedInvoices = () => {
         </div>
       </div>
       
-      {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-4">
         <div className="relative flex-1">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500" />
@@ -131,7 +128,6 @@ const IssuedInvoices = () => {
         </div>
       </div>
       
-      {/* Invoices Table */}
       <div className="border rounded-lg overflow-hidden">
         <Table>
           <TableHeader className="bg-gray-50">
@@ -163,14 +159,16 @@ const IssuedInvoices = () => {
                     {invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)}
                   </Badge>
                 </TableCell>
-                <TableCell className="text-right">
+                <TableCell className="text-right space-x-2">
                   <Button variant="ghost" size="sm" asChild>
-                    <Link to={`/dashboard/invoices/${invoice.id}`}>
+                    <Link to={`/dashboard/invoices/${invoice.id}/preview`}>
                       <Eye className="h-4 w-4" />
                     </Link>
                   </Button>
-                  <Button variant="ghost" size="sm">
-                    <FileText className="h-4 w-4" />
+                  <Button variant="ghost" size="sm" asChild>
+                    <Link to={`/dashboard/invoices/${invoice.id}/edit`}>
+                      <FileEdit className="h-4 w-4" />
+                    </Link>
                   </Button>
                 </TableCell>
               </TableRow>

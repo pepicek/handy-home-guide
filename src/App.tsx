@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -66,6 +65,9 @@ import ListingsSettings from "./pages/dashboard/ListingsSettings";
 // New invoice pages
 import CreateInvoice from "./pages/dashboard/invoices/CreateInvoice";
 import IssuedInvoices from "./pages/dashboard/invoices/IssuedInvoices";
+import InvoicePreview from "./pages/dashboard/invoices/InvoicePreview";
+import InvoiceEdit from "./pages/dashboard/invoices/InvoiceEdit";
+import Support from "./pages/dashboard/Support";
 
 // New target pages
 import AnnualTarget from "./pages/dashboard/targets/AnnualTarget";
@@ -167,6 +169,8 @@ const App = () => (
             {/* New Invoice Routes */}
             <Route path="invoices/create" element={<CreateInvoice />} />
             <Route path="invoices" element={<IssuedInvoices />} />
+            <Route path="invoices/:id/preview" element={<InvoicePreview />} />
+            <Route path="invoices/:id/edit" element={<InvoiceEdit />} />
             
             {/* New Target Routes */}
             <Route path="targets/annual" element={<AnnualTarget />} />
@@ -174,6 +178,9 @@ const App = () => (
             
             {/* New Export Route */}
             <Route path="exports/earnings" element={<EarningsExport />} />
+
+            {/* Support Route */}
+            <Route path="support" element={<Support />} />
           </Route>
           
           <Route path="/client" element={<ClientDashboardLayout />}>
