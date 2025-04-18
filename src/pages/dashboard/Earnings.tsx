@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -31,7 +32,7 @@ import {
 import { 
   DollarSign, 
   Download, 
-  Calendar, 
+  CalendarIcon, // Renamed from Calendar to CalendarIcon to avoid conflict
   ArrowUpRight, 
   Wallet, 
   CreditCard,
@@ -58,6 +59,7 @@ import {
 } from "@/components/ui/popover";
 import { toast } from "sonner";
 
+// Define data arrays for charts and tables
 const monthlyEarnings = [
   { month: 'Jan', earnings: 3200 },
   { month: 'Feb', earnings: 4100 },
@@ -175,6 +177,11 @@ const Earnings = () => {
     new Date()
   ]);
   
+  // Define the missing variables for the progress circle chart
+  const totalEarnings = 65000; // Example value for total earnings so far
+  const projectedEarnings = 100000; // Example value for projected earnings target
+  const percentToTarget = (totalEarnings / projectedEarnings) * 100;
+  
   const handleExport = () => {
     toast.success("Exporting earnings data...");
     // In a real app, this would trigger the export functionality
@@ -193,7 +200,7 @@ const Earnings = () => {
           <Popover>
             <PopoverTrigger asChild>
               <Button variant="outline" className="flex items-center gap-2">
-                <Calendar className="h-4 w-4" />
+                <CalendarIcon className="h-4 w-4" />
                 <span>
                   {dateRange[0] ? format(dateRange[0], "MMM d, yyyy") : "Start"} -{" "}
                   {dateRange[1] ? format(dateRange[1], "MMM d, yyyy") : "End"}
@@ -202,7 +209,6 @@ const Earnings = () => {
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="end">
               <Calendar
-                initialFocus
                 mode="range"
                 defaultMonth={dateRange[0]}
                 selected={{
