@@ -6,13 +6,16 @@ import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Search, DollarSign, Clock, Calendar, MessageCircle, ExternalLink } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 
 const QuoteRequests = () => {
+  const navigate = useNavigate();
+  
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold text-anthracite">Quote Requests</h1>
-        <Button>Request New Quote</Button>
+        <Button onClick={() => navigate("/client/quotes/new")}>Request New Quote</Button>
       </div>
       
       <Card>
@@ -32,6 +35,7 @@ const QuoteRequests = () => {
           <div className="space-y-4">
             {[
               {
+                id: "1",
                 project: "Home Renovation",
                 provider: "Elite Home Renovations",
                 initials: "EH",
@@ -41,6 +45,7 @@ const QuoteRequests = () => {
                 description: "Complete renovation of living room and kitchen area"
               },
               {
+                id: "2",
                 project: "Garden Landscaping",
                 provider: "Green Gardens Pro",
                 initials: "GG",
@@ -50,6 +55,7 @@ const QuoteRequests = () => {
                 description: "Front yard redesign with new plants and irrigation system"
               },
               {
+                id: "3",
                 project: "Bathroom Remodel",
                 provider: "Premier Plumbing",
                 initials: "PP",
@@ -93,12 +99,21 @@ const QuoteRequests = () => {
                   </div>
                 </div>
                 
-                <div className="flex gap-2 w-full md:w-auto">
-                  <Button variant="outline" size="sm" className="flex-1 md:flex-initial">
+                <div className="flex gap-2 w-full md:w-auto pt-2 md:pt-0">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="flex-1 md:flex-initial"
+                    onClick={() => navigate(`/client/quotes/${quote.id}/message`)}
+                  >
                     <MessageCircle className="w-4 h-4 mr-2" />
                     Message
                   </Button>
-                  <Button size="sm" className="flex-1 md:flex-initial">
+                  <Button 
+                    size="sm" 
+                    className="flex-1 md:flex-initial"
+                    onClick={() => navigate(`/client/quotes/${quote.id}`)}
+                  >
                     <ExternalLink className="w-4 h-4 mr-2" />
                     View Details
                   </Button>

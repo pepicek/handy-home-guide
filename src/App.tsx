@@ -81,6 +81,11 @@ import NewProject from "./pages/client/projects/NewProject";
 import ProjectDetails from "./pages/client/projects/ProjectDetails";
 import EditProject from "./pages/client/projects/EditProject";
 
+// Quote related pages
+import RequestNewQuote from "./pages/client/quotes/RequestNewQuote";
+import QuoteDetails from "./pages/client/quotes/QuoteDetails";
+import MessageProvider from "./pages/client/quotes/MessageProvider";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -152,6 +157,9 @@ const App = () => (
             <Route path="projects/:id" element={<ProjectDetails />} />
             <Route path="projects/:id/edit" element={<EditProject />} />
             <Route path="quotes" element={<QuoteRequests />} />
+            <Route path="quotes/new" element={<RequestNewQuote />} />
+            <Route path="quotes/:id" element={<QuoteDetails />} />
+            <Route path="quotes/:id/message" element={<MessageProvider />} />
             <Route path="reviews" element={<ClientReviews />} />
             <Route path="finance" element={<FinancialSummary />} />
             <Route path="search-history" element={<SearchHistory />} />

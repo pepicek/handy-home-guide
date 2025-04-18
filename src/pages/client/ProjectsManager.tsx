@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -23,15 +22,20 @@ import {
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { useNavigate } from "react-router-dom";
 
 const ProjectsManager = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
   
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-2 sm:space-y-0">
         <h1 className="text-3xl font-bold text-anthracite">My Projects</h1>
-        <Button className="bg-anthracite hover:bg-anthracite/90 text-yellow-400">
+        <Button 
+          className="bg-anthracite hover:bg-anthracite/90 text-yellow-400"
+          onClick={() => navigate("/client/projects/new")}
+        >
           <Plus className="mr-2 h-4 w-4" /> Create New Project
         </Button>
       </div>
@@ -214,6 +218,8 @@ const PlanningProjectsList = () => {
 };
 
 const ProjectCard = ({ project }) => {
+  const navigate = useNavigate();
+  
   return (
     <Card className="overflow-hidden">
       <CardHeader className="pb-2">
@@ -303,13 +309,23 @@ const ProjectCard = ({ project }) => {
           </div>
         </div>
       </CardContent>
-      <CardFooter className="border-t bg-gray-50 justify-between">
+      <CardFooter className="border-t bg-gray-50 justify-between pt-4 pb-4">
         <div className="flex gap-2">
-          <Button variant="outline" size="sm" className="h-8">
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="h-8"
+            onClick={() => navigate(`/client/projects/${project.id}/edit`)}
+          >
             <Edit className="h-4 w-4 mr-1" />
             Edit
           </Button>
-          <Button variant="outline" size="sm" className="h-8">
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="h-8"
+            onClick={() => navigate(`/client/projects/${project.id}`)}
+          >
             <FileText className="h-4 w-4 mr-1" />
             Details
           </Button>
@@ -319,7 +335,11 @@ const ProjectCard = ({ project }) => {
             <Trash2 className="h-4 w-4 mr-1" />
             Delete
           </Button>
-          <Button size="sm" className="h-8 bg-yellow-500 hover:bg-yellow-600 text-anthracite">
+          <Button 
+            size="sm" 
+            className="h-8 bg-yellow-500 hover:bg-yellow-600 text-anthracite"
+            onClick={() => navigate(`/client/projects/${project.id}`)}
+          >
             <ArrowUpRight className="h-4 w-4 mr-1" />
             Manage
           </Button>
