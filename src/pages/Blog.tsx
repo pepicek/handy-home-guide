@@ -1,9 +1,9 @@
-
 import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
 
 const blogPosts = [
   {
@@ -71,7 +71,7 @@ const Blog = () => {
                         {post.category}
                       </Badge>
                       <h2 className="text-xl font-semibold text-anthracite mb-3 hover:text-yellow-600 transition-colors">
-                        <a href="#">{post.title}</a>
+                        <Link to={`/blog/${post.id}`}>{post.title}</Link>
                       </h2>
                       <p className="text-anthracite/70 mb-4 line-clamp-2">
                         {post.excerpt}

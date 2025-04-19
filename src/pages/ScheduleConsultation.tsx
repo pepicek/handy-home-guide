@@ -1,4 +1,3 @@
-
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -34,6 +33,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Card } from "@/components/ui/card";
+import { navigate } from "react-router-dom";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -79,6 +79,7 @@ const ScheduleConsultation = () => {
       title: "Consultation Scheduled!",
       description: `Your consultation is set for ${format(values.date, "MMMM d, yyyy")} at ${values.timeSlot}. We'll send you a confirmation email.`,
     });
+    navigate("/consultation/success");
   }
   
   const timeSlots = [

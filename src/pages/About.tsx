@@ -1,4 +1,3 @@
-
 import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -11,6 +10,7 @@ import {
   Award,
   GraduationCap,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const About = () => {
   const values = [
@@ -130,19 +130,23 @@ const About = () => {
               ready to grow your business, we're here to help you succeed.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                size="lg"
-                className="bg-anthracite hover:bg-anthracite/90 text-yellow-400 hover:scale-105 transition-transform duration-300"
-              >
-                Find a Pro
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-anthracite/30 hover:bg-yellow-500/20 hover:scale-105 transition-transform duration-300"
-              >
-                Become a Provider
-              </Button>
+              <Link to="/search">
+                <Button
+                  size="lg"
+                  className="bg-anthracite hover:bg-anthracite/90 text-yellow-400 hover:scale-105 transition-transform duration-300"
+                >
+                  Find a Pro
+                </Button>
+              </Link>
+              <Link to="/register/provider">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="border-anthracite/30 hover:bg-yellow-500/20 hover:scale-105 transition-transform duration-300"
+                >
+                  Become a Provider
+                </Button>
+              </Link>
             </div>
           </div>
         </section>

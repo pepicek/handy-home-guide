@@ -1,4 +1,3 @@
-
 import { RouteObject } from "react-router-dom";
 import Index from "@/pages/Index";
 import IndexAlt1 from "@/pages/IndexAlt1";
@@ -46,6 +45,9 @@ import CookiePolicy from "@/pages/legal/CookiePolicy";
 import HomepageVariation1 from "@/pages/HomepageVariation1";
 import HomepageVariation2 from "@/pages/HomepageVariation2";
 import HomepageVariation3 from "@/pages/HomepageVariation3";
+import BlogPost from "@/pages/BlogPost";
+import ConsultationAccepted from "@/pages/ConsultationAccepted";
+import JobApplication from "@/pages/JobApplication";
 
 export const publicRoutes: RouteObject[] = [
   { path: "/", element: <Index /> },
@@ -89,5 +91,8 @@ export const publicRoutes: RouteObject[] = [
   { path: "/reviews", element: <Reviews /> },
   { path: "/providers/benefits", element: <ProviderBenefits /> },
   { path: "/providers/schedule-consultation", element: <ScheduleConsultation /> },
-  { path: "*", element: <NotFound /> }
+  { path: "*", element: <NotFound /> },
+  { path: "/blog/:id", element: <BlogPost /> },
+  { path: "/consultation/success", element: <ConsultationAccepted /> },
+  { path: "/careers/apply/:id", element: <JobApplication /> },
 ];

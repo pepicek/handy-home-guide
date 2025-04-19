@@ -69,9 +69,11 @@ const Careers = () => {
                           <Badge variant="outline">{job.type}</Badge>
                         </div>
                       </div>
-                      <Button className="mt-4 md:mt-0 bg-yellow-500 hover:bg-yellow-600 text-anthracite">
-                        Apply Now
-                      </Button>
+                      <Link to={`/careers/apply/${index + 1}`}>
+                        <Button className="mt-4 md:mt-0 bg-yellow-500 hover:bg-yellow-600 text-anthracite">
+                          Apply Now
+                        </Button>
+                      </Link>
                     </div>
                     <p className="text-anthracite/70">{job.description}</p>
                   </CardContent>
@@ -91,22 +93,25 @@ const Careers = () => {
               to make a real impact in the home services industry.
             </p>
             <div className="grid md:grid-cols-3 gap-8">
-              <div>
-                <h3 className="font-semibold text-lg mb-2">Competitive Pay</h3>
+              <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+                <h3 className="font-semibold text-lg mb-3 text-yellow-600">Competitive Pay</h3>
                 <p className="text-anthracite/70">
-                  Salary, equity, and comprehensive benefits package
+                  Industry-leading compensation package including salary, equity, 
+                  and comprehensive health benefits
                 </p>
               </div>
-              <div>
-                <h3 className="font-semibold text-lg mb-2">Remote-First</h3>
+              <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+                <h3 className="font-semibold text-lg mb-3 text-yellow-600">Remote-First</h3>
                 <p className="text-anthracite/70">
-                  Work from anywhere in the world
+                  Work from anywhere with flexible hours and a supportive 
+                  global team culture
                 </p>
               </div>
-              <div>
-                <h3 className="font-semibold text-lg mb-2">Growth</h3>
+              <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+                <h3 className="font-semibold text-lg mb-3 text-yellow-600">Growth</h3>
                 <p className="text-anthracite/70">
-                  Professional development and learning opportunities
+                  Regular learning opportunities, mentorship programs, and 
+                  clear career progression paths
                 </p>
               </div>
             </div>
