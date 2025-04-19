@@ -18,6 +18,7 @@ import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useAuth } from "@/context/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
 
 const formSchema = z.object({
   businessName: z.string().min(2, "Business name must be at least 2 characters"),
@@ -42,7 +43,6 @@ const RegisterProvider = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
-  const { signUp } = useAuth();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -62,16 +62,34 @@ const RegisterProvider = () => {
       const nameParts = data.contactName.split(" ");
       const firstName = nameParts[0];
       const lastName = nameParts.slice(1).join(" ");
-
-      console.log(data);
       
-      await signUp(
-        data.email,
-        data.password,
+      console.log("Submitting provider registration:", {
+        email: data.email,
         firstName,
-        lastName || "",
-        "provider"
-      );
+        lastName,
+        role: 'provider',
+        businessName: data.businessName,
+        phone: data.phone
+      });
+      
+      // Direct Supabase signup approach
+      const { data: authData, error } = await supabase.auth.signUp({
+        email: data.email,
+        password: data.password,
+        options: {
+          data: {
+            first_name: firstName,
+            last_name: lastName || "",
+            role: 'provider',
+            business_name: data.businessName,
+            phone: data.phone
+          },
+        }
+      });
+      
+      if (error) {
+        throw error;
+      }
       
       toast({
         title: "Registration Successful!",
@@ -80,6 +98,7 @@ const RegisterProvider = () => {
       
       navigate("/register/provider/onboarding");
     } catch (error: any) {
+      console.error("Provider registration error:", error);
       toast({
         title: "Registration Failed",
         description: error.message,

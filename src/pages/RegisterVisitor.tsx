@@ -13,6 +13,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { toast } from "sonner";
 import { useAuth } from "@/context/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
 
 const formSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters"),
@@ -45,16 +46,26 @@ const RegisterVisitor = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     try {
-      await signUp(
-        values.email, 
-        values.password, 
-        values.firstName, 
-        values.lastName, 
-        "user"
-      );
+      const { data, error } = await supabase.auth.signUp({
+        email: values.email,
+        password: values.password,
+        options: {
+          data: {
+            first_name: values.firstName,
+            last_name: values.lastName,
+            role: 'user'
+          },
+        }
+      });
+      
+      if (error) {
+        throw error;
+      }
+      
       toast.success("Registration successful!");
       navigate("/register/visitor/questionnaire");
     } catch (error: any) {
+      console.error("Registration error:", error);
       toast.error(`Registration failed: ${error.message}`);
     } finally {
       setIsSubmitting(false);
