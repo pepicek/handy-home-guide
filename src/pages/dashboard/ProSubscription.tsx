@@ -12,6 +12,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Check, Crown, Star, Zap } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const plans = [
   {
@@ -67,10 +68,6 @@ const ProSubscription = () => {
     toast.success(`Starting upgrade process to ${planName} plan`);
     // In a real app, this would navigate to a payment page
     navigate("/dashboard/settings");
-  };
-
-  const handleScheduleConsultation = () => {
-    toast.success("Consultation request submitted! Our team will contact you soon.");
   };
 
   return (
@@ -130,17 +127,25 @@ const ProSubscription = () => {
               </ul>
             </CardContent>
             <CardFooter>
-              <Button 
-                className={`w-full ${
-                  plan.highlighted
-                    ? "bg-yellow-500 hover:bg-yellow-600 text-anthracite"
-                    : "bg-anthracite hover:bg-anthracite/90 text-white"
-                }`}
-                onClick={() => plan.name !== "Basic" && handleUpgrade(plan.name)}
-                disabled={plan.name === "Basic"}
-              >
-                {plan.name === "Basic" ? "Current Plan" : `Upgrade to ${plan.name}`}
-              </Button>
+              {plan.name === "Basic" ? (
+                <Button 
+                  className="w-full bg-gray-200 hover:bg-gray-300 text-gray-600 cursor-not-allowed"
+                  disabled={true}
+                >
+                  Current Plan
+                </Button>
+              ) : (
+                <Button 
+                  className={`w-full ${
+                    plan.highlighted
+                      ? "bg-yellow-500 hover:bg-yellow-600 text-anthracite"
+                      : "bg-anthracite hover:bg-anthracite/90 text-white"
+                  }`}
+                  onClick={() => handleUpgrade(plan.name)}
+                >
+                  Upgrade to {plan.name}
+                </Button>
+              )}
             </CardFooter>
           </Card>
         ))}
@@ -153,13 +158,14 @@ const ProSubscription = () => {
         <p className="text-gray-600 mb-6">
           Schedule a call with our team to discuss your needs and find the perfect solution for your business.
         </p>
-        <Button 
-          variant="outline" 
-          className="border-yellow-400 text-anthracite hover:bg-yellow-50"
-          onClick={handleScheduleConsultation}
-        >
-          Schedule Consultation
-        </Button>
+        <Link to="/providers/schedule-consultation">
+          <Button 
+            variant="outline" 
+            className="border-yellow-400 text-anthracite hover:bg-yellow-50"
+          >
+            Schedule Consultation
+          </Button>
+        </Link>
       </div>
     </div>
   );

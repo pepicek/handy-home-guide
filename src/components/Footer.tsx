@@ -118,11 +118,11 @@ const Footer = () => {
           <div>
             <h3 className="font-bold text-lg mb-4 text-white">For Providers</h3>
             <ul className="space-y-2">
-              <li><Link to="/providers/join" className="text-gray-400 hover:text-yellow-400">Join as a Pro</Link></li>
-              <li><Link to="/providers/pricing" className="text-gray-400 hover:text-yellow-400">Pricing</Link></li>
-              <li><Link to="/providers/resources" className="text-gray-400 hover:text-yellow-400">Resources</Link></li>
-              <li><Link to="/providers/success-stories" className="text-gray-400 hover:text-yellow-400">Success Stories</Link></li>
-              <li><Link to="/providers/help" className="text-gray-400 hover:text-yellow-400">Help & Support</Link></li>
+              <li><Link to="/register/provider" className="text-gray-400 hover:text-yellow-400">Join as a Pro</Link></li>
+              <li><Link to="/pricing" className="text-gray-400 hover:text-yellow-400">Pricing</Link></li>
+              <li><Link to="/resources" className="text-gray-400 hover:text-yellow-400">Resources</Link></li>
+              <li><Link to="/success-stories" className="text-gray-400 hover:text-yellow-400">Success Stories</Link></li>
+              <li><Link to="/help-support" className="text-gray-400 hover:text-yellow-400">Help & Support</Link></li>
             </ul>
           </div>
 

@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
@@ -15,6 +16,7 @@ const offers = [
     timeframe: "Same-week service",
     popularity: "Booked 24 times this week",
     description: "Complete air conditioning system check, cleaning, and tune-up with certified technicians. Includes filter replacement and performance test.",
+    image: "https://images.unsplash.com/photo-1527576539890-dfa815648363?auto=format&fit=crop&q=80&w=500&h=220"
   },
   {
     id: 2,
@@ -26,6 +28,7 @@ const offers = [
     timeframe: "1-2 day service",
     popularity: "Booked 18 times this week",
     description: "Full kitchen plumbing service including sink, garbage disposal, and dishwasher hookup. Includes inspection of existing pipes.",
+    image: "https://images.unsplash.com/photo-1452960962994-acf4fd70b632?auto=format&fit=crop&q=80&w=500&h=220"
   },
   {
     id: 3,
@@ -37,6 +40,7 @@ const offers = [
     timeframe: "Available next week",
     popularity: "Booked 31 times this month",
     description: "Professional interior painting with premium paint. Includes wall preparation, repairs of minor damages, and complete cleanup.",
+    image: "https://images.unsplash.com/photo-1518877593221-1f28583780b4?auto=format&fit=crop&q=80&w=500&h=220"
   },
 ];
 
@@ -54,12 +58,14 @@ const SpecialOffers = () => {
             </p>
           </div>
           
-          <Button 
-            variant="ghost"
-            className="text-anthracite hover:bg-yellow-50 font-medium hidden md:flex mt-4 md:mt-0"
-          >
-            View All Offers <ArrowRight className="ml-2 w-4 h-4" />
-          </Button>
+          <Link to="/special-offers">
+            <Button 
+              variant="ghost"
+              className="text-anthracite hover:bg-yellow-50 font-medium hidden md:flex mt-4 md:mt-0"
+            >
+              View All Offers <ArrowRight className="ml-2 w-4 h-4" />
+            </Button>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -70,7 +76,7 @@ const SpecialOffers = () => {
             >
               <div className="w-full h-48 bg-gray-100 relative overflow-hidden">
                 <img
-                  src={`https://images.unsplash.com/photo-1${offer.id + 530073118558}-9552e5299b09?auto=format&fit=crop&q=80&w=500&h=220`}
+                  src={offer.image}
                   alt={offer.title}
                   className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-300"
                 />
@@ -120,21 +126,25 @@ const SpecialOffers = () => {
                     View Details
                   </Button>
                 </Link>
-                <Button size="sm" className="bg-yellow-400 hover:bg-yellow-500 text-anthracite font-medium">
-                  Book Now
-                </Button>
+                <Link to={`/book-now/${offer.id}`}>
+                  <Button size="sm" className="bg-yellow-400 hover:bg-yellow-500 text-anthracite font-medium">
+                    Book Now
+                  </Button>
+                </Link>
               </CardFooter>
             </Card>
           ))}
         </div>
         
         <div className="text-center mt-8 md:hidden">
-          <Button 
-            variant="outline"
-            className="border-yellow-300 text-anthracite hover:bg-yellow-50 font-medium"
-          >
-            View All Offers <ArrowRight className="ml-2 w-4 h-4" />
-          </Button>
+          <Link to="/special-offers">
+            <Button 
+              variant="outline"
+              className="border-yellow-300 text-anthracite hover:bg-yellow-50 font-medium"
+            >
+              View All Offers <ArrowRight className="ml-2 w-4 h-4" />
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

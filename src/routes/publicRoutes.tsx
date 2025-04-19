@@ -27,6 +27,15 @@ import Careers from "@/pages/Careers";
 import Press from "@/pages/Press";
 import Contact from "@/pages/Contact";
 import Blog from "@/pages/Blog";
+import Pricing from "@/pages/Pricing";
+import Resources from "@/pages/Resources";
+import SuccessStories from "@/pages/SuccessStories";
+import HelpSupport from "@/pages/HelpSupport";
+import SafetyTrust from "@/pages/SafetyTrust";
+import Reviews from "@/pages/Reviews";
+import ProviderBenefits from "@/pages/ProviderBenefits";
+import NewsDetails from "@/pages/NewsDetails";
+import ScheduleConsultation from "@/pages/ScheduleConsultation";
 
 // Legal pages
 import TermsOfService from "@/pages/legal/TermsOfService";
@@ -55,6 +64,7 @@ export const publicRoutes: RouteObject[] = [
   { path: "/about", element: <About /> },
   { path: "/careers", element: <Careers /> },
   { path: "/press", element: <Press /> },
+  { path: "/press/news/:id", element: <NewsDetails /> },
   { path: "/contact", element: <Contact /> },
   { path: "/blog", element: <Blog /> },
   { path: "/terms", element: <TermsOfService /> },
@@ -71,5 +81,13 @@ export const publicRoutes: RouteObject[] = [
   { path: "/search/projects", element: <ProjectSearch /> },
   { path: "/search/market", element: <MarketResearch /> },
   { path: "/categories", element: <AllCategories /> },
+  { path: "/pricing", element: <Pricing /> },
+  { path: "/resources", element: <Resources /> },
+  { path: "/success-stories", element: <SuccessStories /> },
+  { path: "/help-support", element: <HelpSupport /> },
+  { path: "/safety", element: <SafetyTrust /> },
+  { path: "/reviews", element: <Reviews /> },
+  { path: "/providers/benefits", element: <ProviderBenefits /> },
+  { path: "/providers/schedule-consultation", element: <ScheduleConsultation /> },
   { path: "*", element: <NotFound /> }
 ];

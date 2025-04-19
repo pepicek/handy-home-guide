@@ -30,6 +30,7 @@ import CreateTicket from "@/pages/dashboard/support/CreateTicket";
 import TicketDetails from "@/pages/dashboard/support/TicketDetails";
 import ProSubscription from "@/pages/dashboard/ProSubscription";
 import CheckSchedule from "@/pages/CheckSchedule";
+import ScheduleConsultation from "@/pages/ScheduleConsultation";
 
 export const dashboardRoutes: RouteObject[] = [{
   path: "/dashboard",
@@ -45,6 +46,7 @@ export const dashboardRoutes: RouteObject[] = [{
     { path: "earnings", element: <Earnings /> },
     { path: "settings", element: <Settings /> },
     { path: "pro", element: <ProSubscription /> },
+    { path: "pro/schedule-consultation", element: <ScheduleConsultation /> },
     { path: "clients/:id", element: <ClientProfile /> },
     { path: "clients/:id/history", element: <ServiceHistory /> },
     { path: "appointments/schedule/:id", element: <CheckSchedule /> },
