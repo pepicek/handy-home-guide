@@ -33,6 +33,7 @@ export const ProviderRegistrationForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [debugInfo, setDebugInfo] = useState<any>(null);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -48,12 +49,15 @@ export const ProviderRegistrationForm = () => {
 
   async function onSubmit(values: FormValues) {
     setIsSubmitting(true);
+    setDebugInfo(null);
+    
     try {
+      console.log("Provider registration - Starting signup process");
       const nameParts = values.contactName.split(" ");
       const firstName = nameParts[0];
       const lastName = nameParts.slice(1).join(" ");
       
-      const { data, error } = await supabase.auth.signUp({
+      const userData = {
         email: values.email,
         password: values.password,
         options: {
@@ -65,14 +69,40 @@ export const ProviderRegistrationForm = () => {
             phone: values.phone
           },
         }
-      });
+      };
       
-      if (error) throw error;
+      console.log("Provider registration - User data prepared:", JSON.stringify({
+        email: userData.email,
+        data: userData.options.data
+      }));
       
+      const { data, error } = await supabase.auth.signUp(userData);
+      
+      if (error) {
+        console.error("Provider registration error details:", error);
+        setDebugInfo({
+          errorCode: error.code,
+          errorName: error.name,
+          errorMessage: error.message,
+          errorStack: error.stack,
+          timestamp: new Date().toISOString()
+        });
+        throw error;
+      }
+      
+      console.log("Provider registration successful, data:", data);
       toast.success("Registration successful!");
       navigate("/register/provider/onboarding");
     } catch (error: any) {
       console.error("Provider registration error:", error);
+      const errorDetails = {
+        message: error.message || "Unknown error",
+        name: error?.name || "Error",
+        code: error?.code,
+        details: error?.details || {},
+      };
+      console.error("Detailed error information:", errorDetails);
+      setDebugInfo(errorDetails);
       toast.error(`Registration failed: ${error.message}`);
     } finally {
       setIsSubmitting(false);
@@ -223,6 +253,16 @@ export const ProviderRegistrationForm = () => {
           </Button>
         </form>
       </Form>
+      
+      {/* Debug Information Section */}
+      {debugInfo && (
+        <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-md">
+          <h3 className="text-sm font-medium text-red-800">Debug Information</h3>
+          <div className="mt-1 max-h-40 overflow-auto text-xs text-red-700 font-mono">
+            <pre>{JSON.stringify(debugInfo, null, 2)}</pre>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
