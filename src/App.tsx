@@ -104,6 +104,14 @@ import TicketsList from "./pages/dashboard/support/TicketsList";
 import CreateTicket from "./pages/dashboard/support/CreateTicket";
 import TicketDetails from "./pages/dashboard/support/TicketDetails";
 
+import Careers from "./pages/Careers";
+import Press from "./pages/Press";
+import Contact from "./pages/Contact";
+import Blog from "./pages/Blog";
+import TermsOfService from "./pages/TermsOfService";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import CookiePolicy from "./pages/CookiePolicy";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -129,6 +137,13 @@ const App = () => (
           <Route path="/how-it-works" element={<HowItWorksPage />} />
           <Route path="/providers" element={<Providers />} />
           <Route path="/about" element={<About />} />
+          <Route path="/careers" element={<Careers />} />
+          <Route path="/press" element={<Press />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/terms" element={<TermsOfService />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/cookies" element={<CookiePolicy />} />
           <Route path="/book-now/:id" element={<BookNow />} />
           <Route path="/profile/:id" element={<ViewProfile />} />
           <Route path="/schedule/:id" element={<CheckSchedule />} />
