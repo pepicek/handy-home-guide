@@ -32,9 +32,15 @@ import ProSubscription from "@/pages/dashboard/ProSubscription";
 import CheckSchedule from "@/pages/CheckSchedule";
 import ScheduleConsultation from "@/pages/ScheduleConsultation";
 
+// Import SuperAdmin components
+import SuperAdminDashboard from "@/pages/dashboard/superadmin/SuperAdminDashboard";
+
+// Import PrivateRoute component for route protection
+import { PrivateRoute } from "@/components/auth/PrivateRoute";
+
 export const dashboardRoutes: RouteObject[] = [{
   path: "/dashboard",
-  element: <DashboardLayout />,
+  element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
   children: [
     { path: "", element: <Dashboard /> },
     { path: "services", element: <Services /> },
@@ -63,6 +69,12 @@ export const dashboardRoutes: RouteObject[] = [{
     { path: "support", element: <Support /> },
     { path: "support/tickets", element: <TicketsList /> },
     { path: "support/tickets/new", element: <CreateTicket /> },
-    { path: "support/tickets/:ticketId", element: <TicketDetails /> }
+    { path: "support/tickets/:ticketId", element: <TicketDetails /> },
+    
+    // SuperAdmin routes (protected with additional role checks)
+    { 
+      path: "admin", 
+      element: <PrivateRoute requiresAdmin={true}><SuperAdminDashboard /></PrivateRoute> 
+    },
   ]
 }];

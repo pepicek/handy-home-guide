@@ -1,12 +1,17 @@
+
 import React from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Shield } from "lucide-react";
+import { Shield, Lock, LogIn } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
+import { Link } from "react-router-dom";
+import { useAuth } from "@/context/AuthContext";
 
 const SecuritySettings = () => {
+  const { isAdmin, isSuperAdmin } = useAuth();
+
   return (
     <Card>
       <CardHeader>
@@ -63,6 +68,30 @@ const SecuritySettings = () => {
               <h4 className="font-medium">Account Control</h4>
               <Button variant="destructive">Deactivate Account</Button>
             </div>
+
+            {(isAdmin || isSuperAdmin) && (
+              <>
+                <Separator />
+                
+                <div className="space-y-4">
+                  <h4 className="font-medium">Admin Access</h4>
+                  <div className="p-4 border rounded-md bg-yellow-50">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium">Admin Dashboard</p>
+                        <p className="text-sm text-gray-600">Access administration controls</p>
+                      </div>
+                      <Link to="/dashboard/admin">
+                        <Button variant="outline" className="bg-white flex gap-2">
+                          <Lock className="h-4 w-4" />
+                          Admin Panel
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </CardContent>
