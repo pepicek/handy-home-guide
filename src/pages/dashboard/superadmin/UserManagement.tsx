@@ -9,6 +9,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { Plus, Search, Edit, Trash2, UserPlus } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/context/AuthContext";
 
 type User = {
   id: string;
@@ -20,6 +21,8 @@ type User = {
   created_at: string;
 };
 
+type UserRole = 'user' | 'provider' | 'admin' | 'superadmin';
+
 const UserManagement = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -28,6 +31,7 @@ const UserManagement = () => {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const { toast } = useToast();
+  const { user: currentUser } = useAuth();
 
   useEffect(() => {
     fetchUsers();
@@ -39,7 +43,9 @@ const UserManagement = () => {
       let query = supabase.from("profiles").select("*");
       
       if (filterRole) {
-        query = query.eq("role", filterRole);
+        // Type assertion to ensure filterRole is a valid UserRole when it's not null
+        const role = filterRole as UserRole;
+        query = query.eq("role", role);
       }
 
       const { data, error } = await query;
@@ -58,7 +64,7 @@ const UserManagement = () => {
   };
 
   const handleDeleteUser = async () => {
-    if (!selectedUser) return;
+    if (!selectedUser || !currentUser) return;
     
     try {
       const { error } = await supabase.auth.admin.deleteUser(selectedUser.id);
@@ -70,8 +76,9 @@ const UserManagement = () => {
         description: `${selectedUser.email} has been successfully deleted.`
       });
       
-      // Log the activity
+      // Log the activity with the required user_id field
       await supabase.from("admin_activity_log").insert({
+        user_id: currentUser.id,
         action: "DELETE",
         entity_type: "user",
         entity_id: selectedUser.id,

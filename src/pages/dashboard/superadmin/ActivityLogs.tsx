@@ -4,6 +4,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Activity, User } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
+import { Json } from "@/integrations/supabase/types";
 
 type ActivityLog = {
   id: string;
@@ -11,19 +13,20 @@ type ActivityLog = {
   action: string;
   entity_type: string;
   entity_id: string | null;
-  details: any;
+  details: Json | null;
   created_at: string;
   user?: {
     email: string;
     first_name: string | null;
     last_name: string | null;
-  };
+  } | null;
 };
 
 const ActivityLogs = () => {
   const [logs, setLogs] = useState<ActivityLog[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
+  const { user: currentUser } = useAuth();
 
   useEffect(() => {
     fetchLogs();
@@ -32,17 +35,34 @@ const ActivityLogs = () => {
   const fetchLogs = async () => {
     setIsLoading(true);
     try {
-      const { data, error } = await supabase
+      // First fetch the logs without the join
+      const { data: logsData, error: logsError } = await supabase
         .from("admin_activity_log")
-        .select(`
-          *,
-          user:user_id(email, first_name, last_name)
-        `)
+        .select("*")
         .order("created_at", { ascending: false })
         .limit(100);
         
-      if (error) throw error;
-      setLogs(data || []);
+      if (logsError) throw logsError;
+      
+      // Then fetch user data separately for each log
+      if (logsData) {
+        const logsWithUserData: ActivityLog[] = [];
+        
+        for (const log of logsData) {
+          const { data: userData, error: userError } = await supabase
+            .from("profiles")
+            .select("email, first_name, last_name")
+            .eq("id", log.user_id)
+            .single();
+          
+          logsWithUserData.push({
+            ...log,
+            user: userError ? null : userData
+          });
+        }
+        
+        setLogs(logsWithUserData);
+      }
     } catch (error: any) {
       toast({
         title: "Error fetching logs",
