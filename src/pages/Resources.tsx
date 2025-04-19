@@ -1,4 +1,3 @@
-
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -36,7 +35,7 @@ const Resources = () => {
                 <div className="grid gap-6 md:grid-cols-2">
                   <Card>
                     <CardHeader>
-                      <CardTitle>Finding the Right Service Provider</CardTitle>
+                      <CardTitle className="text-lg font-semibold">Finding the Right Service Provider</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <ul className="space-y-4">

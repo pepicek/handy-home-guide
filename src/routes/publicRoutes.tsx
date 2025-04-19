@@ -35,13 +35,13 @@ import Reviews from "@/pages/Reviews";
 import ProviderBenefits from "@/pages/ProviderBenefits";
 import NewsDetails from "@/pages/NewsDetails";
 import ScheduleConsultation from "@/pages/ScheduleConsultation";
+import GuidedSearch from "@/pages/GuidedSearch";
+import ApplicationSuccess from "@/pages/ApplicationSuccess";
 
-// Legal pages
 import TermsOfService from "@/pages/legal/TermsOfService";
 import PrivacyPolicy from "@/pages/legal/PrivacyPolicy";
 import CookiePolicy from "@/pages/legal/CookiePolicy";
 
-// Homepage variations
 import HomepageVariation1 from "@/pages/HomepageVariation1";
 import HomepageVariation2 from "@/pages/HomepageVariation2";
 import HomepageVariation3 from "@/pages/HomepageVariation3";
@@ -95,4 +95,6 @@ export const publicRoutes: RouteObject[] = [
   { path: "/blog/:id", element: <BlogPost /> },
   { path: "/consultation/success", element: <ConsultationAccepted /> },
   { path: "/careers/apply/:id", element: <JobApplication /> },
+  { path: "/guided-search", element: <GuidedSearch /> },
+  { path: "/application-success", element: <ApplicationSuccess /> },
 ];

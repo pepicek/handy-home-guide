@@ -1,10 +1,8 @@
-
 import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useParams } from "react-router-dom";
 
-// Import the blog posts data from a shared location
 const blogPosts = [
   {
     id: 1,
@@ -114,6 +112,7 @@ const blogPosts = [
 const BlogPost = () => {
   const { id } = useParams();
   const post = blogPosts.find((post) => post.id === Number(id));
+  const relatedPosts = blogPosts.filter(p => p.id !== Number(id)).slice(0, 3);
 
   if (!post) {
     return null;
@@ -146,6 +145,31 @@ const BlogPost = () => {
             </div>
           </div>
         </article>
+
+        <section className="max-w-4xl mx-auto px-4 pb-12">
+          <h2 className="text-2xl font-bold mb-6">Related Articles</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            {relatedPosts.map((relatedPost) => (
+              <Link 
+                key={relatedPost.id} 
+                to={`/blog/${relatedPost.id}`}
+                className="group"
+              >
+                <div className="aspect-video mb-4">
+                  <img 
+                    src={relatedPost.image} 
+                    alt={relatedPost.title}
+                    className="object-cover w-full h-full rounded-lg"
+                  />
+                </div>
+                <h3 className="font-semibold group-hover:text-yellow-600 transition-colors">
+                  {relatedPost.title}
+                </h3>
+                <p className="text-sm text-gray-600 mt-2">{relatedPost.date}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
       </main>
       <Footer />
     </div>

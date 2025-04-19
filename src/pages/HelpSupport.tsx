@@ -1,4 +1,3 @@
-
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -31,10 +30,13 @@ const HelpSupport = () => {
               
               <div className="relative max-w-xl mx-auto">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                <Input 
-                  className="pl-10 py-6 border-2 border-anthracite/10 rounded-lg"
-                  placeholder="Search for help with..." 
-                />
+                <div className="flex gap-2">
+                  <Input 
+                    className="pl-10 py-6 border-2 border-anthracite/10 rounded-lg"
+                    placeholder="Search for help with..." 
+                  />
+                  <Button>Search Now</Button>
+                </div>
               </div>
             </div>
           </div>
@@ -55,25 +57,33 @@ const HelpSupport = () => {
                     <h2 className="text-2xl font-bold mb-4">For Homeowners</h2>
                     <Accordion type="single" collapsible className="w-full">
                       <AccordionItem value="item-1">
-                        <AccordionTrigger>How do I find a service provider?</AccordionTrigger>
+                        <AccordionTrigger className="text-base">
+                          How do I find a service provider?
+                        </AccordionTrigger>
                         <AccordionContent>
                           You can search for service providers by entering what you need and your location on our homepage. You can also browse by service category or check special offers near you.
                         </AccordionContent>
                       </AccordionItem>
                       <AccordionItem value="item-2">
-                        <AccordionTrigger>Are service providers vetted?</AccordionTrigger>
+                        <AccordionTrigger className="text-base">
+                          Are service providers vetted?
+                        </AccordionTrigger>
                         <AccordionContent>
                           Yes, we verify the identity and credentials of all providers on our platform. We also collect and verify reviews from real customers to help you make informed decisions.
                         </AccordionContent>
                       </AccordionItem>
                       <AccordionItem value="item-3">
-                        <AccordionTrigger>How do I pay for services?</AccordionTrigger>
+                        <AccordionTrigger className="text-base">
+                          How do I pay for services?
+                        </AccordionTrigger>
                         <AccordionContent>
                           Payment methods vary by provider. Some accept payment through our platform, while others may accept direct payment. The payment options will be clearly listed on the provider's profile.
                         </AccordionContent>
                       </AccordionItem>
                       <AccordionItem value="item-4">
-                        <AccordionTrigger>What if I'm not satisfied with a service?</AccordionTrigger>
+                        <AccordionTrigger className="text-base">
+                          What if I'm not satisfied with a service?
+                        </AccordionTrigger>
                         <AccordionContent>
                           If you're not satisfied, first try to resolve the issue directly with your provider. If that doesn't work, you can open a dispute through your account, and our customer support team will help mediate.
                         </AccordionContent>
@@ -85,25 +95,33 @@ const HelpSupport = () => {
                     <h2 className="text-2xl font-bold mb-4">For Service Providers</h2>
                     <Accordion type="single" collapsible className="w-full">
                       <AccordionItem value="item-1">
-                        <AccordionTrigger>How do I sign up as a provider?</AccordionTrigger>
+                        <AccordionTrigger className="text-base">
+                          How do I sign up as a provider?
+                        </AccordionTrigger>
                         <AccordionContent>
                           Click the "Join as a Pro" button in the navigation or footer. You'll need to create an account, complete your business profile, and verify your identity and credentials.
                         </AccordionContent>
                       </AccordionItem>
                       <AccordionItem value="item-2">
-                        <AccordionTrigger>What fees does YelloPago charge?</AccordionTrigger>
+                        <AccordionTrigger className="text-base">
+                          What fees does YelloPago charge?
+                        </AccordionTrigger>
                         <AccordionContent>
                           We offer several subscription plans with different features. Basic listing is free, while premium features require a Pro or Enterprise subscription. Visit our Pricing page for details.
                         </AccordionContent>
                       </AccordionItem>
                       <AccordionItem value="item-3">
-                        <AccordionTrigger>How do I receive payments?</AccordionTrigger>
+                        <AccordionTrigger className="text-base">
+                          How do I receive payments?
+                        </AccordionTrigger>
                         <AccordionContent>
                           You can set up direct bank deposits for payments made through our platform. You can also track all transactions in your provider dashboard.
                         </AccordionContent>
                       </AccordionItem>
                       <AccordionItem value="item-4">
-                        <AccordionTrigger>How do I get more visibility?</AccordionTrigger>
+                        <AccordionTrigger className="text-base">
+                          How do I get more visibility?
+                        </AccordionTrigger>
                         <AccordionContent>
                           Complete your profile with high-quality photos, detailed service descriptions, and pricing. Encourage satisfied customers to leave reviews, and consider creating special offers to attract new clients.
                         </AccordionContent>

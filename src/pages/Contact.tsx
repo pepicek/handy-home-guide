@@ -1,4 +1,3 @@
-
 import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -90,7 +89,7 @@ const Contact = () => {
                       <Mail className="w-6 h-6 text-yellow-600" />
                       <div>
                         <h3 className="font-semibold mb-1">Email Us</h3>
-                        <p className="text-anthracite/70">support@yellopago.com</p>
+                        <p className="text-sm text-anthracite/70">support@yellopago.com</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-4">

@@ -30,6 +30,7 @@ const formSchema = z.object({
 const JobApplication = () => {
   const { id } = useParams();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
@@ -39,6 +40,7 @@ const JobApplication = () => {
       title: "Application Submitted",
       description: "We'll be in touch soon!",
     });
+    navigate('/application-success');
   };
 
   return (
