@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/sheet";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 const formSchema = z.object({
   businessName: z.string().min(2, "Business name must be at least 2 characters"),
@@ -49,6 +50,7 @@ export const ProviderRegistrationForm = () => {
   const [requestDetailsLog, setRequestDetailsLog] = useState<any[]>([]);
   const [dbSchema, setDbSchema] = useState<any>(null);
   const [activeDebugTab, setActiveDebugTab] = useState("request");
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
   
   // Inspect database schema on component mount
   useEffect(() => {
@@ -237,7 +239,12 @@ export const ProviderRegistrationForm = () => {
       }]);
       
       toast.success("Registration successful!");
-      navigate("/register/provider/onboarding");
+      setShowSuccessDialog(true);
+      
+      // Delay navigation to show success message
+      setTimeout(() => {
+        navigate("/register/provider/onboarding");
+      }, 2000);
     } catch (error: any) {
       console.error("Provider registration error:", error);
       
@@ -537,6 +544,33 @@ export const ProviderRegistrationForm = () => {
           </Button>
         </form>
       </Form>
+      
+      {/* Success Dialog */}
+      <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="text-green-600">Registration Successful!</DialogTitle>
+            <DialogDescription>
+              Your provider account has been created successfully.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="bg-green-50 border border-green-100 rounded-md p-4 my-2">
+            <p className="text-green-800">
+              You will be redirected to the onboarding process in a moment...
+            </p>
+          </div>
+          <DialogFooter>
+            <Button 
+              onClick={() => {
+                setShowSuccessDialog(false);
+                navigate("/register/provider/onboarding");
+              }}
+            >
+              Continue to Onboarding
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
