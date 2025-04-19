@@ -54,20 +54,58 @@ export const ProviderRegistrationForm = () => {
   useEffect(() => {
     async function fetchDbSchema() {
       try {
-        // We can only query public tables that we have permission to access
+        // First test if we can access the profiles table anonymously
         const { data: tableInfo, error: tableError } = await supabase
           .from('profiles')
           .select('*')
           .limit(0);
           
         if (tableError) {
-          console.error("Error fetching profiles schema:", tableError);
+          console.log("Error fetching profiles schema:", tableError);
           setDbSchema({ error: tableError });
+          
+          // Log the error for debugging
+          setRequestDetailsLog(prev => [...prev, {
+            timestamp: new Date().toISOString(),
+            type: "error",
+            data: { 
+              source: "Database Schema Check", 
+              message: tableError.message,
+              details: tableError
+            }
+          }]);
           return;
         }
         
+        // Log success and get column information
+        console.log("Successfully accessed profiles table");
+        
         // Get column information from the response
-        const columnInfo = tableInfo ? Object.keys(tableInfo) : [];
+        let columnInfo = [];
+        if (tableInfo) {
+          // If we got data, we can examine it
+          columnInfo = Object.keys(tableInfo);
+        } else {
+          // If no data, make another request to get table information
+          const { data: columnsData, error: columnsError } = await supabase.rpc(
+            'get_table_info',
+            { table_name: 'profiles' }
+          ).maybeSingle();
+          
+          if (columnsError) {
+            console.log("Error fetching column schema:", columnsError);
+            setRequestDetailsLog(prev => [...prev, {
+              timestamp: new Date().toISOString(),
+              type: "error",
+              data: { 
+                source: "Columns Info Check", 
+                message: columnsError.message 
+              }
+            }]);
+          } else if (columnsData) {
+            columnInfo = columnsData;
+          }
+        }
         
         setDbSchema({
           tables: {
@@ -77,9 +115,29 @@ export const ProviderRegistrationForm = () => {
             }
           }
         });
+        
+        setRequestDetailsLog(prev => [...prev, {
+          timestamp: new Date().toISOString(),
+          type: "success",
+          data: { 
+            source: "Database Schema Check", 
+            message: "Successfully connected to profiles table",
+            columns: columnInfo
+          }
+        }]);
       } catch (error) {
         console.error("Error inspecting database:", error);
         setDbSchema({ error });
+        
+        setRequestDetailsLog(prev => [...prev, {
+          timestamp: new Date().toISOString(),
+          type: "error",
+          data: { 
+            source: "Database Schema Check Exception", 
+            message: error instanceof Error ? error.message : "Unknown error",
+            details: error
+          }
+        }]);
       }
     }
     
@@ -109,34 +167,39 @@ export const ProviderRegistrationForm = () => {
       const firstName = nameParts[0];
       const lastName = nameParts.slice(1).join(" ") || ""; // Ensure lastName is never null
       
-      const userData = {
-        email: values.email,
-        password: values.password,
-        options: {
-          data: {
-            first_name: firstName,
-            last_name: lastName,
-            role: 'provider',
-            business_name: values.businessName,
-            phone: values.phone
-          },
-        }
+      // Prepare the user metadata
+      const userMetadata = {
+        first_name: firstName,
+        last_name: lastName,
+        role: 'provider',
+        phone: values.phone,
+        business_name: values.businessName
       };
       
+      // Log the full signup request for debugging
+      console.log("Provider registration - Full signup request:", JSON.stringify({
+        email: values.email,
+        metadata: userMetadata
+      }, null, 2));
+      
       // Log the request data
-      const requestData = {
-        email: userData.email,
-        data: userData.options.data
-      };
-      console.log("Provider registration - User data prepared:", JSON.stringify(requestData));
       setRequestDetailsLog(prev => [...prev, {
         timestamp: new Date().toISOString(),
         type: "request",
-        data: requestData
+        data: {
+          email: values.email,
+          metadata: userMetadata
+        }
       }]);
       
       // Make the sign-up request
-      const { data, error } = await supabase.auth.signUp(userData);
+      const { data, error } = await supabase.auth.signUp({
+        email: values.email,
+        password: values.password,
+        options: {
+          data: userMetadata
+        }
+      });
       
       if (error) {
         console.error("Provider registration error details:", error);
@@ -144,7 +207,7 @@ export const ProviderRegistrationForm = () => {
           errorCode: error.code,
           errorName: error.name,
           errorMessage: error.message,
-          errorStack: error.stack,
+          errorDetails: error.details,
           timestamp: new Date().toISOString()
         });
         
@@ -154,20 +217,11 @@ export const ProviderRegistrationForm = () => {
           data: {
             code: error.code,
             name: error.name,
-            message: error.message
+            message: error.message,
+            details: error.details
           }
         }]);
 
-        // Additional diagnostic check
-        if (error.message.includes("Database error") && dbSchema) {
-          // Add schema information to debug log
-          setRequestDetailsLog(prev => [...prev, {
-            timestamp: new Date().toISOString(),
-            type: "schema",
-            data: dbSchema
-          }]);
-        }
-        
         throw error;
       }
       
@@ -179,7 +233,8 @@ export const ProviderRegistrationForm = () => {
         data: {
           user: data.user ? {
             id: data.user.id,
-            email: data.user.email
+            email: data.user.email,
+            metadata: data.user.user_metadata
           } : null,
           session: data.session ? "Session created" : "No session"
         }
@@ -189,15 +244,30 @@ export const ProviderRegistrationForm = () => {
       navigate("/register/provider/onboarding");
     } catch (error: any) {
       console.error("Provider registration error:", error);
+      
+      // Create a more detailed error report
       const errorDetails = {
         message: error.message || "Unknown error",
         name: error?.name || "Error",
         code: error?.code,
         details: error?.details || {},
+        statusCode: error?.status || error?.statusCode,
+        hint: ""
       };
+      
+      // Add helpful hints for common errors
+      if (error.message?.includes("Database error saving")) {
+        errorDetails.hint = "There might be an issue with the database schema. Check if all required fields exist in the profiles table.";
+      } else if (error.message?.includes("User already registered")) {
+        errorDetails.hint = "This email is already in use. Try logging in instead.";
+      }
+      
       console.error("Detailed error information:", errorDetails);
       setDebugInfo(errorDetails);
-      toast.error(`Registration failed: ${error.message}`);
+      
+      // Show a more helpful error message based on the context
+      const userFriendlyMessage = errorDetails.hint || error.message;
+      toast.error(`Registration failed: ${userFriendlyMessage}`);
       
       // Open debug sheet automatically on error
       setShowDetailsSheet(true);
