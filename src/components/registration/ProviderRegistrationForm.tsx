@@ -86,24 +86,18 @@ export const ProviderRegistrationForm = () => {
           // If we got data, we can examine it
           columnInfo = Object.keys(tableInfo);
         } else {
-          // If no data, make another request to get table information
-          const { data: columnsData, error: columnsError } = await supabase.rpc(
-            'get_table_info',
-            { table_name: 'profiles' }
-          ).maybeSingle();
-          
-          if (columnsError) {
-            console.log("Error fetching column schema:", columnsError);
-            setRequestDetailsLog(prev => [...prev, {
-              timestamp: new Date().toISOString(),
-              type: "error",
-              data: { 
-                source: "Columns Info Check", 
-                message: columnsError.message 
-              }
-            }]);
-          } else if (columnsData) {
-            columnInfo = columnsData;
+          // If no data, try to get information through another method
+          try {
+            const { data: schemaInfo, error: schemaError } = await supabase
+              .rpc('is_admin');
+            
+            if (schemaError) {
+              console.log("Error checking admin status:", schemaError);
+            } else {
+              columnInfo = ["Schema access verified"];
+            }
+          } catch (error) {
+            console.error("Error checking database functions:", error);
           }
         }
         
@@ -207,7 +201,8 @@ export const ProviderRegistrationForm = () => {
           errorCode: error.code,
           errorName: error.name,
           errorMessage: error.message,
-          errorDetails: error.details,
+          // Only access the error details if they exist
+          ...(error.message && { errorMessage: error.message }),
           timestamp: new Date().toISOString()
         });
         
@@ -218,7 +213,8 @@ export const ProviderRegistrationForm = () => {
             code: error.code,
             name: error.name,
             message: error.message,
-            details: error.details
+            // Only include details if they exist
+            ...(typeof error === 'object' && error !== null && 'details' in error && { details: (error as any).details })
           }
         }]);
 
@@ -250,16 +246,19 @@ export const ProviderRegistrationForm = () => {
         message: error.message || "Unknown error",
         name: error?.name || "Error",
         code: error?.code,
-        details: error?.details || {},
+        // Only include details if they exist on the error object
+        ...(typeof error === 'object' && error !== null && 'details' in error && { details: (error as any).details }),
         statusCode: error?.status || error?.statusCode,
         hint: ""
       };
       
       // Add helpful hints for common errors
       if (error.message?.includes("Database error saving")) {
-        errorDetails.hint = "There might be an issue with the database schema. Check if all required fields exist in the profiles table.";
+        errorDetails.hint = "There might be an issue with the database schema or RLS policies. Please ask support for help.";
       } else if (error.message?.includes("User already registered")) {
         errorDetails.hint = "This email is already in use. Try logging in instead.";
+      } else if (error.message?.includes("infinite recursion")) {
+        errorDetails.hint = "Database RLS policy issue detected. Contact support.";
       }
       
       console.error("Detailed error information:", errorDetails);
