@@ -29,6 +29,7 @@ import TicketsList from "@/pages/dashboard/support/TicketsList";
 import CreateTicket from "@/pages/dashboard/support/CreateTicket";
 import TicketDetails from "@/pages/dashboard/support/TicketDetails";
 import ProSubscription from "@/pages/dashboard/ProSubscription";
+import CheckSchedule from "@/pages/CheckSchedule";
 
 export const dashboardRoutes: RouteObject[] = [{
   path: "/dashboard",
