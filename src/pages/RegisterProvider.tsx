@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight, Building, Mail, Phone, Lock, User, Eye, EyeOff, Gift } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { useAuth } from "@/context/AuthContext";
 
 const formSchema = z.object({
   businessName: z.string().min(2, "Business name must be at least 2 characters"),
@@ -38,8 +39,10 @@ type FormValues = z.infer<typeof formSchema>;
 const RegisterProvider = () => {
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { signUp } = useAuth();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -53,13 +56,38 @@ const RegisterProvider = () => {
     }
   });
 
-  const onSubmit = (data: FormValues) => {
-    console.log(data);
-    toast({
-      title: "Registration Successful!",
-      description: "Your account has been created successfully.",
-    });
-    navigate("/dashboard");
+  const onSubmit = async (data: FormValues) => {
+    setIsSubmitting(true);
+    try {
+      const nameParts = data.contactName.split(" ");
+      const firstName = nameParts[0];
+      const lastName = nameParts.slice(1).join(" ");
+
+      console.log(data);
+      
+      await signUp(
+        data.email,
+        data.password,
+        firstName,
+        lastName || "",
+        "provider"
+      );
+      
+      toast({
+        title: "Registration Successful!",
+        description: "Your account has been created successfully.",
+      });
+      
+      navigate("/register/provider/onboarding");
+    } catch (error: any) {
+      toast({
+        title: "Registration Failed",
+        description: error.message,
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -244,9 +272,14 @@ const RegisterProvider = () => {
                       />
                       
                       <div className="pt-4">
-                        <Button type="submit" className="w-full bg-anthracite hover:bg-anthracite/90 text-yellow-400" size="lg">
-                          Create Account
-                          <ArrowRight className="ml-2 h-4 w-4" />
+                        <Button 
+                          type="submit" 
+                          className="w-full bg-anthracite hover:bg-anthracite/90 text-yellow-400" 
+                          size="lg"
+                          disabled={isSubmitting}
+                        >
+                          {isSubmitting ? "Creating Account..." : "Create Account"}
+                          {!isSubmitting && <ArrowRight className="ml-2 h-4 w-4" />}
                         </Button>
                       </div>
                       

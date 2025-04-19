@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
@@ -13,6 +12,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { toast } from "sonner";
+import { useAuth } from "@/context/AuthContext";
 
 const formSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters"),
@@ -28,6 +28,8 @@ const formSchema = z.object({
 const RegisterVisitor = () => {
   const navigate = useNavigate();
   const [videoOpen, setVideoOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { signUp } = useAuth();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -40,11 +42,23 @@ const RegisterVisitor = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // In a real app, you would send this to your backend
-    console.log(values);
-    toast.success("Registration successful!");
-    navigate("/register/visitor/questionnaire");
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsSubmitting(true);
+    try {
+      await signUp(
+        values.email, 
+        values.password, 
+        values.firstName, 
+        values.lastName, 
+        "user"
+      );
+      toast.success("Registration successful!");
+      navigate("/register/visitor/questionnaire");
+    } catch (error: any) {
+      toast.error(`Registration failed: ${error.message}`);
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -176,9 +190,13 @@ const RegisterVisitor = () => {
                         )}
                       />
 
-                      <Button type="submit" className="w-full bg-yellow-500 hover:bg-yellow-600 text-anthracite">
-                        Create Account
-                        <ArrowRight className="ml-2 h-4 w-4" />
+                      <Button 
+                        type="submit" 
+                        className="w-full bg-yellow-500 hover:bg-yellow-600 text-anthracite"
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? "Creating Account..." : "Create Account"}
+                        {!isSubmitting && <ArrowRight className="ml-2 h-4 w-4" />}
                       </Button>
                     </form>
                   </Form>

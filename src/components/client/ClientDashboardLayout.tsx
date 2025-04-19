@@ -12,7 +12,8 @@ import {
   Search,
   Settings,
   Menu,
-  User
+  User,
+  LogOut
 } from "lucide-react";
 import {
   SidebarProvider,
@@ -28,10 +29,12 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useAuth } from "@/context/AuthContext";
 
 const ClientDashboardLayout = () => {
   const location = useLocation();
   const isMobile = useIsMobile();
+  const { signOut } = useAuth();
 
   const navigation = [
     {
@@ -151,9 +154,14 @@ const ClientDashboardLayout = () => {
                   </CardContent>
                 </Card>
 
-                <div className="mx-2">
+                <div className="mx-2 space-y-2">
                   <Button variant="outline" className="w-full">
                     <Link to="/" className="w-full">Home Page</Link>
+                  </Button>
+                  
+                  <Button variant="outline" className="w-full text-red-500 hover:text-red-700 hover:bg-red-50 flex items-center justify-center" onClick={signOut}>
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Logout
                   </Button>
                 </div>
               </div>
