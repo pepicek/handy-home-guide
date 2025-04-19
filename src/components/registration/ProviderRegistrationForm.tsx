@@ -1,10 +1,10 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Building, Mail, Lock, Eye, EyeOff, User, Phone } from "lucide-react";
+import { Building, Mail, Lock, Eye, EyeOff, User, Phone, Database, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -17,7 +17,10 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
+  SheetFooter,
 } from "@/components/ui/sheet";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const formSchema = z.object({
   businessName: z.string().min(2, "Business name must be at least 2 characters"),
@@ -44,6 +47,44 @@ export const ProviderRegistrationForm = () => {
   const [debugInfo, setDebugInfo] = useState<any>(null);
   const [showDetailsSheet, setShowDetailsSheet] = useState(false);
   const [requestDetailsLog, setRequestDetailsLog] = useState<any[]>([]);
+  const [dbSchema, setDbSchema] = useState<any>(null);
+  const [activeDebugTab, setActiveDebugTab] = useState("request");
+  
+  // Inspect database schema on component mount
+  useEffect(() => {
+    async function fetchDbSchema() {
+      try {
+        // We can only query public tables that we have permission to access
+        const { data: tableInfo, error: tableError } = await supabase
+          .from('profiles')
+          .select('*')
+          .limit(0);
+          
+        if (tableError) {
+          console.error("Error fetching profiles schema:", tableError);
+          setDbSchema({ error: tableError });
+          return;
+        }
+        
+        // Get column information from the response
+        const columnInfo = tableInfo ? Object.keys(tableInfo) : [];
+        
+        setDbSchema({
+          tables: {
+            profiles: {
+              exists: true,
+              columns: columnInfo
+            }
+          }
+        });
+      } catch (error) {
+        console.error("Error inspecting database:", error);
+        setDbSchema({ error });
+      }
+    }
+    
+    fetchDbSchema();
+  }, []);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -116,6 +157,16 @@ export const ProviderRegistrationForm = () => {
             message: error.message
           }
         }]);
+
+        // Additional diagnostic check
+        if (error.message.includes("Database error") && dbSchema) {
+          // Add schema information to debug log
+          setRequestDetailsLog(prev => [...prev, {
+            timestamp: new Date().toISOString(),
+            type: "schema",
+            data: dbSchema
+          }]);
+        }
         
         throw error;
       }
@@ -147,6 +198,10 @@ export const ProviderRegistrationForm = () => {
       console.error("Detailed error information:", errorDetails);
       setDebugInfo(errorDetails);
       toast.error(`Registration failed: ${error.message}`);
+      
+      // Open debug sheet automatically on error
+      setShowDetailsSheet(true);
+      setActiveDebugTab("error");
     } finally {
       setIsSubmitting(false);
     }
@@ -165,61 +220,111 @@ export const ProviderRegistrationForm = () => {
         <Sheet open={showDetailsSheet} onOpenChange={setShowDetailsSheet}>
           <SheetTrigger asChild>
             <Button 
-              variant="outline" 
+              variant={debugInfo ? "destructive" : "outline"} 
               size="sm" 
-              className="text-xs bg-gray-50 border-gray-200 text-gray-500"
+              className={`text-xs ${debugInfo ? 'bg-red-100 hover:bg-red-200 text-red-800 border-red-300' : 'bg-gray-50 border-gray-200 text-gray-500'}`}
               onClick={() => setShowDetailsSheet(true)}
             >
-              Debug Details
+              {debugInfo ? (
+                <>
+                  <AlertCircle className="h-3.5 w-3.5 mr-1" />
+                  Error Details
+                </>
+              ) : (
+                'Debug Details'
+              )}
             </Button>
           </SheetTrigger>
-          <SheetContent className="w-[400px] sm:w-[540px] overflow-y-auto">
+          <SheetContent className="w-full sm:w-[540px] overflow-y-hidden">
             <SheetHeader>
               <SheetTitle>Registration Debug Information</SheetTitle>
               <SheetDescription>
                 Detailed logs and error information for troubleshooting.
               </SheetDescription>
             </SheetHeader>
-            <div className="mt-6 space-y-6">
-              <div>
-                <h3 className="font-medium text-sm mb-2">Request/Response Timeline</h3>
-                <div className="space-y-2 max-h-60 overflow-y-auto border rounded-md p-3 bg-gray-50">
-                  {requestDetailsLog.length > 0 ? requestDetailsLog.map((log, i) => (
-                    <div key={i} className={`p-2 text-xs font-mono rounded ${
-                      log.type === 'error' ? 'bg-red-50 text-red-800' : 
-                      log.type === 'success' ? 'bg-green-50 text-green-800' : 
-                      'bg-blue-50 text-blue-800'
-                    }`}>
-                      <div className="text-xs text-gray-500 mb-1">{log.timestamp}</div>
-                      <pre className="whitespace-pre-wrap">
-                        {JSON.stringify(log.data, null, 2)}
+            
+            <Tabs value={activeDebugTab} onValueChange={setActiveDebugTab} className="mt-4">
+              <TabsList className="grid grid-cols-3 mb-4">
+                <TabsTrigger value="request">Requests</TabsTrigger>
+                <TabsTrigger value="error">Errors</TabsTrigger>
+                <TabsTrigger value="schema">DB Schema</TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="request" className="mt-0">
+                <ScrollArea className="h-[400px]">
+                  <div className="space-y-2">
+                    {requestDetailsLog.length > 0 ? requestDetailsLog.map((log, i) => (
+                      <div key={i} className={`p-2 text-xs font-mono rounded ${
+                        log.type === 'error' ? 'bg-red-50 text-red-800 border border-red-200' : 
+                        log.type === 'success' ? 'bg-green-50 text-green-800 border border-green-200' : 
+                        'bg-blue-50 text-blue-800 border border-blue-200'
+                      }`}>
+                        <div className="text-xs text-gray-500 mb-1">{log.timestamp}</div>
+                        <pre className="whitespace-pre-wrap overflow-x-auto">
+                          {JSON.stringify(log.data, null, 2)}
+                        </pre>
+                      </div>
+                    )) : (
+                      <p className="text-sm text-gray-500">No requests logged yet.</p>
+                    )}
+                  </div>
+                </ScrollArea>
+              </TabsContent>
+              
+              <TabsContent value="error" className="mt-0">
+                <ScrollArea className="h-[400px]">
+                  {debugInfo ? (
+                    <div className="border rounded-md p-3 bg-red-50 text-sm text-red-800 font-mono">
+                      <pre className="whitespace-pre-wrap overflow-x-auto">
+                        {JSON.stringify(debugInfo, null, 2)}
                       </pre>
                     </div>
-                  )) : (
-                    <p className="text-sm text-gray-500">No requests logged yet.</p>
+                  ) : (
+                    <p className="text-sm text-gray-500">No errors recorded.</p>
                   )}
-                </div>
-              </div>
+                </ScrollArea>
+              </TabsContent>
               
-              {debugInfo && (
-                <div>
-                  <h3 className="font-medium text-sm mb-2">Error Details</h3>
-                  <div className="border rounded-md p-3 bg-red-50 text-sm text-red-800 font-mono max-h-60 overflow-y-auto">
-                    <pre className="whitespace-pre-wrap">
-                      {JSON.stringify(debugInfo, null, 2)}
-                    </pre>
+              <TabsContent value="schema" className="mt-0">
+                <ScrollArea className="h-[400px]">
+                  <div className="space-y-4">
+                    <div className="border rounded-md p-3 bg-gray-50">
+                      <h3 className="text-sm font-medium mb-2 flex items-center">
+                        <Database className="h-4 w-4 mr-1" />
+                        Database Schema
+                      </h3>
+                      {dbSchema ? (
+                        <div className="text-sm font-mono">
+                          <pre className="whitespace-pre-wrap overflow-x-auto">
+                            {JSON.stringify(dbSchema, null, 2)}
+                          </pre>
+                        </div>
+                      ) : (
+                        <p className="text-sm text-gray-500">Loading schema information...</p>
+                      )}
+                    </div>
+                    
+                    <div>
+                      <h3 className="text-sm font-medium mb-2">Supabase Config</h3>
+                      <div className="border rounded-md p-3 bg-gray-50 text-sm text-gray-800 font-mono">
+                        <p>Project ID: lcybohvhquvkeapisede</p>
+                        <p>API URL: https://lcybohvhquvkeapisede.supabase.co</p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              )}
-              
-              <div>
-                <h3 className="font-medium text-sm mb-2">Supabase Config</h3>
-                <div className="border rounded-md p-3 bg-gray-50 text-sm text-gray-800 font-mono">
-                  <p>Project ID: lcybohvhquvkeapisede</p>
-                  <p>API URL: https://lcybohvhquvkeapisede.supabase.co</p>
-                </div>
-              </div>
-            </div>
+                </ScrollArea>
+              </TabsContent>
+            </Tabs>
+            
+            <SheetFooter className="mt-4">
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => setShowDetailsSheet(false)}
+              >
+                Close
+              </Button>
+            </SheetFooter>
           </SheetContent>
         </Sheet>
       </div>
@@ -363,16 +468,6 @@ export const ProviderRegistrationForm = () => {
           </Button>
         </form>
       </Form>
-      
-      {/* Debug Information Section */}
-      {debugInfo && (
-        <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-md">
-          <h3 className="text-sm font-medium text-red-800">Debug Information</h3>
-          <div className="mt-1 max-h-40 overflow-auto text-xs text-red-700 font-mono">
-            <pre>{JSON.stringify(debugInfo, null, 2)}</pre>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
