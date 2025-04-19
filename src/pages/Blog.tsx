@@ -1,3 +1,4 @@
+
 import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -7,6 +8,7 @@ import { Link } from "react-router-dom";
 
 const blogPosts = [
   {
+    id: 1,
     title: "10 Essential Home Maintenance Tips for Spring",
     excerpt: "Get your home ready for spring with these essential maintenance tips that every homeowner should know.",
     author: "Sarah Johnson",
@@ -16,6 +18,7 @@ const blogPosts = [
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f"
   },
   {
+    id: 2,
     title: "How to Choose the Right Service Professional",
     excerpt: "Learn the key factors to consider when hiring a service professional for your home improvement projects.",
     author: "Michael Chen",
@@ -25,6 +28,7 @@ const blogPosts = [
     image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d"
   },
   {
+    id: 3,
     title: "The Future of Home Services in 2025",
     excerpt: "Explore the latest trends and technologies shaping the future of home services.",
     author: "Emily Rodriguez",
