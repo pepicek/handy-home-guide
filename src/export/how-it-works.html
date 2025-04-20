@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works - YelloPago</title>
+    <link rel="stylesheet" href="css/tailwind.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/main.js" defer></script>
+</head>
+<body>
+    <div class="flex flex-col min-h-screen">
+        <!-- Header -->
+        <header class="bg-white border-b border-gray-200">
+            <nav class="container mx-auto px-4 py-4">
+                <div class="flex justify-between items-center">
+                    <a href="index.html" class="text-2xl font-bold text-yellow-600">YelloPago</a>
+                    <div class="hidden md:flex space-x-6">
+                        <a href="search.html" class="text-gray-600 hover:text-gray-900">Find Services</a>
+                        <a href="providers.html" class="text-gray-600 hover:text-gray-900">Providers</a>
+                        <a href="about.html" class="text-gray-600 hover:text-gray-900">About</a>
+                        <a href="contact.html" class="text-gray-600 hover:text-gray-900">Contact</a>
+                    </div>
+                    <div class="hidden md:flex space-x-4">
+                        <a href="signin.html" class="px-4 py-2 text-gray-600 hover:text-gray-900">Sign In</a>
+                        <a href="register.html" class="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">Register</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow">
+            <div class="container mx-auto px-4 py-12">
+                <div class="max-w-4xl mx-auto">
+                    <h1 class="text-4xl font-bold text-gray-900 mb-8">How YelloPago Works</h1>
+
+                    <!-- Steps Section -->
+                    <div class="space-y-12">
+                        <!-- Step 1 -->
+                        <div class="grid md:grid-cols-2 gap-8 items-center">
+                            <div>
+                                <span class="inline-block bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm mb-4">Step 1</span>
+                                <h2 class="text-2xl font-semibold mb-4">Create Your Account</h2>
+                                <p class="text-gray-600">
+                                    Sign up as a client or service provider. Complete your profile with relevant information to get started.
+                                </p>
+                            </div>
+                            <div class="bg-gray-100 h-48 rounded-lg flex items-center justify-center">
+                                [Illustration Placeholder]
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="grid md:grid-cols-2 gap-8 items-center">
+                            <div class="md:order-2">
+                                <span class="inline-block bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm mb-4">Step 2</span>
+                                <h2 class="text-2xl font-semibold mb-4">Browse or List Services</h2>
+                                <p class="text-gray-600">
+                                    Clients can search for services, while providers can list their offerings and set availability.
+                                </p>
+                            </div>
+                            <div class="bg-gray-100 h-48 rounded-lg flex items-center justify-center md:order-1">
+                                [Illustration Placeholder]
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="grid md:grid-cols-2 gap-8 items-center">
+                            <div>
+                                <span class="inline-block bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm mb-4">Step 3</span>
+                                <h2 class="text-2xl font-semibold mb-4">Book and Complete Services</h2>
+                                <p class="text-gray-600">
+                                    Schedule appointments, make secure payments, and enjoy quality service delivery.
+                                </p>
+                            </div>
+                            <div class="bg-gray-100 h-48 rounded-lg flex items-center justify-center">
+                                [Illustration Placeholder]
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="grid md:grid-cols-2 gap-8 items-center">
+                            <div class="md:order-2">
+                                <span class="inline-block bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm mb-4">Step 4</span>
+                                <h2 class="text-2xl font-semibold mb-4">Review and Grow</h2>
+                                <p class="text-gray-600">
+                                    Share your experience through reviews and help build a trusted community.
+                                </p>
+                            </div>
+                            <div class="bg-gray-100 h-48 rounded-lg flex items-center justify-center md:order-1">
+                                [Illustration Placeholder]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CTA Section -->
+                    <div class="mt-16 text-center">
+                        <h2 class="text-2xl font-semibold mb-4">Ready to Get Started?</h2>
+                        <div class="flex flex-wrap justify-center gap-4">
+                            <a href="register/client.html" class="bg-yellow-500 text-white px-6 py-3 rounded-lg hover:bg-yellow-600">
+                                Register as Client
+                            </a>
+                            <a href="register/provider.html" class="bg-gray-900 text-yellow-400 px-6 py-3 rounded-lg hover:bg-gray-800">
+                                Become a Provider
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-12">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">About YelloPago</h3>
+                        <p class="text-gray-400">
+                            Connecting homeowners with trusted service professionals since 2023.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                        <ul class="space-y-2">
+                            <li><a href="how-it-works.html" class="text-gray-400 hover:text-white">How It Works</a></li>
+                            <li><a href="pricing.html" class="text-gray-400 hover:text-white">Pricing</a></li>
+                            <li><a href="faq.html" class="text-gray-400 hover:text-white">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Support</h3>
+                        <ul class="space-y-2">
+                            <li><a href="contact.html" class="text-gray-400 hover:text-white">Contact Us</a></li>
+                            <li><a href="help.html" class="text-gray-400 hover:text-white">Help Center</a></li>
+                            <li><a href="terms.html" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-white">Twitter</a>
+                            <a href="#" class="text-gray-400 hover:text-white">Facebook</a>
+                            <a href="#" class="text-gray-400 hover:text-white">LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
