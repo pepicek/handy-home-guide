@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register as Provider - YelloPago</title>
+    <link rel="stylesheet" href="../css/tailwind.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../js/main.js" defer></script>
+</head>
+<body class="bg-gray-50">
+    <div class="flex flex-col min-h-screen">
+        <!-- Header -->
+        <header class="bg-white border-b border-gray-200">
+            <nav class="container mx-auto px-4 py-4">
+                <div class="flex justify-between items-center">
+                    <a href="../index.html" class="text-2xl font-bold text-yellow-600">YelloPago</a>
+                    <div class="hidden md:flex space-x-4">
+                        <a href="../signin.html" class="px-4 py-2 text-gray-600 hover:text-gray-900">Sign In</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow">
+            <div class="container mx-auto px-4 py-12">
+                <div class="max-w-4xl mx-auto">
+                    <button class="mb-8 flex items-center text-gray-600 hover:text-gray-900" onclick="window.location.href='../register.html'">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                        Back to registration options
+                    </button>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h1 class="text-3xl font-bold text-gray-900 mb-4">
+                                Register as a Service Provider
+                            </h1>
+                            <p class="text-gray-600 mb-6">
+                                Join thousands of professionals who trust YelloPago to grow their business
+                            </p>
+                            
+                            <div class="bg-white p-6 rounded-lg shadow-sm border mb-6">
+                                <h2 class="text-xl font-semibold mb-4">Why Join YelloPago?</h2>
+                                <ul class="space-y-4">
+                                    <li class="flex items-start">
+                                        <svg class="h-6 w-6 text-yellow-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                        </svg>
+                                        <span>Access to qualified leads in your area</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="h-6 w-6 text-yellow-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                        </svg>
+                                        <span>Professional profile to showcase your work</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="h-6 w-6 text-yellow-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                        </svg>
+                                        <span>Smart scheduling and booking system</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-lg shadow-sm border">
+                            <form id="provider-registration-form" class="space-y-6">
+                                <div>
+                                    <label class="form-label">Business Name</label>
+                                    <input type="text" class="form-input" required>
+                                </div>
+                                
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="form-label">First Name</label>
+                                        <input type="text" class="form-input" required>
+                                    </div>
+                                    <div>
+                                        <label class="form-label">Last Name</label>
+                                        <input type="text" class="form-input" required>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-input" required>
+                                </div>
+
+                                <div>
+                                    <label class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-input" required>
+                                </div>
+
+                                <div>
+                                    <label class="form-label">Password</label>
+                                    <input type="password" class="form-input" required>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary w-full">
+                                    Create Account
+                                </button>
+
+                                <p class="text-center text-sm text-gray-600">
+                                    Already have an account?
+                                    <a href="../signin.html" class="text-yellow-600 hover:text-yellow-700 font-medium">
+                                        Sign in
+                                    </a>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-12">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">About YelloPago</h3>
+                        <p class="text-gray-400">
+                            Connecting homeowners with trusted service professionals since 2023.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                        <ul class="space-y-2">
+                            <li><a href="../how-it-works.html" class="text-gray-400 hover:text-white">How It Works</a></li>
+                            <li><a href="../pricing.html" class="text-gray-400 hover:text-white">Pricing</a></li>
+                            <li><a href="../faq.html" class="text-gray-400 hover:text-white">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Support</h3>
+                        <ul class="space-y-2">
+                            <li><a href="../contact.html" class="text-gray-400 hover:text-white">Contact Us</a></li>
+                            <li><a href="../help.html" class="text-gray-400 hover:text-white">Help Center</a></li>
+                            <li><a href="../terms.html" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-white">Twitter</a>
+                            <a href="#" class="text-gray-400 hover:text-white">Facebook</a>
+                            <a href="#" class="text-gray-400 hover:text-white">LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
