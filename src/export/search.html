@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Services - YelloPago</title>
+    <link rel="stylesheet" href="css/tailwind.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/main.js" defer></script>
+</head>
+<body>
+    <div class="flex flex-col min-h-screen">
+        <!-- Header -->
+        <header class="bg-white border-b border-gray-200">
+            <nav class="container mx-auto px-4 py-4">
+                <div class="flex justify-between items-center">
+                    <a href="index.html" class="text-2xl font-bold text-yellow-600">YelloPago</a>
+                    <div class="hidden md:flex space-x-6">
+                        <a href="search.html" class="text-gray-600 hover:text-gray-900">Find Services</a>
+                        <a href="providers.html" class="text-gray-600 hover:text-gray-900">Providers</a>
+                        <a href="about.html" class="text-gray-600 hover:text-gray-900">About</a>
+                        <a href="contact.html" class="text-gray-600 hover:text-gray-900">Contact</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow bg-gray-50">
+            <div class="container mx-auto px-4 py-8">
+                <!-- Search Section -->
+                <div class="max-w-4xl mx-auto mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h1 class="text-2xl font-bold mb-6">Find Service Providers</h1>
+                        <form class="space-y-4">
+                            <div class="grid md:grid-cols-3 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Service Type</label>
+                                    <select class="w-full px-3 py-2 border rounded-md">
+                                        <option value="">Select a service</option>
+                                        <option value="plumbing">Plumbing</option>
+                                        <option value="electrical">Electrical</option>
+                                        <option value="cleaning">Cleaning</option>
+                                        <option value="landscaping">Landscaping</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                                    <input type="text" placeholder="Enter ZIP code" class="w-full px-3 py-2 border rounded-md">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Price Range</label>
+                                    <select class="w-full px-3 py-2 border rounded-md">
+                                        <option value="">Any price</option>
+                                        <option value="low">$</option>
+                                        <option value="medium">$$</option>
+                                        <option value="high">$$$</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="w-full bg-yellow-500 text-white py-2 px-4 rounded-md hover:bg-yellow-600">
+                                Search Providers
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Provider Card -->
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="h-12 w-12 rounded-full bg-gray-200 mr-4"></div>
+                                <div>
+                                    <h3 class="font-semibold">John's Plumbing</h3>
+                                    <div class="flex items-center text-sm text-gray-500">
+                                        <span class="flex items-center">
+                                            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                            </svg>
+                                            4.8
+                                        </span>
+                                        <span class="mx-2">•</span>
+                                        <span>Portland, OR</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4">
+                                Professional plumbing services with 15+ years of experience. Available 24/7 for emergencies.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-2 py-1 bg-gray-100 text-sm rounded-full">Plumbing</span>
+                                <span class="px-2 py-1 bg-gray-100 text-sm rounded-full">Emergency</span>
+                                <span class="px-2 py-1 bg-gray-100 text-sm rounded-full">Licensed</span>
+                            </div>
+                            <a href="provider-profile.html" class="block w-full text-center bg-white border border-yellow-500 text-yellow-500 py-2 px-4 rounded-md hover:bg-yellow-50">
+                                View Profile
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- More provider cards would go here -->
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-12">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">About YelloPago</h3>
+                        <p class="text-gray-400">
+                            Connecting homeowners with trusted service professionals since 2023.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                        <ul class="space-y-2">
+                            <li><a href="how-it-works.html" class="text-gray-400 hover:text-white">How It Works</a></li>
+                            <li><a href="pricing.html" class="text-gray-400 hover:text-white">Pricing</a></li>
+                            <li><a href="faq.html" class="text-gray-400 hover:text-white">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Support</h3>
+                        <ul class="space-y-2">
+                            <li><a href="contact.html" class="text-gray-400 hover:text-white">Contact Us</a></li>
+                            <li><a href="help.html" class="text-gray-400 hover:text-white">Help Center</a></li>
+                            <li><a href="terms.html" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-white">Twitter</a>
+                            <a href="#" class="text-gray-400 hover:text-white">Facebook</a>
+                            <a href="#" class="text-gray-400 hover:text-white">LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

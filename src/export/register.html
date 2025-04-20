@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - YelloPago</title>
+    <link rel="stylesheet" href="css/tailwind.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/main.js" defer></script>
+</head>
+<body>
+    <div class="flex flex-col min-h-screen">
+        <!-- Header -->
+        <header class="bg-white border-b border-gray-200">
+            <nav class="container mx-auto px-4 py-4">
+                <div class="flex justify-between items-center">
+                    <a href="index.html" class="text-2xl font-bold text-yellow-600">YelloPago</a>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow bg-gray-50">
+            <div class="container mx-auto px-4 py-16">
+                <div class="max-w-4xl mx-auto">
+                    <h1 class="text-3xl font-bold text-center mb-8">Choose Your Account Type</h1>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Client Registration Card -->
+                        <div class="bg-white p-8 rounded-lg shadow-sm border hover:shadow-md transition-shadow">
+                            <div class="text-center mb-6">
+                                <div class="inline-block p-3 bg-blue-100 rounded-full mb-4">
+                                    <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                    </svg>
+                                </div>
+                                <h2 class="text-xl font-semibold mb-2">Looking for Services?</h2>
+                                <p class="text-gray-600 mb-6">Create a client account to find and hire service providers</p>
+                            </div>
+                            <ul class="space-y-3 mb-8">
+                                <li class="flex items-center text-gray-600">
+                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    Browse verified professionals
+                                </li>
+                                <li class="flex items-center text-gray-600">
+                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    Get quotes for your projects
+                                </li>
+                                <li class="flex items-center text-gray-600">
+                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    Secure payment system
+                                </li>
+                            </ul>
+                            <a href="register/client.html" class="block w-full text-center bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">
+                                Register as Client
+                            </a>
+                        </div>
+
+                        <!-- Provider Registration Card -->
+                        <div class="bg-white p-8 rounded-lg shadow-sm border hover:shadow-md transition-shadow">
+                            <div class="text-center mb-6">
+                                <div class="inline-block p-3 bg-yellow-100 rounded-full mb-4">
+                                    <svg class="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <h2 class="text-xl font-semibold mb-2">Offering Services?</h2>
+                                <p class="text-gray-600 mb-6">Join our network of trusted service providers</p>
+                            </div>
+                            <ul class="space-y-3 mb-8">
+                                <li class="flex items-center text-gray-600">
+                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    Access to qualified leads
+                                </li>
+                                <li class="flex items-center text-gray-600">
+                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    Professional profile
+                                </li>
+                                <li class="flex items-center text-gray-600">
+                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    Booking management
+                                </li>
+                            </ul>
+                            <a href="register/provider.html" class="block w-full text-center bg-yellow-500 text-white py-2 px-4 rounded-md hover:bg-yellow-600">
+                                Register as Provider
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-8">
+            <div class="container mx-auto px-4 text-center">
+                <p class="text-gray-400">&copy; 2024 YelloPago. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
