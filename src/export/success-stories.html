@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success Stories - YelloPago</title>
+    <link rel="stylesheet" href="css/tailwind.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/main.js" defer></script>
+</head>
+<body>
+    <div class="flex flex-col min-h-screen">
+        <!-- Header -->
+        <header class="bg-white border-b border-gray-200">
+            <nav class="container mx-auto px-4 py-4">
+                <div class="flex justify-between items-center">
+                    <a href="index.html" class="text-2xl font-bold text-yellow-600">YelloPago</a>
+                    <div class="hidden md:flex space-x-6">
+                        <a href="search.html" class="text-gray-600 hover:text-gray-900">Find Services</a>
+                        <a href="providers.html" class="text-gray-600 hover:text-gray-900">Providers</a>
+                        <a href="about.html" class="text-gray-600 hover:text-gray-900">About</a>
+                        <a href="contact.html" class="text-gray-600 hover:text-gray-900">Contact</a>
+                    </div>
+                    <div class="hidden md:flex space-x-4">
+                        <a href="signin.html" class="px-4 py-2 text-gray-600 hover:text-gray-900">Sign In</a>
+                        <a href="register/index.html" class="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">Register</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="flex-grow">
+            <!-- Hero Section -->
+            <section class="bg-gradient-to-br from-yellow-300 to-yellow-100 py-20">
+                <div class="container mx-auto px-4">
+                    <div class="max-w-3xl">
+                        <h1 class="text-4xl md:text-5xl font-bold font-poster text-anthracite mb-6">
+                            Success Stories
+                        </h1>
+                        <p class="text-lg md:text-xl text-anthracite/80 mb-8">
+                            Real stories from service providers who have transformed their businesses with YelloPago.
+                        </p>
+                        <a href="register/provider.html" class="bg-anthracite hover:bg-anthracite/90 text-yellow-400 px-6 py-3 rounded-md">
+                            Start Your Success Story
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Success Stories Grid -->
+            <section class="py-16 container mx-auto px-4">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Story Card -->
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                        <div class="grid md:grid-cols-3">
+                            <div class="bg-anthracite text-white p-8 flex flex-col">
+                                <img src="https://images.unsplash.com/photo-1580518324671-c2f0833a3af3?w=150&h=150&fit=crop" 
+                                     alt="Michael Rodriguez" 
+                                     class="w-24 h-24 rounded-full mb-4 object-cover">
+                                <h3 class="text-xl font-bold mb-1">Michael Rodriguez</h3>
+                                <p class="text-yellow-400 mb-3">Mike's Barbershop</p>
+                            </div>
+                            <div class="col-span-2 p-8">
+                                <blockquote class="text-lg italic text-gray-700 mb-6">
+                                    "Before YelloPago, I was spending hours every week managing appointments and trying to find new customers. Now, my schedule is always full and I spend more time doing what I love - cutting hair!"
+                                </blockquote>
+                                <div class="grid grid-cols-3 gap-4">
+                                    <div class="bg-yellow-50 p-4 rounded-lg">
+                                        <h4 class="font-medium text-sm text-yellow-800 mb-1">Time Saved</h4>
+                                        <p class="text-lg font-bold text-anthracite">15+ hrs/week</p>
+                                    </div>
+                                    <div class="bg-yellow-50 p-4 rounded-lg">
+                                        <h4 class="font-medium text-sm text-yellow-800 mb-1">New Clients</h4>
+                                        <p class="text-lg font-bold text-anthracite">40% increase</p>
+                                    </div>
+                                    <div class="bg-yellow-50 p-4 rounded-lg">
+                                        <h4 class="font-medium text-sm text-yellow-800 mb-1">Revenue</h4>
+                                        <p class="text-lg font-bold text-anthracite">$2,300/month</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- More story cards... -->
+                </div>
+            </section>
+
+            <!-- Call to Action -->
+            <section class="py-16 bg-gray-50">
+                <div class="container mx-auto px-4 text-center">
+                    <h2 class="text-3xl font-bold text-anthracite mb-6">Ready to Write Your Success Story?</h2>
+                    <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+                        Join thousands of service professionals who are growing their businesses with less effort and better results.
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="register/provider.html" class="bg-yellow-500 hover:bg-yellow-600 text-anthracite px-6 py-3 rounded-md">
+                            Sign Up Free
+                        </a>
+                        <a href="pricing.html" class="border border-yellow-400 text-anthracite hover:bg-yellow-50 px-6 py-3 rounded-md">
+                            View Pricing
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-12">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">About YelloPago</h3>
+                        <p class="text-gray-400">
+                            Connecting homeowners with trusted service professionals since 2023.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                        <ul class="space-y-2">
+                            <li><a href="how-it-works.html" class="text-gray-400 hover:text-white">How It Works</a></li>
+                            <li><a href="pricing.html" class="text-gray-400 hover:text-white">Pricing</a></li>
+                            <li><a href="faq.html" class="text-gray-400 hover:text-white">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Support</h3>
+                        <ul class="space-y-2">
+                            <li><a href="contact.html" class="text-gray-400 hover:text-white">Contact Us</a></li>
+                            <li><a href="help.html" class="text-gray-400 hover:text-white">Help Center</a></li>
+                            <li><a href="terms.html" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-white">Twitter</a>
+                            <a href="#" class="text-gray-400 hover:text-white">Facebook</a>
+                            <a href="#" class="text-gray-400 hover:text-white">LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
