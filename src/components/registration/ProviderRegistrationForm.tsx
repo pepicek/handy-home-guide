@@ -57,14 +57,19 @@ export const ProviderRegistrationForm = () => {
     async function fetchDbSchema() {
       try {
         // First test if we can access the profiles table anonymously
-        const { data: tableInfo, error: tableError } = await supabase
+        const { data: profilesData, error: profilesError } = await supabase
           .from('profiles')
           .select('*')
           .limit(0);
           
-        if (tableError) {
-          console.log("Error fetching profiles schema:", tableError);
-          setDbSchema({ error: tableError });
+        const { data: providerProfilesData, error: providerProfilesError } = await supabase
+          .from('provider_profiles')
+          .select('*')
+          .limit(0);
+          
+        if (profilesError || providerProfilesError) {
+          console.log("Error fetching schema:", profilesError || providerProfilesError);
+          setDbSchema({ error: profilesError || providerProfilesError });
           
           // Log the error for debugging
           setRequestDetailsLog(prev => [...prev, {
@@ -72,42 +77,25 @@ export const ProviderRegistrationForm = () => {
             type: "error",
             data: { 
               source: "Database Schema Check", 
-              message: tableError.message,
-              details: tableError
+              message: (profilesError || providerProfilesError)?.message,
+              details: profilesError || providerProfilesError
             }
           }]);
           return;
         }
         
         // Log success and get column information
-        console.log("Successfully accessed profiles table");
-        
-        // Get column information from the response
-        let columnInfo = [];
-        if (tableInfo) {
-          // If we got data, we can examine it
-          columnInfo = Object.keys(tableInfo);
-        } else {
-          // If no data, try to get information through another method
-          try {
-            const { data: schemaInfo, error: schemaError } = await supabase
-              .rpc('is_admin');
-            
-            if (schemaError) {
-              console.log("Error checking admin status:", schemaError);
-            } else {
-              columnInfo = ["Schema access verified"];
-            }
-          } catch (error) {
-            console.error("Error checking database functions:", error);
-          }
-        }
+        console.log("Successfully accessed database tables");
         
         setDbSchema({
           tables: {
             profiles: {
               exists: true,
-              columns: columnInfo
+              columns: Object.keys(profilesData?.[0] || {})
+            },
+            provider_profiles: {
+              exists: true,
+              columns: Object.keys(providerProfilesData?.[0] || {})
             }
           }
         });
@@ -117,8 +105,9 @@ export const ProviderRegistrationForm = () => {
           type: "success",
           data: { 
             source: "Database Schema Check", 
-            message: "Successfully connected to profiles table",
-            columns: columnInfo
+            message: "Successfully connected to database tables",
+            profileColumns: Object.keys(profilesData?.[0] || {}),
+            providerProfileColumns: Object.keys(providerProfilesData?.[0] || {})
           }
         }]);
       } catch (error) {
